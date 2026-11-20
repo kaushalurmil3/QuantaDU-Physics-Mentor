@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Bot,
   KeyRound,
@@ -51,17 +51,27 @@ const QUESTION_BANK: QuestionOption[] = [
   },
 ];
 
-export default function ProfessorGrader() {
+export default function ProfessorGrader({ practice }: { practice?: { paper: string; label: string; question: string } | null }) {
   const [apiKey, setApiKey] = useState<string>(() => localStorage.getItem(KEY_STORAGE) ?? '');
   const [rememberKey, setRememberKey] = useState(() => !!localStorage.getItem(KEY_STORAGE));
   const [showKey, setShowKey] = useState(false);
   const [qIndex, setQIndex] = useState(0);
+  const [practiceQ, setPracticeQ] = useState(practice ?? null);
   const [answer, setAnswer] = useState('');
   const [grading, setGrading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<GradeResult | null>(null);
 
-  const selected = QUESTION_BANK[qIndex];
+  useEffect(() => {
+    setPracticeQ(practice ?? null);
+    if (practice) {
+      setAnswer('');
+      setResult(null);
+      setError(null);
+    }
+  }, [practice]);
+
+  const selected = practiceQ ?? QUESTION_BANK[qIndex];
   const demoMode = !apiKey.trim();
   const scoreColor = useMemo(() => {
     if (!result) return '';
@@ -150,6 +160,24 @@ export default function ProfessorGrader() {
 
       {/* Grading form */}
       <div className="mt-6 rounded-xl border border-navy-100 bg-white p-5 shadow-card">
+        {practiceQ && (
+          <div className="mb-4 flex items-center justify-between gap-3 rounded-lg border border-amber-300 bg-amber-50 px-4 py-2.5">
+            <p className="text-xs font-medium text-amber-800">
+              Practicing a PYQ from the DU PYQ Bank — write your answer below and get graded.
+            </p>
+            <button
+              onClick={() => {
+                setPracticeQ(null);
+                setAnswer('');
+                setResult(null);
+                setError(null);
+              }}
+              className="shrink-0 rounded-md border border-amber-400 px-2.5 py-1 text-xs font-medium text-amber-700 transition hover:bg-amber-100"
+            >
+              Back to question bank
+            </button>
+          </div>
+        )}
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block">
             <span className="mb-1 block text-xs font-medium text-navy-500">Paper</span>
@@ -163,6 +191,7 @@ export default function ProfessorGrader() {
             <span className="mb-1 block text-xs font-medium text-navy-500">Question</span>
             <select
               value={qIndex}
+              disabled={!!practiceQ}
               onChange={(e) => {
                 setQIndex(Number(e.target.value));
                 setResult(null);

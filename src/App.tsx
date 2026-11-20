@@ -1,21 +1,39 @@
 import { useState } from 'react';
-import { Atom, BookOpen, FileText, Github, Layers, Sparkles, Trophy } from 'lucide-react';
+import { Atom, BookOpen, FileText, Github, GraduationCap, Layers, Sparkles, Trophy } from 'lucide-react';
 import SemesterHub from '@/components/SemesterHub';
 import Flashcards from '@/components/Flashcards';
 import SamplePapers from '@/components/SamplePapers';
 import ProfessorGrader from '@/components/ProfessorGrader';
+import PYQBank from '@/components/PYQBank';
+import type { PYQ } from '@/data/pyqBank';
 
-type TabId = 'hub' | 'flashcards' | 'papers' | 'grader';
+type TabId = 'hub' | 'flashcards' | 'papers' | 'pyq' | 'grader';
 
 const TABS: { id: TabId; label: string; icon: typeof BookOpen }[] = [
   { id: 'hub', label: 'Semester Hub & Notes', icon: BookOpen },
   { id: 'flashcards', label: 'Interactive Flashcards', icon: Layers },
   { id: 'papers', label: 'DU Sample Papers', icon: FileText },
+  { id: 'pyq', label: 'DU PYQ Bank', icon: GraduationCap },
   { id: 'grader', label: 'AI Professor Grader', icon: Trophy },
 ];
 
 export default function App() {
   const [tab, setTab] = useState<TabId>('hub');
+  const [practicePYQ, setPracticePYQ] = useState<PYQ | null>(null);
+
+  const handlePractice = (pyq: PYQ) => {
+    setPracticePYQ(pyq);
+    setTab('grader');
+    window.scrollTo({ top: 0 });
+  };
+
+  const practiceForGrader = practicePYQ
+    ? {
+        paper: `${practicePYQ.paper}: ${practicePYQ.paperName} (DU PYQ)`,
+        label: practicePYQ.question.slice(0, 80),
+        question: practicePYQ.question,
+      }
+    : null;
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-50">
@@ -76,7 +94,8 @@ export default function App() {
           {tab === 'hub' && <SemesterHub />}
           {tab === 'flashcards' && <Flashcards />}
           {tab === 'papers' && <SamplePapers />}
-          {tab === 'grader' && <ProfessorGrader />}
+          {tab === 'pyq' && <PYQBank onPractice={handlePractice} />}
+          {tab === 'grader' && <ProfessorGrader practice={practiceForGrader} />}
         </div>
       </main>
 
