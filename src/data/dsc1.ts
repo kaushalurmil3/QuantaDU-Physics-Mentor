@@ -1,0 +1,156 @@
+import type { DetailedPaper } from './types';
+
+export const DSC1: DetailedPaper = {
+  kind: 'detailed',
+  id: 'dsc1',
+  code: 'DSC-1',
+  name: 'Mathematical Physics I',
+  playlist: {
+    label: 'NPTEL Mathematical Physics (Prof. V. Balakrishnan, IIT Madras)',
+    url: 'https://www.youtube.com/playlist?list=PLbMVogVj5nJRhl_6TUGChpnt2Lg0AZvZu',
+  },
+  chapters: [
+    {
+      title: 'Chapter 1: First & Second Order Differential Equations',
+      topics: [
+        'First-order ODEs: separable, linear and exact equations',
+        'Integrating factors and inhomogeneous equations',
+        'Second-order linear ODEs; homogeneous vs. inhomogeneous',
+        'Wronskian test for linear independence of solutions',
+        'Physical application: damped and driven systems',
+      ],
+      notes: [
+        'Every ODE question in the exam begins the same way: classify first (order, linearity, homogeneous or not), then pick the method. Classification itself carries marks.',
+        'For an inhomogeneous linear equation, the general solution is always "complementary function + particular integral". DU evaluators look for this split explicitly.',
+        'An integrating factor turns y′ + P(x)y = Q(x) into an exact derivative: multiply through by e^{∫P dx} and the left side collapses to d/dx[y·e^{∫P dx}].',
+        'The Wronskian is your independence test: two solutions y₁, y₂ of a second-order linear ODE are linearly independent if and only if W(y₁, y₂) = y₁y₂′ − y₂y₁′ ≠ 0. If W vanishes identically, your "two" solutions are really one — find the second by reduction of order.',
+        'Physical damping applications: the mass on a spring, the LCR circuit and the damped pendulum are all the same mathematics. Write the analogies (L↔m, R↔b, 1/C↔k) once and three units become one.',
+      ],
+      derivations: [
+        'Solve y′ + P(x)y = Q(x): multiply by the integrating factor μ(x) = e^{∫P dx}; note (μy)′ = μy′ + μPy = μQ; integrate directly to y = μ⁻¹(∫μQ dx + C).',
+        'For ay″ + by′ + cy = 0, insert y = e^{mx} to get the auxiliary equation am² + bm + c = 0; classify by the discriminant: real distinct (overdamped), real repeated (critically damped, y = (C₁ + C₂x)e^{mx}), complex conjugate (underdamped, y = e^{αx}(C₁ cos βx + C₂ sin βx)).',
+        'Inhomogeneous case: particular integral by undetermined coefficients — guess the form of the forcing (polynomial → polynomial, sin/cos → sin/cos combination, e^{kx} → Ae^{kx}), substitute back, and match coefficients.',
+        'Wronskian derivation: suppose C₁y₁ + C₂y₂ = 0 identically; differentiate and eliminate C₁, C₂ from the pair; a non-trivial solution for (C₁, C₂) exists only when the determinant W = 0 — hence W ≠ 0 certifies independence.',
+      ],
+      formulas: [
+        { name: 'Integrating factor', expr: 'μ(x) = e^{∫P(x) dx}' },
+        { name: 'General solution (linear 1st order)', expr: 'y = μ⁻¹ [ ∫ μQ dx + C ]' },
+        { name: 'Auxiliary equation roots', expr: 'm = (−b ± √(b² − 4ac)) / 2a' },
+        { name: 'Wronskian', expr: 'W(y₁, y₂) = y₁ y₂′ − y₂ y₁′' },
+        { name: 'Damped oscillator equation', expr: 'm x″ + b x′ + kx = 0' },
+      ],
+      tips: [
+        'Always write the classification line before solving — free marks.',
+        'Verify second-order solutions by substitution, not by re-derivation; it catches sign slips in seconds.',
+        'When Q(x) already contains a term of the complementary function, multiply your trial particular integral by x (resonance case).',
+      ],
+    },
+    {
+      title: 'Chapter 2: Vector Algebra & Vector Calculus',
+      topics: [
+        'Scalar and vector fields; level surfaces',
+        'Gradient — direction of steepest change',
+        'Divergence — sources and sinks',
+        'Curl — local rotation of a field',
+        'Solenoidal vs. irrotational fields',
+      ],
+      notes: [
+        'A scalar field assigns a number to each point (temperature, potential); a vector field assigns a direction too (gravitational field, fluid velocity). Saying this crisply is a standard 2-mark opener.',
+        'Gradient ∇φ points in the direction of maximum increase of φ, with magnitude equal to that rate. Its physical reading: the electric field is minus the gradient of potential — the direction a positive charge "falls".',
+        'Divergence ∇·F is the net outflow per unit volume at a point. Positive = source, negative = sink, zero = incompressible flow at that point.',
+        'Curl ∇×F measures twice the local angular velocity of the field. A paddle wheel dropped in the flow rotates if and only if the curl there is non-zero.',
+        'Solenoidal field: ∇·F = 0 everywhere (magnetostatic field B is the classic case — no magnetic monopoles). Irrotational field: ∇×F = 0 (electrostatic field E, gravity). Fields can be both (uniform field), neither, or either one alone — examiners love this classification.',
+        'Any sufficiently smooth field can be written as the sum of an irrotational part and a solenoidal part (Helmholtz decomposition) — a beautiful one-line answer if asked "why study both operations?"',
+      ],
+      derivations: [
+        'Gradient in spherical polars: equate infinitesimal displacement ds = dr r̂ + r dθ θ̂ + r sinθ dφ φ̂ with dφ_total = ∇φ·ds and match coefficients to get ∇φ = (∂φ/∂r) r̂ + (1/r)(∂φ/∂θ) θ̂ + (1/r sinθ)(∂φ/∂φ) φ̂.',
+        'Physical meaning of divergence: place a tiny box of volume dV around a point; the net flux out is ∮F·dA ≈ (∇·F) dV — so ∇·F is literally outflow per unit volume in the limit dV → 0.',
+        'Physical meaning of curl: the circulation ∮F·dl around a tiny loop of area dA enclosing normal n̂ satisfies ∮F·dl ≈ (∇×F)·n̂ dA; curl is circulation density.',
+        'For a central force F = f(r) r̂, show ∇×F = 0 by direct component computation in spherical coordinates — every term cancels by symmetry.',
+      ],
+      formulas: [
+        { name: 'Gradient (Cartesian)', expr: '∇φ = x̂ ∂φ/∂x + ŷ ∂φ/∂y + ẑ ∂φ/∂z' },
+        { name: 'Directional derivative', expr: 'dφ/ds = ∇φ · n̂' },
+        { name: 'Divergence (Cartesian)', expr: '∇·F = ∂F_x/∂x + ∂F_y/∂y + ∂F_z/∂z' },
+        { name: 'Curl (determinant form)', expr: '∇×F = | x̂  ŷ  ẑ ; ∂x  ∂y  ∂z ; F_x  F_y  F_z |' },
+        { name: 'Solenoidal condition', expr: '∇·F = 0' },
+        { name: 'Irrotational condition', expr: '∇×F = 0 ⇒ F = −∇φ for some scalar φ' },
+      ],
+      tips: [
+        'Compute curl in Cartesian first and transform only if forced; direct spherical curl formulas are error-prone.',
+        'When asked for "physical significance", always give one concrete physics example per operator — that is where the marks sit.',
+        'Remember: gradient of a scalar is a vector, divergence of a vector is a scalar, curl of a vector is a vector. Mixed-up natures cost easy marks.',
+      ],
+    },
+    {
+      title: 'Chapter 3: Vector Integral Theorems',
+      topics: [
+        'Line, surface and volume integrals; oriented surfaces',
+        "Gauss's Divergence Theorem with proof",
+        "Stokes' Theorem with proof",
+        "Green's Theorem in the plane",
+      ],
+      notes: [
+        'The three theorems are one idea repeated: the behaviour of a field on a boundary equals the accumulation of its derivative over the enclosed region. Divergence theorem: flux through a closed surface = total divergence inside. Stokes: circulation around a loop = total curl over any surface spanning the loop.',
+        'Green\'s theorem is Stokes in 2D: ∮_C (P dx + Q dy) = ∬ (∂Q/∂x − ∂P/∂y) dx dy. Treat it as the "starter" theorem the other two generalize.',
+        'For the proofs, DU expects the cuboid argument: for the divergence theorem, compute the net flux through the six faces of a small rectangular box, show it equals ∇·F dV, and sum over boxes — interior faces cancel pairwise, leaving only the boundary flux.',
+        "For Stokes' proof, tile the spanning surface with tiny rectangles, apply Green's theorem to each tile, and watch interior edges cancel — only the rim survives. Emphasizing this cancellation is what separates a 14/14 answer from a 9/14.",
+        'Practical power: replace a hard surface integral (closed flux) with an easy volume integral, or a hard line integral with an easy surface integral. Several numericals are just this trick.',
+      ],
+      derivations: [
+        "Gauss's theorem: for a box with faces ⟂ to x, y, z, the flux difference through the ±x faces is ∂F_x/∂x dx dy dz (Taylor-expand F_x across the box); summing all faces gives ∇·F dV; sum over all boxes in V and cancel interior faces ⇒ ∮_∂V F·dA = ∫_V (∇·F) dV.",
+        "Stokes' theorem: decompose surface S into infinitesimal rectangles with edges parallel to x and y axes; for each, ∮F·dl = [(∂F_y/∂x) − (∂F_x/∂y)] dx dy = (∇×F)·dA; interior edges are traversed twice in opposite directions and cancel ⇒ ∮_∂S F·dl = ∫_S (∇×F)·dA.",
+        "Green's theorem: restrict Stokes to the xy-plane with dA = dx dy ẑ; the curl z-component is (∂F_y/∂x − ∂F_x/∂y) and the result follows immediately.",
+        'Application proof: a field with ∇×F = 0 in a simply connected region is conservative — path-independence of ∫F·dl follows because any closed loop bounds a surface over which ∫(∇×F)·dA = 0 (by Stokes).',
+      ],
+      formulas: [
+        { name: "Gauss's Divergence Theorem", expr: '∮_∂V F·dA = ∫_V (∇·F) dV' },
+        { name: "Stokes' Theorem", expr: '∮_∂S F·dl = ∫_S (∇×F)·dA' },
+        { name: "Green's Theorem", expr: '∮_C (P dx + Q dy) = ∬ (∂Q/∂x − ∂P/∂y) dx dy' },
+        { name: 'Conservative field criterion', expr: '∇×F = 0 (simply connected) ⇔ F = −∇φ' },
+      ],
+      tips: [
+        'State the theorem, name the orientation convention (outward normal, anticlockwise rim), then compute — evaluators award structure marks.',
+        'Check your surface orientation: a flipped normal flips the sign and the answer.',
+        'Use the theorems to shortcut numericals: a sphere flux via the divergence theorem beats parametrising the surface.',
+      ],
+    },
+    {
+      title: 'Chapter 4: Probability Distributions',
+      topics: [
+        'Binomial distribution and its moments',
+        'Poisson distribution as the n → ∞, p → 0 limit',
+        'Gaussian / Normal distribution',
+        'Mean, variance and standard deviation',
+        'Experimental error analysis',
+      ],
+      notes: [
+        'Distributions answer one question: given a random process, what is the probability of each outcome? Binomial counts successes in n independent yes/no trials with success probability p.',
+        'Poisson emerges when trials are numerous but success is rare (n → ∞, p → 0, mean np = μ fixed): radioactive decays per second, cosmic ray counts, students arriving at a physics lab help desk. Its single parameter μ controls both mean and variance — variance equals mean, the fingerprint examiners test.',
+        'The Gaussian is the limit of the binomial for large n with moderate p, and — far more deeply — the shape that any averaging process converges to (central limit theorem). Measurement errors are Gaussian because they are the sum of many small independent effects.',
+        'Error analysis: report measurements as x ± σ, where σ is the standard deviation of repeated readings. The best estimate from N repetitions has uncertainty σ/√N — this is why averaging helps, and quoting it earns marks.',
+        'Full width at half maximum (FWHM) of a Gaussian is 2.355σ: quoted in spectroscopy numericals and worth memorising.',
+      ],
+      derivations: [
+        'Binomial mean: P(n successes) = C(n,x) pˣ q^{n−x}; compute μ = Σ x P(x) using the binomial theorem trick (x·C(n,x) = n·C(n−1, x−1)) to get μ = np; similarly μ₂ − μ² gives σ² = npq.',
+        'Poisson limit: in (1 + q/p)^{n} expansions, with μ = np fixed, [n(n−1)…(n−x+1)/nˣ]·pˣ → μˣ/x! as n → ∞, and (1 − μ/n)ⁿ → e^{−μ}, leaving P(x) = e^{−μ} μˣ / x!.',
+        'Normalisation of the Gaussian: I = ∫e^{−x²} dx; square it, switch to polar coordinates (I² = ∫∫e^{−r²} dx dy = 2π∫r e^{−r²} dr = π), so I = √π — then rescale to get the normalised form.',
+        'Gaussian moments: ∫x e^{−ax²} dx = 0 (odd integrand) gives mean 0; integrate by parts (∫x² e^{−ax²} dx = −d/da ∫e^{−ax²} dx) to get variance σ² = 1/2a in the general form.',
+        'Propagation of errors: for f(x, y) with small independent errors, δf² = (∂f/∂x)² δx² + (∂f/∂y)² δy² — derive by Taylor-expanding to first order and summing variances.',
+      ],
+      formulas: [
+        { name: 'Binomial distribution', expr: 'P(x) = C(n,x) pˣ q^{n−x},  q = 1 − p' },
+        { name: 'Binomial mean & variance', expr: 'μ = np,  σ² = npq' },
+        { name: 'Poisson distribution', expr: 'P(x) = e^{−μ} μˣ / x!' },
+        { name: 'Gaussian distribution', expr: 'P(x) = (1/(σ√(2π))) e^{−(x−μ)²/2σ²}' },
+        { name: 'Gaussian properties', expr: 'mean = μ,  variance = σ²,  FWHM = 2.355σ' },
+        { name: 'Standard error of the mean', expr: 'σ_mean = σ / √N' },
+      ],
+      tips: [
+        'Identify the distribution from the story of the problem: fixed trials → binomial; rare events per interval → Poisson; cluster of small errors → Gaussian.',
+        'In error numericals, always add variances in quadrature, never errors linearly (unless correlations are stated).',
+        'Sketch the Gaussian with μ and ±σ marked — a labelled sketch routinely carries a mark of its own.',
+      ],
+    },
+  ],
+};

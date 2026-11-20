@@ -1,358 +1,166 @@
-export type Paper = {
-  id: string;
-  code: string;
-  name: string;
-};
+import type { Semester, SyllabusPaper } from './types';
+import { DSC1, DSC2, DSC3 } from '.';
 
-export type Resource = {
-  label: string;
-  url: string;
-};
+function sp(
+  id: string,
+  code: string,
+  name: string,
+  chapters: [string, string[]][]
+): SyllabusPaper {
+  return {
+    kind: 'syllabus',
+    id,
+    code,
+    name,
+    chapters: chapters.map(([title, topics]) => ({ title, topics })),
+  };
+}
 
-export type Unit = {
-  title: string;
-  topics: string[];
-  notes: string[];
-  formulas: { name: string; expr: string }[];
-  references: string[];
-  videos: Resource[];
-};
+const SEM2: SyllabusPaper[] = [
+  sp('dsc4', 'DSC-4', 'Mathematical Physics II', [
+    ['Chapter 1: Fourier Series & Transforms', ['Periodic functions and orthogonality of sines/cosines', 'Dirichlet conditions and convergence', 'Fourier series of standard waveforms', 'Fourier transform and its physical meaning']],
+    ['Chapter 2: Special Functions', ['Legendre polynomials and generating function', 'Hermite and Laguerre polynomials', 'Beta and Gamma functions', 'Rodrigues’ recurrence relations']],
+    ['Chapter 3: Partial Differential Equations', ['Wave equation and its solution', 'Heat conduction (diffusion) equation', 'Laplace equation; separation of variables', 'Boundary value problems in physics']],
+  ]),
+  sp('dsc5', 'DSC-5', 'Electricity and Magnetism', [
+    ['Chapter 1: Electrostatics', ['Coulomb’s law and electric field', 'Gauss’s law and applications', 'Electric potential; conductors and capacitors', 'Dielectrics and polarisation']],
+    ['Chapter 2: Magnetostatics & Electrodynamics', ['Biot–Savart law and Ampère’s law', 'Magnetic vector potential', 'Faraday’s law of induction', 'Displacement current and Maxwell’s equations']],
+    ['Chapter 3: Electromagnetic Waves & Circuits', ['EM wave propagation in vacuum and matter', 'Poynting vector and energy flow', 'AC circuits: impedance and resonance', 'Maxwell’s equations in differential form']],
+  ]),
+  sp('dsc6', 'DSC-6', 'Electrical Circuit Analysis', [
+    ['Chapter 1: DC Circuit Analysis', ['Kirchhoff’s laws; mesh and node analysis', 'Network theorems: Thevenin, Norton, superposition', 'Transient analysis of RC, RL circuits', 'Maximum power transfer']],
+    ['Chapter 2: AC Circuits & Resonance', ['Phasor analysis of series and parallel circuits', 'Series and parallel resonance; Q factor', 'Power factor and real/reactive power', 'Three-phase circuits']],
+    ['Chapter 3: Two-Port Networks & Filters', ['Two-port parameters (Z, Y, h)', 'Low-pass, high-pass, band-pass filters', 'Attenuators and coupled circuits', 'Laplace transform techniques for circuits']],
+  ]),
+];
 
-export type Semester = {
-  id: number;
-  label: string;
-  active: boolean;
-  papers: (Paper & { units: Unit[] })[];
-};
+const SEM3: SyllabusPaper[] = [
+  sp('dsc7', 'DSC-7', 'Mathematical Physics III', [
+    ['Chapter 1: Complex Analysis', ['Analytic functions; Cauchy–Riemann conditions', 'Complex integration; Cauchy’s theorem', 'Taylor and Laurent expansions', 'Residue theorem and contour integration']],
+    ['Chapter 2: Integral Transforms', ['Laplace transform and physical applications', 'Convolution theorem', 'Fourier transforms revisited', 'Green’s function approach']],
+    ['Chapter 3: Calculus of Variations', ['Euler–Lagrange equation', 'Brachistochrone problem', 'Functional derivatives', 'Constrained variations']],
+  ]),
+  sp('dsc8', 'DSC-8', 'Thermal Physics', [
+    ['Chapter 1: Thermodynamics', ['Laws of thermodynamics and entropy', 'Thermodynamic potentials and Maxwell relations', 'Carnot cycle and heat engines', 'Third law and absolute temperature']],
+    ['Chapter 2: Kinetic Theory', ['Maxwell–Boltzmann distribution', 'Mean free path and transport phenomena', 'Equipartition of energy', 'Real gases and van der Waals equation']],
+    ['Chapter 3: Statistical Mechanics (Introduction)', ['Microstates and macrostates', 'Boltzmann distribution', 'Partition function and thermodynamic quantities', 'Blackbody radiation: Planck’s law']],
+  ]),
+  sp('dsc9', 'DSC-9', 'Light and Matter', [
+    ['Chapter 1: Wave Optics', ['Interference: Young’s double slit, thin films', 'Diffraction: Fraunhofer and Fresnel', 'Polarisation; Malus’ law, Brewster’s angle', 'Resolving power and gratings']],
+    ['Chapter 2: Quantum Nature of Light', ['Photoelectric effect', 'Compton scattering', 'Wave–particle duality', 'de Broglie hypothesis and electron diffraction']],
+    ['Chapter 3: Matter Waves & Introductory QM', ['Heisenberg uncertainty principle', 'Wave packets and dispersion', 'Double-slit with particles', 'Matter wave interference experiments']],
+  ]),
+];
+
+const SEM4: SyllabusPaper[] = [
+  sp('dsc10', 'DSC-10', 'Modern Physics', [
+    ['Chapter 1: Special Relativity II', ['Relativistic kinematics and dynamics', 'Invariant mass and collisions', 'Doppler effect for light', 'Introduction to general relativity concepts']],
+    ['Chapter 2: Quantum Mechanics I', ['Schrödinger equation; wave function interpretation', 'Particle in a box; tunnelling', 'Hydrogen atom energy levels', 'Angular momentum quantisation']],
+    ['Chapter 3: Nuclear & Particle Physics (Intro)', ['Nuclear structure and binding energy', 'Radioactive decay laws', 'Fission and fusion', 'Elementary particles and the standard model']],
+  ]),
+  sp('dsc11', 'DSC-11', 'Solid State Physics', [
+    ['Chapter 1: Crystal Structure', ['Crystal lattices and unit cells', 'Bragg’s law and X-ray diffraction', 'Crystal binding and cohesion', 'Reciprocal lattice']],
+    ['Chapter 2: Electronic Properties', ['Free electron theory; Fermi energy', 'Band theory of solids', 'Conductors, semiconductors, insulators', 'Hall effect']],
+    ['Chapter 3: Magnetic & Dielectric Properties', ['Diamagnetism, paramagnetism, ferromagnetism', 'Curie law and hysteresis', 'Polarisation mechanisms', 'Superconductivity basics']],
+  ]),
+  sp('dsc12', 'DSC-12', 'Analog Systems and Applications', [
+    ['Chapter 1: Semiconductor Devices', ['p-n junction diode; rectifiers', 'Bipolar junction transistor characteristics', 'FETs and MOSFETs', 'Amplifier biasing and load lines']],
+    ['Chapter 2: Amplifiers & Oscillators', ['Small-signal amplifiers; frequency response', 'Feedback amplifiers', 'Operational amplifiers and applications', 'Oscillator circuits; phase shift and Wien bridge']],
+    ['Chapter 3: Wave Shaping & Power Supplies', ['Clippers, clampers and multivibrators', 'Regulated power supplies', '555 timer applications', 'Signal generators']],
+  ]),
+];
+
+const SEM5: SyllabusPaper[] = [
+  sp('dsc13', 'DSC-13', 'Electromagnetic Theory', [
+    ['Chapter 1: Electrostatics & Magnetostatics II', ['Boundary value problems; method of images', 'Multipole expansion', 'Magnetic fields in matter', 'Maxwell stress tensor']],
+    ['Chapter 2: Time-Varying Fields & Waves', ['Maxwell’s equations in matter', 'EM waves in conducting and non-conducting media', 'Reflection, refraction, Fresnel equations', 'Waveguides and cavities']],
+    ['Chapter 3: Radiation & Relativistic EM', ['Radiation from an oscillating dipole', 'Retarded potentials', 'Relativistic transformation of E and B fields', 'Field tensors']],
+  ]),
+  sp('dsc14', 'DSC-14', 'Quantum Mechanics I', [
+    ['Chapter 1: Formalism of QM', ['Hilbert space and states', 'Operators and observables; commutators', 'Measurement postulate; expectation values', 'Dirac notation']],
+    ['Chapter 2: One-Dimensional Systems', ['Harmonic oscillator (operator and differential methods)', 'Potential steps and barriers', 'Tunnelling and α-decay', 'WKB approximation']],
+    ['Chapter 3: Angular Momentum & Hydrogen Atom', ['Spherical harmonics', 'Angular momentum algebra', 'Hydrogen atom solution', 'Spin and Pauli matrices']],
+  ]),
+  sp('dsc15', 'DSC-15', 'Digital Systems and Applications', [
+    ['Chapter 1: Digital Fundamentals', ['Number systems and Boolean algebra', 'Logic gates; minimisation (K-maps)', 'Combinational circuits: adders, multiplexers', 'Decoders and encoders']],
+    ['Chapter 2: Sequential Circuits', ['Flip-flops and latches', 'Counters and shift registers', 'Finite state machines', 'Timing diagrams']],
+    ['Chapter 3: Applications', ['Memories: RAM, ROM', 'D/A and A/D converters', 'Microprocessor basics (8085)', 'Simple microprocessor programming']],
+  ]),
+];
+
+const SEM6: SyllabusPaper[] = [
+  sp('dsc16', 'DSC-16', 'Statistical Mechanics', [
+    ['Chapter 1: Foundations', ['Macrostates, microstates, entropy', 'Classical and quantum statistics overview', 'Density of states', 'Partition function and free energy']],
+    ['Chapter 2: Ensembles', ['Microcanonical, canonical and grand canonical ensembles', 'Partition functions and thermodynamic quantities', 'Equipartition theorem applications', 'Fluctuations']],
+    ['Chapter 3: Quantum Statistics', ['Bose–Einstein and Fermi–Dirac distributions', 'Blackbody radiation and photon gas', 'Bose–Einstein condensation', 'Electron gas in metals; Pauli paramagnetism']],
+  ]),
+  sp('dsc17', 'DSC-17', 'Atomic and Molecular Physics', [
+    ['Chapter 1: Atomic Spectra', ['Bohr model and refinements', 'Stern–Gerlach experiment and spin', 'Fine structure and Lamb shift', 'Zeeman and Stark effects']],
+    ['Chapter 2: Molecular Structure', ['Molecular bonding: ionic, covalent', 'Rotational and vibrational spectra', 'Raman spectroscopy', 'Nuclear magnetic resonance basics']],
+    ['Chapter 3: Laser Physics', ['Einstein coefficients; population inversion', 'Optical cavities and modes', 'Types of lasers: He-Ne, Nd:YAG, semiconductor', 'Laser applications']],
+  ]),
+  sp('dsc18', 'DSC-18', 'Nuclear and Particle Physics', [
+    ['Chapter 1: Nuclear Properties & Models', ['Nuclear size, mass, binding energy', 'Liquid drop model; semi-empirical mass formula', 'Shell model; nuclear spin and moments', 'Nuclear stability and decay modes']],
+    ['Chapter 2: Nuclear Reactions & Detectors', ['Nuclear fission and fusion', 'Cross sections; compound nucleus', 'Accelerators', 'Radiation detectors: GM counter, scintillators']],
+    ['Chapter 3: Particle Physics', ['Classification of elementary particles', 'Conservation laws; quark model', 'Weak interactions; neutrinos', 'Standard Model overview']],
+  ]),
+];
 
 export const SEMESTERS: Semester[] = [
   {
     id: 1,
     label: 'Semester 1',
     active: true,
-    papers: [
-      {
-        id: 'dsc1',
-        code: 'DSC-1',
-        name: 'Mathematical Physics I',
-        units: [
-          {
-            title: 'Unit 1: Infinite Series & Calculus',
-            topics: [
-              'Convergence of series: comparison, ratio and integral tests',
-              'Alternating series, absolute and conditional convergence',
-              'Taylor and Maclaurin series with remainders',
-              'Applications: error estimation in physics computations',
-            ],
-            notes: [
-              'Start every series question by identifying whether terms are positive, alternating, or both — the test you choose depends on this.',
-              'The ratio test fails for series like 1/n³ (ratio → 1). Keep the comparison and integral tests ready for these cases.',
-              'Maclaurin expansions of eˣ, sin x, cos x, ln(1+x), (1+x)ⁿ are the working tools of physics — know them with their radii of convergence.',
-            ],
-            formulas: [
-              { name: 'Taylor series (about a)', expr: 'f(x) = f(a) + f′(a)(x−a) + f″(a)(x−a)²/2! + …' },
-              { name: 'Maclaurin of eˣ', expr: 'eˣ = 1 + x + x²/2! + x³/3! + …  (all x)' },
-              { name: 'Binomial series', expr: '(1+x)ⁿ = 1 + nx + n(n−1)x²/2! + …  (|x| < 1)' },
-              { name: 'Ratio test', expr: 'For Σaₙ, if lim |aₙ₊₁/aₙ| = L: converges if L < 1, diverges if L > 1' },
-            ],
-            references: [
-              'Mathematical Methods for Physicists — Arfken, Weber & Harris (Ch. 1)',
-              'Mathematical Physics — H.K. Dass & R. Verma (Unit 1)',
-              'Mathematics for Physicists — Philippe Dennery',
-            ],
-            videos: [
-              { label: 'NPTEL: Mathematical Physics — Series & Convergence', url: 'https://nptel.ac.in/courses/115106108' },
-              { label: 'MIT OCW 18.01: Taylor Series (Lecture)', url: 'https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/' },
-            ],
-          },
-          {
-            title: 'Unit 2: Vectors & Coordinate Systems',
-            topics: [
-              'Scalar and vector products, triple products',
-              'Gradient, divergence and curl; physical meaning',
-              'Green, Stokes and Gauss theorems',
-              'Spherical polar and cylindrical coordinates',
-            ],
-            notes: [
-              'Divergence measures outflow of a field from a point; curl measures local rotation. Exam questions often ask for physical interpretation, not just computation.',
-              'Practice converting ∇, ∇·, ∇× into spherical polars — this is a repeated UGCF long question.',
-              'Write Stokes and Gauss theorems in one line each and recall one physical example of each (e.g. magnetostatics, electrostatics).',
-            ],
-            formulas: [
-              { name: 'Gradient', expr: '∇φ = x̂ ∂φ/∂x + ŷ ∂φ/∂y + ẑ ∂φ/∂z' },
-              { name: 'Divergence theorem', expr: '∮ₛ F·dA = ∫ᵥ (∇·F) dV' },
-              { name: 'Stokes theorem', expr: '∮_C F·dl = ∫ₛ (∇×F)·dA' },
-              { name: 'Laplacian (spherical)', expr: '∇²φ = (1/r²) ∂/∂r (r² ∂φ/∂r) + (1/r² sinθ) ∂/∂θ (sinθ ∂φ/∂θ) + (1/r² sin²θ) ∂²φ/∂φ²' },
-            ],
-            references: [
-              'Introduction to Electrodynamics — David J. Griffiths (Ch. 1)',
-              'Vector Analysis — Murray R. Spiegel (Schaum)',
-              'Mathematical Methods for Physicists — Arfken, Weber & Harris (Ch. 2–3)',
-            ],
-            videos: [
-              { label: 'MIT OCW 8.02: Vector Fields & Divergence/Curl', url: 'https://ocw.mit.edu/courses/8-02sc-physics-ii-electricity-and-magnetism-fall-2010/' },
-              { label: 'NPTEL: Mathematical Physics — Vector Calculus', url: 'https://nptel.ac.in/courses/115106108' },
-            ],
-          },
-          {
-            title: 'Unit 3: Matrices & Ordinary Differential Equations',
-            topics: [
-              'Matrix algebra, inverses, rank; eigenvalues and eigenvectors',
-              'Diagonalisation of symmetric matrices',
-              'First-order ODEs: separable, linear, exact',
-              'Second-order linear ODEs with constant coefficients',
-            ],
-            notes: [
-              'For eigenvalue problems, always verify with the trace and determinant checks: tr(A) = Σλᵢ and det(A) = Πλᵢ.',
-              'The damped/forced oscillator problem in DSC-3 is solved by exactly this ODE technique — connect the two papers while revising.',
-              'Diagonalising a real symmetric matrix by its eigenvector basis is the mathematical heart of normal modes (again, DSC-3).',
-            ],
-            formulas: [
-              { name: 'Characteristic equation', expr: 'det(A − λI) = 0' },
-              { name: 'Linear first-order ODE', expr: 'dy/dx + P(x)y = Q(x)  ⇒  y·e^{∫P dx} = ∫ Q e^{∫P dx} dx + C' },
-              { name: '2nd-order ODE solution', expr: 'ay″ + by′ + cy = 0:  y = e^{mx},  m = (−b ± √(b²−4ac))/2a' },
-            ],
-            references: [
-              'Mathematical Physics — H.K. Dass & R. Verma (Matrices & ODE units)',
-              'Mathematical Methods for Physicists — Arfken, Weber & Harris (Ch. 4, 8)',
-            ],
-            videos: [
-              { label: 'MIT OCW 18.03: Differential Equations', url: 'https://ocw.mit.edu/courses/18-03-differential-equations-spring-2010/' },
-              { label: 'NPTEL: Matrices & Eigenvalue Problems', url: 'https://nptel.ac.in/courses/111106051' },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'dsc2',
-        code: 'DSC-2',
-        name: 'Mechanics',
-        units: [
-          {
-            title: 'Unit 1: Fundamentals of Newtonian Mechanics',
-            topics: [
-              'Newton’s laws; inertial frames; momentum and impulse',
-              'Work–energy theorem, conservative forces and potential energy',
-              'Central forces and the shell theorem',
-              'Collisions in laboratory and centre-of-mass frames',
-            ],
-            notes: [
-              'Always begin numericals by drawing a free-body diagram — DU marking schemes award explicit step marks for this.',
-              'For collisions, distinguish elastic, inelastic and completely inelastic cases: what is conserved in each is the standard 2–3 mark conceptual question.',
-              'The shell theorem derivation (field inside and outside a uniform sphere) is a favourite long question — practice it fully.',
-            ],
-            formulas: [
-              { name: 'Work–energy theorem', expr: 'W_net = ΔK = ½mv² − ½mv₀²' },
-              { name: 'Gravitational field of a shell (outside)', expr: 'g(r) = GM/r²   (r ≥ R)' },
-              { name: 'Gravitational field of a shell (inside)', expr: 'g(r) = 0   (r < R)' },
-              { name: 'Elastic collision (equal masses, target at rest)', expr: 'v₁′ = 0,  v₂′ = v₁' },
-              { name: 'Reduced mass', expr: 'μ = m₁m₂ / (m₁ + m₂)' },
-            ],
-            references: [
-              'An Introduction to Mechanics — Kleppner & Kolenkow (Ch. 1–6)',
-              'Classical Mechanics — John R. Taylor (Ch. 4)',
-              'University Physics — Sears & Zemansky (Mechanics chapters)',
-            ],
-            videos: [
-              { label: 'MIT OCW 8.01: Classical Mechanics (Walter Lewin)', url: 'https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/' },
-              { label: 'NPTEL: Engineering Mechanics — Collisions & Frames', url: 'https://nptel.ac.in/courses/122106048' },
-            ],
-          },
-          {
-            title: 'Unit 2: Rotational Motion & Rigid Bodies',
-            topics: [
-              'Angular momentum, torque, moment of inertia theorems',
-              'Rotation about a fixed axis; kinetics of rolling',
-              'Perpendicular and parallel axis theorems',
-              'Gyroscope precession (qualitative)',
-            ],
-            notes: [
-              'Moment of inertia integrals for ring, disc, rod, sphere and their combinations are bank questions — memorise the standard results and know which axis they refer to.',
-              'Rolling problems: state whether you are using energy conservation or torque about the contact point; mixing them wastes time.',
-              'The precession rate Ω = τ/L for a spinning gyroscope is a short conceptual favourite.',
-            ],
-            formulas: [
-              { name: 'Parallel axis theorem', expr: 'I = I_cm + Mh²' },
-              { name: 'Perpendicular axis theorem (planar body)', expr: 'I_z = I_x + I_y' },
-              { name: 'Solid sphere about a diameter', expr: 'I = (2/5)MR²' },
-              { name: 'Rod about its end', expr: 'I = ML²/3' },
-              { name: 'Precession rate', expr: 'Ω = τ / L = mgr / (Iω)' },
-            ],
-            references: [
-              'An Introduction to Mechanics — Kleppner & Kolenkow (Ch. 6–8)',
-              'University Physics — Sears & Zemansky (Rotation chapters)',
-            ],
-            videos: [
-              { label: 'MIT OCW 8.01: Rotations & Rigid Bodies', url: 'https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/' },
-              { label: 'NPTEL: Rigid Body Dynamics', url: 'https://nptel.ac.in/courses/122106048' },
-            ],
-          },
-          {
-            title: 'Unit 3: Special Relativity (Introduction)',
-            topics: [
-              'Michelson–Morley experiment and its outcome',
-              'Postulates of special relativity; Lorentz transformations',
-              'Time dilation, length contraction, relativity of simultaneity',
-              'Relativistic energy and momentum; mass–energy equivalence',
-            ],
-            notes: [
-              'The Michelson–Morley null result and how it motivates the second postulate is asked repeatedly as a 4–6 mark question.',
-              'Numericals almost always use β = v/c: compute β first, then γ = 1/√(1−β²). Never mix Newtonian and relativistic formulas.',
-              'Write E² = (pc)² + (mc²)² once and derive E = mc² and p = γmv from it — a compact way to revise the whole unit.',
-            ],
-            formulas: [
-              { name: 'Lorentz factor', expr: 'γ = 1 / √(1 − v²/c²)' },
-              { name: 'Time dilation', expr: 'Δt = γ Δt₀' },
-              { name: 'Length contraction', expr: 'L = L₀ / γ' },
-              { name: 'Relativistic energy', expr: 'E² = (pc)² + (mc²)²' },
-            ],
-            references: [
-              'Introduction to Special Relativity — Robert Resnick',
-              'An Introduction to Mechanics — Kleppner & Kolenkow (Ch. 11–12)',
-            ],
-            videos: [
-              { label: 'MIT OCW 8.033: Relativity (full course)', url: 'https://ocw.mit.edu/courses/8-033-relativity-fall-2006/' },
-              { label: 'NPTEL: Special Theory of Relativity', url: 'https://nptel.ac.in/courses/122106048' },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'dsc3',
-        code: 'DSC-3',
-        name: 'Waves and Oscillations',
-        units: [
-          {
-            title: 'Unit 1: Simple Harmonic Motion',
-            topics: [
-              'Differential equation of SHM and its solution',
-              'Energy in SHM: kinetic, potential, total',
-              'Oscillations of spring–mass, simple pendulum, torsional pendulum',
-              'Physical pendulum; effect of finite amplitude',
-            ],
-            notes: [
-              'The exam pattern is consistent: derive x = A sin(ωt + φ) from Newton’s second law, then compute energy. Learn this derivation verbatim.',
-              'For the simple pendulum, always state the small-angle approximation sin θ ≈ θ explicitly — marks are deducted for skipping it.',
-              'Total energy in SHM ∝ A²ω² is the basis of several 2-mark conceptual questions; know the energy–time graph shape.',
-            ],
-            formulas: [
-              { name: 'SHM equation', expr: 'd²x/dt² + ω²x = 0,  ω = √(k/m)' },
-              { name: 'General solution', expr: 'x(t) = A sin(ωt + φ)' },
-              { name: 'Energy in SHM', expr: 'E = ½ m ω² A²  = ½ k A²' },
-              { name: 'Simple pendulum (small angle)', expr: 'T = 2π √(L/g)' },
-            ],
-            references: [
-              'The Physics of Waves and Oscillations — N.K. Bajaj (Ch. 1–2)',
-              'Waves — Berkeley Physics Course Vol. 3, Frank S. Crawford (Ch. 1)',
-              'Fundamentals of Physics — Halliday, Resnick & Walker (Oscillations)',
-            ],
-            videos: [
-              { label: 'MIT OCW 8.03: Oscillations (Walter Lewin)', url: 'https://ocw.mit.edu/courses/8-03sc-physics-iii-vibrations-and-waves-fall-2016/' },
-              { label: 'NPTEL: Waves and Oscillations', url: 'https://nptel.ac.in/courses/115105103' },
-            ],
-          },
-          {
-            title: 'Unit 2: Damped & Forced Oscillations, Resonance',
-            topics: [
-              'Damped harmonic oscillator: light, critical and heavy damping',
-              'Logarithmic decrement; quality factor Q',
-              'Forced oscillations; amplitude and phase vs driving frequency',
-              'Sharpness of resonance; applications (electrical analogy)',
-            ],
-            notes: [
-              'Write the damped equation x″ + 2b x′ + ω₀² x = 0 and classify solutions by comparing b with ω₀ — this classification itself carries marks.',
-              'At resonance the amplitude A_max = F₀/(2b m): note it depends on damping, a favourite conceptual probe.',
-              'The electrical analogy L↔m, R↔b, 1/C↔k appears in at least one question most years.',
-            ],
-            formulas: [
-              { name: 'Damped oscillator', expr: 'm x″ + b x′ + kx = 0' },
-              { name: 'Amplitude decay', expr: 'A(t) = A₀ e^{−bt/m}' },
-              { name: 'Quality factor', expr: 'Q = ω₀ / 2b' },
-              { name: 'Resonance amplitude', expr: 'A_max = F₀ / (2 m b ω_d)' },
-            ],
-            references: [
-              'The Physics of Waves and Oscillations — N.K. Bajaj (Ch. 2)',
-              'Waves — Berkeley Physics Course Vol. 3, Crawford (Ch. 2–3)',
-            ],
-            videos: [
-              { label: 'MIT OCW 8.03: Forced Oscillations & Resonance', url: 'https://ocw.mit.edu/courses/8-03sc-physics-iii-vibrations-and-waves-fall-2016/' },
-              { label: 'NPTEL: Damped and Driven Oscillators', url: 'https://nptel.ac.in/courses/115105103' },
-            ],
-          },
-          {
-            title: 'Unit 3: Wave Motion & Superposition',
-            topics: [
-              'The wave equation; transverse waves on a string',
-              'Plane vs spherical waves; intensity and the inverse-square law',
-              'Superposition: stationary waves, beats, phase and group velocity',
-              'Normal modes of a stretched string',
-            ],
-            notes: [
-              'Deriving v = √(T/μ) from Newton’s second law on a string element is a standard long question; practice the full proof.',
-              'Distinguish clearly: phase velocity = ω/k, group velocity = dω/dk. Questions often give one dispersion relation and ask for both.',
-              'Normal modes: fₙ = n v / 2L for a string fixed at both ends — sketch the first three modes if asked.',
-            ],
-            formulas: [
-              { name: 'Wave equation', expr: '∂²y/∂x² = (1/v²) ∂²y/∂t²' },
-              { name: 'Speed on a string', expr: 'v = √(T/μ)' },
-              { name: 'Normal modes (string, both ends fixed)', expr: 'fₙ = n v / 2L,  n = 1, 2, 3, …' },
-              { name: 'Beats', expr: 'f_beat = |f₁ − f₂|' },
-              { name: 'Group velocity', expr: 'v_g = dω/dk' },
-            ],
-            references: [
-              'Waves — Berkeley Physics Course Vol. 3, Crawford (Ch. 1–4)',
-              'The Physics of Waves and Oscillations — N.K. Bajaj (Ch. 3–4)',
-              'Principles of Physics — Halliday, Resnick & Walker (Waves)',
-            ],
-            videos: [
-              { label: 'MIT OCW 8.03: Travelling & Standing Waves', url: 'https://ocw.mit.edu/courses/8-03sc-physics-iii-vibrations-and-waves-fall-2016/' },
-              { label: 'NPTEL: Wave Motion & Superposition', url: 'https://nptel.ac.in/courses/115105103' },
-            ],
-          },
-        ],
-      },
-    ],
+    tagline: 'Full notes, flashcards and sample paper active',
+    papers: [DSC1, DSC2, DSC3],
   },
   {
     id: 2,
     label: 'Semester 2',
-    active: false,
-    papers: [],
+    active: true,
+    tagline: 'Chapter syllabus + AI Study Guide Generator',
+    papers: SEM2,
   },
   {
     id: 3,
     label: 'Semester 3',
-    active: false,
-    papers: [],
+    active: true,
+    tagline: 'Chapter syllabus + AI Study Guide Generator',
+    papers: SEM3,
   },
   {
     id: 4,
     label: 'Semester 4',
-    active: false,
-    papers: [],
+    active: true,
+    tagline: 'Chapter syllabus + AI Study Guide Generator',
+    papers: SEM4,
   },
   {
     id: 5,
     label: 'Semester 5',
-    active: false,
-    papers: [],
+    active: true,
+    tagline: 'Chapter syllabus + AI Study Guide Generator',
+    papers: SEM5,
   },
   {
     id: 6,
     label: 'Semester 6',
-    active: false,
-    papers: [],
+    active: true,
+    tagline: 'Chapter syllabus + AI Study Guide Generator',
+    papers: SEM6,
   },
   {
     id: 7,
     label: 'Semester 7',
     active: false,
+    tagline: 'Coming soon',
     papers: [],
   },
   {
     id: 8,
     label: 'Semester 8',
     active: false,
+    tagline: 'Coming soon',
     papers: [],
   },
 ];
