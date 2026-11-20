@@ -1,6 +1,6 @@
 export type Flashcard = {
   id: string;
-  paperCode: 'DSC-1' | 'DSC-2' | 'DSC-3' | 'DSC-4' | 'DSC-5' | 'DSC-6' | 'DSC-7' | 'DSC-8' | 'DSC-9';
+  paperCode: 'DSC-1' | 'DSC-2' | 'DSC-3' | 'DSC-4' | 'DSC-5' | 'DSC-6' | 'DSC-7' | 'DSC-8' | 'DSC-9' | 'DSC-10' | 'DSC-11' | 'DSC-12';
   question: string;
   answer: string[];
 };
@@ -337,6 +337,81 @@ export const FLASHCARDS: Flashcard[] = [
       'Physical reason: in the medium, the oscillating dipoles driven by the refracted field radiate along their own axis only —',
       'at Brewster\u2019s angle that axis aligns with the reflected-ray direction, so no parallel-polarized light is reflected.',
       'Reflected light is therefore fully plane-polarized perpendicular to the plane of incidence.',
+    ],
+  },
+  {
+    id: 'dsc10-uncertainty',
+    paperCode: 'DSC-10',
+    question: 'State the Heisenberg uncertainty principle and use it to estimate the minimum energy of a particle confined to a box of size a.',
+    answer: [
+      'Δx·Δp ≥ ħ/2 and ΔE·Δt ≥ ħ/2 — a theorem of wave mechanics, not a measurement-skill limit.',
+      'Confinement: Δx ≈ a ⇒ Δp ≥ ħ/2a.',
+      'Minimum kinetic energy: E ≈ (Δp)²/2m = ħ²/8ma².',
+      'For an electron in a = 1 Å: E ≈ 0.96 eV — order of magnitude of the true value 37.6 eV (up to factors of order 1).',
+      'This zero-point energy has no classical analogue: confinement costs energy.',
+    ],
+  },
+  {
+    id: 'dsc10-tunneling',
+    paperCode: 'DSC-10',
+    question: 'A particle with E < V₀ meets a barrier of height V₀ and width a. Give the transmission probability and explain why tunnelling matters macroscopically never but microscopically always.',
+    answer: [
+      'T ≈ e^{−2κa} with κ = √(2m(V₀ − E))/ħ (wide-barrier limit).',
+      'The exponential makes T catastrophically sensitive to mass m, width a and the height deficit.',
+      'Electron, 1 eV barrier, E = 0.5 eV: T ≈ 8×10⁻⁴ at a = 1 nm but ≈ 3×10⁻¹³ at a = 5 nm.',
+      'Macroscopic objects (m grams, a metres) give T ~ e^{−10³⁰}: absolutely impossible.',
+      'Microscopic cases — alpha decay, the scanning tunnelling microscope, fusion in stars — have tiny m and a, making tunnelling central.',
+    ],
+  },
+  {
+    id: 'dsc11-bragg',
+    paperCode: 'DSC-11',
+    question: "State Bragg's law and show how powder X-ray diffraction identifies a cubic crystal's structure type.",
+    answer: [
+      "Bragg's law: 2d sinθ = nλ, with d_{hkl} = a/√(h² + k² + l²) for cubic crystals.",
+      'A powder sample presents all orientations, so every plane family gives a cone of diffraction at its Bragg angle.',
+      'Index the lines by computing sin²θ ratios, which equal (h² + k² + l²) ratios.',
+      '• sc: 1 : 2 : 3 : 4 : 5 : 6 : 8 … (no 7)',
+      '• bcc: 2 : 4 : 6 : 8 … (only even sums — systematic absence)',
+      '• fcc: 3 : 4 : 8 : 11 : 12 … (all-even or all-odd h,k,l only)',
+      'The pattern identifies the lattice type and gives the lattice constant a.',
+    ],
+  },
+  {
+    id: 'dsc11-hall',
+    paperCode: 'DSC-11',
+    question: 'Describe the Hall effect, give the Hall coefficient, and explain its two key uses.',
+    answer: [
+      'A current I in a magnetic field B develops a transverse voltage V_H = IB/nqt across a sample of thickness t, carrier density n.',
+      'Origin: the Lorentz force qv×B pushes carriers sideways until the accumulated charge field qE_H balances it.',
+      'Hall coefficient: R_H = E_H/(jB) = 1/nq.',
+      'Use 1: carrier density from V_H — one of the few direct measurements of n.',
+      'Use 2: the SIGN of V_H reveals the carrier charge — the experimental proof that holes exist in semiconductors.',
+      'Bonus: mobility μ = σR_H follows from combining with conductivity.',
+    ],
+  },
+  {
+    id: 'dsc12-barkhausen',
+    paperCode: 'DSC-12',
+    question: 'State the Barkhausen criterion and apply it to the RC phase-shift oscillator.',
+    answer: [
+      'For sustained oscillation, the loop gain must satisfy |Aβ| = 1 with total loop phase 0° (or 360°).',
+      "Derivation: closed-loop gain A_f = A/(1 − Aβ); oscillation when the denominator vanishes.",
+      'At start-up |Aβ| > 1 so oscillations grow; nonlinearity stabilises the amplitude.',
+      'RC phase-shift oscillator: three RC sections give 180°, the CE amplifier another 180° — total 360° (phase condition met).',
+      'Frequency: f = 1/(2πRC√6); magnitude condition requires amplifier gain ≥ 29.',
+    ],
+  },
+  {
+    id: 'dsc12-virtual-ground',
+    paperCode: 'DSC-12',
+    question: 'What is the virtual ground of an op-amp inverting amplifier, and why is it not an actual ground?',
+    answer: [
+      'With the non-inverting input earthed and negative feedback in place, the op-amp drives its output to whatever voltage makes v₋ ≈ v₊ = 0.',
+      'The inverting input therefore sits at ~0 V — a "virtual ground".',
+      'It is NOT an actual ground: no current flows from that node to earth (input impedance is infinite).',
+      'All the input currents (from multiple inputs, if summing) flow instead through the feedback resistor R_f.',
+      "That is why the summing amplifier works: v_o = −R_f Σ(vᵢ/Rᵢ), with inputs perfectly isolated from each other.",
     ],
   },
   {
