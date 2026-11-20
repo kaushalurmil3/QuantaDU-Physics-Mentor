@@ -1,6 +1,6 @@
 export type Flashcard = {
   id: string;
-  paperCode: 'DSC-1' | 'DSC-2' | 'DSC-3' | 'DSC-4' | 'DSC-5' | 'DSC-6';
+  paperCode: 'DSC-1' | 'DSC-2' | 'DSC-3' | 'DSC-4' | 'DSC-5' | 'DSC-6' | 'DSC-7' | 'DSC-8' | 'DSC-9';
   question: string;
   answer: string[];
 };
@@ -252,6 +252,91 @@ export const FLASHCARDS: Flashcard[] = [
       'Resonant frequency: f₀ = 1 / (2π√(LC)).',
       'At resonance the impedance is minimum and purely resistive: Z = R, so the current is maximum V/R.',
       'Power factor is unity, and the voltage across L or C is Q times the supply voltage (Q = ω₀L/R).',
+    ],
+  },
+  {
+    id: 'dsc7-fourier',
+    paperCode: 'DSC-7',
+    question: "Write the Cauchy-Riemann conditions and state the two consequences used most often in physics problems.",
+    answer: [
+      'For f(z) = u(x, y) + iv(x, y) analytic at z:',
+      '• ∂u/∂x = ∂v/∂y',
+      '• ∂u/∂y = −∂v/∂x',
+      "Consequence 1: u and v are harmonic — ∇²u = ∇²v = 0.",
+      'Consequence 2: v is the harmonic conjugate of u; together they form f(z), e.g. u = x² − y² pairs with v = 2xy to give f(z) = z².',
+    ],
+  },
+  {
+    id: 'dsc7-delta-shift',
+    paperCode: 'DSC-7',
+    question: 'Evaluate ∫ f(x) δ(x² − a²) dx over all real x, and state the rule it comes from.',
+    answer: [
+      'Rule: δ(f(x)) = Σ δ(x − xᵢ)/|f′(xᵢ)| over the simple roots of f.',
+      'Roots of x² − a²: x = ±a, with |f′(±a)| = 2|a|.',
+      '⇒ ∫ f(x)δ(x² − a²)dx = [f(a) + f(−a)] / 2|a|.',
+      'For even f, this reduces to f(a)/|a|.',
+    ],
+  },
+  {
+    id: 'dsc8-maxwell-relations',
+    paperCode: 'DSC-8',
+    question: "Derive Maxwell's thermodynamic relation (∂S/∂V)_T = (∂p/∂T)_V from a thermodynamic potential.",
+    answer: [
+      'Start from dU = TdS − pdV (internal energy, natural variables S, V).',
+      'U is a state function, so its mixed second derivatives are equal:',
+      '∂²U/∂S∂V = ∂²U/∂V∂S.',
+      "• T = (∂U/∂S)_V differentiated w.r.t. V gives (∂T/∂V)_S.",
+      "• −p = (∂U/∂V)_S differentiated w.r.t. S gives −(∂p/∂S)_V.",
+      'Equating: (∂T/∂V)_S = −(∂p/∂S)_V.',
+      "The other three Maxwell relations follow the same way from dH, dF, dG.",
+    ],
+  },
+  {
+    id: 'dsc8-carnot-efficiency',
+    paperCode: 'DSC-8',
+    question: 'State the Carnot efficiency formula and compute the maximum efficiency of an engine between 500 K and 300 K. Why can it never be 100%?',
+    answer: [
+      'η_C = 1 − T₂/T₁ (temperatures in kelvin).',
+      'η_C = 1 − 300/500 = 0.4 = 40%.',
+      "100% would require T₂ = 0 — a perfect heat sink at absolute zero, which the Third law forbids.",
+      "Alternatively, the Kelvin-Planck statement forbids a cycle converting heat entirely into work; some heat must be rejected.",
+      'Carnot\u2019s theorem: no engine between the same reservoirs exceeds η_C, and all reversible engines equal it.',
+    ],
+  },
+  {
+    id: 'dsc9-newtons-rings',
+    paperCode: 'DSC-9',
+    question: "Why is the centre of Newton's rings dark in reflected light, and how is the ring diameter used to find the wavelength?",
+    answer: [
+      'At the centre the air film thickness t = 0, but the reflection at the flat glass plate (denser medium) adds a λ/2 phase flip.',
+      '⇒ effective path difference is λ/2 — destructive interference, so the centre is dark in reflected light.',
+      "Dark rings: r² = nλR, i.e. D²_n = 4nλR.",
+      'In practice use the difference method: D²_{n+m} − D²_n = 4mλR, which eliminates the uncertain contact point.',
+      'Measuring D for known R gives λ; for known λ it gives R.',
+    ],
+  },
+  {
+    id: 'dsc9-rayleigh-compton',
+    paperCode: 'DSC-9',
+    question: 'State (a) the Rayleigh criterion and resolving power of a grating, and (b) the Compton shift formula with its key dependences.',
+    answer: [
+      '(a) Rayleigh criterion: two sources are just resolved when the principal maximum of one falls on the first minimum of the other; for a circular aperture θ_min = 1.22λ/D.',
+      'Grating resolving power: R = λ/Δλ = nN (order n, N illuminated lines).',
+      '(b) Compton shift: Δλ = (h/mₑc)(1 − cosθ), with h/mₑc = 0.0243 Å.',
+      'The shift depends only on the scattering angle — not on incident wavelength or target material.',
+      'Backscatter (θ = 180°) gives the maximum shift 2h/mₑc ≈ 0.049 Å.',
+    ],
+  },
+  {
+    id: 'dsc9-brewster',
+    paperCode: 'DSC-9',
+    question: "State Brewster's angle condition for glass of refractive index 1.5, and explain physically why the reflected ray is fully polarized there.",
+    answer: [
+      "tanθ_B = n₂/n₁ = 1.5 ⇒ θ_B ≈ 56.3° (from air).",
+      'At this angle the reflected and refracted rays are perpendicular: θ_B + θ_r = 90°.',
+      'Physical reason: in the medium, the oscillating dipoles driven by the refracted field radiate along their own axis only —',
+      'at Brewster\u2019s angle that axis aligns with the reflected-ray direction, so no parallel-polarized light is reflected.',
+      'Reflected light is therefore fully plane-polarized perpendicular to the plane of incidence.',
     ],
   },
   {

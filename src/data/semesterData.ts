@@ -1,5 +1,5 @@
 import type { Semester, SyllabusPaper } from './types';
-import { DSC1, DSC2, DSC3, DSC4, DSC5, DSC6 } from '.';
+import { DSC1, DSC2, DSC3, DSC4, DSC5, DSC6, DSC7, DSC8, DSC9 } from '.';
 
 function sp(
   id: string,
@@ -125,8 +125,8 @@ export const SEMESTERS: Semester[] = [
     id: 3,
     label: 'Semester 3',
     active: true,
-    tagline: 'Chapter syllabus + AI Study Guide Generator',
-    papers: SEM3,
+    tagline: 'Full notes, flashcards and sample paper active',
+    papers: [DSC7, DSC8, DSC9],
   },
   {
     id: 4,

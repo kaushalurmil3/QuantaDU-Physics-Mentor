@@ -1,0 +1,156 @@
+import type { DetailedPaper } from './types';
+
+export const DSC9: DetailedPaper = {
+  kind: 'detailed',
+  id: 'dsc9',
+  code: 'DSC-9',
+  name: 'Light and Matter (Optics & Wave-Particle Duality)',
+  playlist: {
+    label: 'NPTEL Optics: Interference, Diffraction & Quantum Nature of Light (IIT)',
+    url: 'https://www.youtube.com/results?search_query=NPTEL+Optics+Interference+Diffraction+IIT',
+  },
+  chapters: [
+    {
+      title: "Chapter 1: Wave Nature of Light & Interference",
+      topics: [
+        "Young's double-slit experiment",
+        'Interference in thin films',
+        "Newton's rings",
+        'Michelson interferometer',
+        'Coherence and path difference',
+      ],
+      notes: [
+        "Young's double slit: two slits separated d, screen at distance D, give bright fringes at y = nλD/d and dark at half-integers. Fringe width β = λD/d is independent of order — the key experimental fact that measured the wavelength of light for the first time. Stating the path difference δ = d·y/D and the phase condition is the skeleton of every double-slit question.",
+        'Thin films: light reflected from the top and bottom faces of a film of thickness t interferes; the optical path difference is 2μt cos r, plus λ/2 for the phase change at the denser reflection. Bright and dark conditions swap depending on whether that extra half-wavelength appears — getting this Stokes-phase bookkeeping right is the entire difficulty of thin-film problems, so draw the two reflections and mark the phase flips explicitly.',
+        "Newton's rings: a plano-convex lens on a flat plate encloses an air film of thickness t = r²/2R; reflected light gives dark centre (compensating phase flip) and rings at r² = nλR for dark, (2n−1)λR/2 for bright. The diameter formula D²_n = 4nλR is the workhorse: measuring ring diameters against n gives λ or R — the standard numerical.",
+        'The Michelson interferometer splits light into two perpendicular arms and recombines; moving one mirror by d shifts the pattern by 2d/λ fringes. Applications: measuring the wavelength of light, the refractive index of gases (insert a cell in one arm), and the historic Michelson-Morley null result. The factor-of-two (mirror displacement vs path change) is the most-tested detail.',
+        'Coherence is the prerequisite for observing interference: the phase relationship must persist over the path difference involved. Real sources have finite coherence length; the reason we see double-slit fringes from a single slit (spatial coherence via the Fresnel-Arago ideas) and why fringes wash out for wide slits (spatial coherence limit) are conceptual questions worth preparing.',
+      ],
+      derivations: [
+        "Fringe positions: path difference δ = d sinθ ≈ d·y/D; constructive when δ = nλ, destructive when δ = (2n−1)λ/2; hence y_n = nλD/d and fringe width β = λD/d; include the intensity profile I = 4I₀cos²(πdy/λD) via phasor addition.",
+        "Newton's rings radii: air-film thickness t = r²/2R by geometry; reflected path difference 2t + λ/2; dark rings when 2t = nλ ⇒ r_n = √(nλR); write D²_n = 4nλR and the difference method D²_{n+m} − D²_n = 4mλR used to eliminate the contact uncertainty.",
+        "Thin-film interference in reflected light: δ = 2μt cos r + λ/2 (phase flip at the denser surface); bright: 2μt cos r = (2n−1)λ/2; dark: 2μt cos r = nλ; specialise to normal incidence (cos r = 1) for the standard numericals on soap films and coatings.",
+        "Michelson fringe shift: path difference between arms is 2d for mirror displacement d (light traverses twice); moving mirror by d shifts N = 2d/λ fringes; invert to measure λ from known d — and for the gas cell, the shift 2(μ − 1)L/λ links refractive index to fringe count.",
+      ],
+      formulas: [
+        { name: 'Fringe width', expr: 'β = λD/d' },
+        { name: 'Intensity (double slit)', expr: 'I = 4I₀ cos²(φ/2),  φ = 2π d y/λD' },
+        { name: "Newton's rings", expr: 'D²_n (dark) = 4nλR ;  D²_n (bright) = (2n−1)·2λR' },
+        { name: 'Thin film (reflection)', expr: 'δ = 2μt cos r + λ/2' },
+        { name: 'Michelson shift', expr: 'N = 2d/λ (mirror move d);  ΔN = 2(μ−1)L/λ (gas cell)' },
+      ],
+      tips: [
+        'Always track the λ/2 phase flip on reflection off a denser medium — the missing flip is the top error in thin-film answers.',
+        'Sketch the geometry (slits + screen, lens on plate, interferometer arms) — the diagram organises the path differences for you.',
+        'In Newton\u2019s rings numericals, use the difference method (D² differences) to cancel the contact-point uncertainty.',
+      ],
+    },
+    {
+      title: 'Chapter 2: Diffraction',
+      topics: [
+        'Huygens-Fresnel principle',
+        'Fraunhofer diffraction by a single slit',
+        'Fraunhofer double-slit and N-slit patterns',
+        'Diffraction grating and resolving power',
+        'Rayleigh criterion and Fresnel zones',
+      ],
+      notes: [
+        'Diffraction is the bending of light around obstacles and apertures, explained by the Huygens-Fresnel principle: every point of a wavefront is a source of secondary wavelets, and the pattern beyond is their interference. Fraunhofer (far-field, plane waves) is analytically clean; Fresnel (near-field, zones) is the qualitative half of the chapter — the distinction between the two regimes is a standard opener.',
+        'Single slit of width a: minima at a sinθ = mλ (m = ±1, ±2, …), central maximum of angular width 2λ/a, with subsidiary maxima at ≈ (2m+1)λ/2a of rapidly decreasing intensity (1 : 1/22 : 1/61 …). The central maximum is doubly wide — twice the subsidiary width — which is a favourite conceptual check. Deriving minima via half-period zones (divide the slit into m strips) is the expected route.',
+        'Adding slits: the double-slit pattern is the single-slit envelope × the two-slit interference fringes (missing orders occur when an interference maximum coincides with a diffraction minimum). The N-slit grating sharpens the fringes into principal maxima at d sinθ = nλ with N−2 subsidiary maxima between them; intensity of principal maxima grows as N² — quoting both the missing-order condition and the N² factor is what full-credit answers include.',
+        'The diffraction grating: for a grating with N lines, principal maxima satisfy d sinθ = nλ. Dispersion and resolving power grow with N; the grating resolves the sodium doublet in standard numericals (d sinθ = nλ for each wavelength).',
+        "Rayleigh criterion: two point sources are just resolved when the principal maximum of one falls on the first minimum of the other — angular resolution θ_min = 1.22λ/D for a circular aperture. Resolving power of a grating R = λ/Δλ = nN. Fresnel zones: divide a wavefront into half-period zones; zone plate focusing and the qualitative explanation of Poisson's spot (the bright centre of a shadow) complete the chapter.",
+      ],
+      derivations: [
+        'Single-slit minima by half-period zones: at angle θ with mλ = a sinθ, the slit divides into m strips whose contributions pairwise cancel — minima. The intensity distribution follows from the phasor sum: I = I₀(sin α/α)² with α = (πa/λ) sinθ; minima where sin α = 0, α ≠ 0.',
+        'Grating principal maxima: sum N phasors with phase increments δ = (2π/λ)d sinθ; the resultant amplitude is A sin(Nδ/2)/sin(δ/2); principal maxima where sin(δ/2) = 0 ⇒ d sinθ = nλ, with intensity N²I₁; the subsidiary maxima between are weak (bounded by the envelope).',
+        "Rayleigh criterion: the first minimum of a circular aperture lies at sinθ = 1.22λ/D (the 1.22 is the first zero of the J₁ Bessel function pattern); two sources are resolved when separated by more than this angle; quote the derivation route via Airy patterns.",
+        'Missing orders: interference maxima (d sinθ = nλ) suppressed where diffraction minima (a sinθ = mλ) occur; the ratio n/m = d/a determines which orders vanish — work the d = 2a case (all even orders missing) as the worked example.',
+      ],
+      formulas: [
+        { name: 'Single-slit minima', expr: 'a sinθ = mλ (m = ±1, ±2, …)' },
+        { name: 'Single-slit intensity', expr: 'I = I₀ (sin α / α)²,  α = (πa/λ) sinθ' },
+        { name: 'Grating equation', expr: 'd sinθ = nλ' },
+        { name: 'Resolving power', expr: 'R = λ/Δλ = nN (grating);  θ_min = 1.22λ/D (aperture)' },
+        { name: 'Missing orders', expr: 'n/m = d/a (coincidence of interference max & diffraction min)' },
+      ],
+      tips: [
+        'Distinguish interference (few beams, comparable intensities) from diffraction (many beams, varying amplitude) in conceptual openers — the grader looks for this framing.',
+        'For grating numericals, convert line count per cm to d in consistent units before applying d sinθ = nλ; unit slips dominate here.',
+        'Quote the Rayleigh criterion with its aperture-specific constant (1.22 for circular, 1 for slit) — using the wrong constant is a silent mark loss.',
+      ],
+    },
+    {
+      title: "Chapter 3: Polarization",
+      topics: [
+        "Malus's law",
+        "Brewster's angle",
+        'Double refraction (birefringence)',
+        'Quarter-wave and half-wave plates',
+        'Production and detection of polarized light',
+      ],
+      notes: [
+        "Polarization is the signature of the transverse nature of light: the electric field oscillates perpendicular to propagation, and materials/anisotropies can select one direction. Linear, circular and elliptical polarization states are distinguished by the relative phase of two orthogonal components — defining the three states crisply with sketches is the standard opening question.",
+        "Malus's law: light polarized along E₀ through an analyser at angle θ emerges with I = I₀cos²θ. Unpolarized light through a polarizer halves its intensity (I = I₀/2) regardless of rotation; two crossed polarizers give zero, but inserting a third at 45° restores I = I₀/8 — the classic three-polarizer puzzle and a certain exam item.",
+        "Brewster's angle: at tanθ_B = n₂/n₁, the reflected and refracted rays are perpendicular (the reflected light is fully plane-polarized parallel to the surface). Physically, the oscillating dipoles in the medium cannot radiate along their own axis, which at this angle aligns with the reflected direction — explaining the mechanism (not just quoting the formula) is the mark of a complete answer. For glass (n = 1.5), θ_B ≈ 56.3°; Brewster windows in lasers exploit this.",
+        'Double refraction: in anisotropic crystals (calcite, quartz), light splits into an ordinary ray (obeying Snell\u2019s law, index nₒ) and an extraordinary ray (direction-dependent index nₑ); the optic axis is the direction where they coincide. The o- and e-rays are orthogonally polarized — calcite\u2019s double image of a dot is the iconic demonstration.',
+        'Wave plates: a slab cut parallel to the optic axis delays one component by a controlled phase. The quarter-wave plate (Δφ = π/2) converts linear to circular polarization (at 45° incidence on the plate) and back — the basis of photoelasticity and optical isolation; the half-wave plate (Δφ = π) rotates the polarization plane by 2θ. Computing which plate converts which state at which input angle is the standard numerical.',
+      ],
+      derivations: [
+        "Malus's law: resolve the incident field E₀ into components E₀cosθ and E₀sinθ along the analyser axes; the transmitted amplitude is E₀cosθ, so I = I₀cos²θ (energy ∝ amplitude²); verify I = I₀/2 at θ = 45°.",
+        "Brewster's angle: at the polarizing angle the reflected and refracted rays are perpendicular (θ_r = 90° − θ_B); Snell\u2019s law n₁sinθ_B = n₂sin(90° − θ_B) = n₂cosθ_B gives tanθ_B = n₂/n₁; connect to the Fresnel equations to show the reflected parallel component vanishes identically at this angle.",
+        'Quarter-wave plate: crystal thickness t chosen so that the o- and e-rays accumulate a phase difference (nₒ − nₑ)(2π/λ)t = π/2 ⇒ t = λ/4(nₒ − nₑ) (plus integer multiples); a 45°-oriented incident linear field emerges with equal components and 90° phase shift = circular polarization.',
+        "Polarization by double refraction: Snell's law applies to the o-ray (nₒ constant) but fails for the e-ray because its wavefront is an ellipsoid around the optic axis; sketch the Huygens constructions for the optic axis parallel and perpendicular to the surface — the two canonical figures.",
+      ],
+      formulas: [
+        { name: "Malus's law", expr: 'I = I₀ cos²θ' },
+        { name: 'Unpolarized through polarizer', expr: 'I = I₀/2 (any orientation)' },
+        { name: "Brewster's angle", expr: 'tanθ_B = n₂/n₁ ;  θ_B + θ_r = 90°' },
+        { name: 'Birefringence', expr: 'Δn = nₑ − nₒ (optic axis reference)' },
+        { name: 'Wave plates', expr: 't = λ/4|nₒ − nₑ| (QWP) ;  t = λ/2|nₒ − nₑ| (HWP)' },
+        { name: 'HWP rotation', expr: 'polarization plane rotates by 2θ (input at θ to axis)' },
+      ],
+      tips: [
+        'Distinguish polarizer from analyser in diagrams and label the transmission axis on both — unlabelled axes lose the figure mark.',
+        "In wave-plate problems, first decompose the input into the crystal's fast/slow axes, then apply the phase shift — the input angle (45° vs 0°) changes the outcome completely.",
+        "For Brewster questions, add the perpendicular-rays condition θ_B + θ_r = 90° — quoting it demonstrates understanding beyond the formula.",
+      ],
+    },
+    {
+      title: 'Chapter 4: Particle Nature of Light',
+      topics: [
+        'Blackbody radiation and the ultraviolet catastrophe',
+        "Planck's hypothesis and quantization",
+        'Photoelectric effect and Einstein\u2019s equation',
+        'Compton scattering',
+        'Wave-particle duality',
+      ],
+      notes: [
+        'Blackbody radiation: classical physics (Rayleigh-Jeans) predicts spectral radiance ∝ Tλ⁻⁴, diverging at short wavelengths — the ultraviolet catastrophe. Experimental curves (Wien peak, Stefan-Boltzmann T⁴ total) contradicted it. Recounting this failure of classical physics is the narrative frame the examiner wants before Planck\u2019s fix.',
+        "Planck's hypothesis: oscillators can exchange energy only in quanta E = hν; averaging over the discrete levels gives the Planck distribution, which fits the measured spectrum exactly and reduces to Rayleigh-Jeans at long wavelengths and Wien at short. Know both limits and the two empirical laws (Wien's displacement λ_maxT = 2.898×10⁻³ m·K, Stefan-Boltzmann P = σT⁴) as consequences.",
+        'Photoelectric effect: light delivers energy in quanta; an electron absorbs one quantum and escapes if hν exceeds the work function φ. Einstein\u2019s equation: K_max = hν − φ, with stopping potential eV₀ = K_max. The predictions that classical physics could not make — threshold frequency, instantaneous emission, intensity-independence of K_max — are the specific points to list in any "why did classical fail" question. Millikan\u2019s verification of the hν/2π slope is worth a line.',
+        "Compton scattering: a photon of wavelength λ scatters off a (quasi-free) electron and emerges redshifted by Δλ = (h/mₑc)(1 − cosθ) — the Compton wavelength h/mₑc = 0.0243 Å. The derivation is simultaneous conservation of relativistic energy and momentum; the shift depends only on the scattering angle, not on the incident wavelength or target material — a point examiners specifically test. X-ray scattering (large fractional shift) makes it observable.",
+        'Wave-particle duality: light exhibits interference (wave) and photoelectric/Compton (particle) behaviour depending on the experiment; de Broglie\u2019s extension λ = h/p assigns wave properties to matter, closing the symmetry. Compton recoil measurements (and electron diffraction) confirm both directions — a closing paragraph connecting the two halves of this chapter to the Semester 4 quantum story is a good finishing touch in long answers.',
+      ],
+      derivations: [
+        "Compton shift: conserve relativistic energy and momentum for photon (E = hc/λ) + stationary electron (mₑc²); eliminate the electron quantities to obtain Δλ = (h/mₑc)(1 − cosθ); quote the maximum shift 2h/mₑc at θ = 180° (backscatter).",
+        "Planck distribution: oscillators with mean energy ħω/(e^{ħω/k_BT} − 1) (Boltzmann-weighted discrete levels); density of EM modes ∝ ω² gives u(ω, T) ∝ ω³/(e^{ħω/k_BT} − 1); take the limits ħω ≪ k_BT (Rayleigh-Jeans) and ħω ≫ k_BT (Wien).",
+        "Stopping-potential analysis: eV₀ = hν − φ; a plot of V₀ against ν is a straight line of slope h/e and intercept −φ/e — Millikan's experiment; the x-intercept is the threshold frequency ν₀ = φ/h.",
+        "Stefan-Boltzmann from Planck: integrate the spectral distribution over all frequencies, using ∫x³dx/(e^x − 1) = π⁴/15, to get total radiance ∝ T⁴; similarly, Wien's displacement follows by setting du/dλ = 0 and solving the transcendental equation x = 5(1 − e^{−x}).",
+      ],
+      formulas: [
+        { name: "Planck's quantum", expr: 'E = hν = ħω,  h = 6.626×10⁻³⁴ J·s' },
+        { name: 'Planck distribution', expr: 'u(ω, T) = (ħω³/π²c³)/(e^{ħω/k_BT} − 1)' },
+        { name: 'Wien & Stefan laws', expr: 'λ_max T = 2.898×10⁻³ m·K ;  P = σT⁴,  σ = 5.67×10⁻⁸ W/m²K⁴' },
+        { name: "Einstein's photoelectric equation", expr: 'K_max = hν − φ ;  eV₀ = hν − φ' },
+        { name: 'Compton shift', expr: 'Δλ = (h/mₑc)(1 − cosθ),  h/mₑc = 0.0243 Å' },
+        { name: 'de Broglie relation', expr: 'λ = h/p' },
+      ],
+      tips: [
+        'In photoelectric numericals, convert wavelength to frequency (ν = c/λ) and energies to eV consistently — unit slips are the main hazard.',
+        'Compton problems: the shift depends only on angle; the incident wavelength sets the fractional size of the shift (X-rays needed) — say both.',
+        'Structure long answers as "classical failure → quantum hypothesis → experimental verification"; the narrative earns coherence marks.',
+      ],
+    },
+  ],
+};
