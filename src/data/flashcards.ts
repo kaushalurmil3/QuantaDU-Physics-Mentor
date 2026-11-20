@@ -1,6 +1,6 @@
 export type Flashcard = {
   id: string;
-  paperCode: 'DSC-1' | 'DSC-2' | 'DSC-3' | 'DSC-4' | 'DSC-5' | 'DSC-6' | 'DSC-7' | 'DSC-8' | 'DSC-9' | 'DSC-10' | 'DSC-11' | 'DSC-12';
+  paperCode: 'DSC-1' | 'DSC-2' | 'DSC-3' | 'DSC-4' | 'DSC-5' | 'DSC-6' | 'DSC-7' | 'DSC-8' | 'DSC-9' | 'DSC-10' | 'DSC-11' | 'DSC-12' | 'DSC-13' | 'DSC-14' | 'DSC-15';
   question: string;
   answer: string[];
 };
@@ -412,6 +412,78 @@ export const FLASHCARDS: Flashcard[] = [
       'It is NOT an actual ground: no current flows from that node to earth (input impedance is infinite).',
       'All the input currents (from multiple inputs, if summing) flow instead through the feedback resistor R_f.',
       "That is why the summing amplifier works: v_o = −R_f Σ(vᵢ/Rᵢ), with inputs perfectly isolated from each other.",
+    ],
+  },
+  {
+    id: 'dsc13-poynting',
+    paperCode: 'DSC-13',
+    question: 'Define the Poynting vector, state Poynting’s theorem, and compute the intensity and radiation pressure of sunlight of 1.4 kW/m².',
+    answer: [
+      'Poynting vector: S = (1/μ₀)E×B — the energy flux of the field, in W/m², pointing along the wave direction.',
+      'Poynting theorem: ∂u/∂t + ∇·S = −J·E with u = (ε₀E² + B²/μ₀)/2 — the work-energy theorem for fields.',
+      'Intensity I = ⟨S⟩ = ½cε₀E₀²; for a plane wave the electric and magnetic energy shares are equal.',
+      'Sunlight I = 1400 W/m²: E₀ = √(2I/cε₀) ≈ 1.03 kV/m, B₀ = E₀/c ≈ 3.4 μT.',
+      'Pressure: absorbed P = I/c ≈ 4.7 μPa; reflected P = 2I/c — the factor of 2 is the classic trap.',
+    ],
+  },
+  {
+    id: 'dsc13-skin-depth',
+    paperCode: 'DSC-13',
+    question: 'What is skin depth? Derive δ = √(2/μ₀σω) for a good conductor and give one consequence.',
+    answer: [
+      'Skin depth: the distance inside a conductor over which the EM field amplitude falls by 1/e — currents flow only in a surface layer of thickness δ.',
+      'Wave equation in conductor: ∇²E = μσε∂E/∂t + με∂²E/∂t²; for a good conductor σ ≫ ωε, the plane-wave ansatz gives k² = iμσω, so k = (1 + i)/δ.',
+      'The imaginary part of k forces decay e^{−z/δ}: E, B ∝ e^{−z/δ} with δ = √(2/μ₀σω).',
+      'Copper at 1 MHz: δ ≈ 66 μm; at microwave frequencies it shrinks to microns.',
+      'Consequence: resistance of a wire rises with frequency (effective cross-section is the skin layer), and good conductors reflect EM waves almost perfectly — mirrors work by skin-depth screening.',
+    ],
+  },
+  {
+    id: 'dsc14-hermitian',
+    paperCode: 'DSC-14',
+    question: 'Prove that a Hermitian operator has real eigenvalues and orthogonal eigenvectors. Why must observables be Hermitian?',
+    answer: [
+      'Hermitian: Â = Â†, i.e. ⟨φ|Âψ⟩ = ⟨Âφ|ψ⟩ for all states.',
+      'Eigenvalue reality: a⟨a|b⟩ = ⟨a|Â|b⟩ = b⟨a|b⟩ ⇒ (a − b)⟨a|b⟩ = 0.',
+      '• Taking a = b: the equation is satisfied for real a only — eigenvalues are real.',
+      '• Taking a ≠ b: ⟨a|b⟩ = 0 — distinct eigenvectors are orthogonal.',
+      'Observables must be Hermitian because measurements return real numbers, and only Hermitian operators guarantee a complete orthogonal eigenbasis for the expansion postulate.',
+    ],
+  },
+  {
+    id: 'dsc14-zero-point',
+    paperCode: 'DSC-14',
+    question: 'Derive the zero-point energy of the quantum harmonic oscillator using ladder operators and explain its physical origin.',
+    answer: [
+      'H = ħω(â†â + ½) with [â, â†] = 1; N̂ = â†â has eigenvalues n ≥ 0 (N̂ is positive: ⟨N̂⟩ = ‖â|ψ⟩‖² ≥ 0).',
+      'The ladder terminates: â|0⟩ = 0 defines the ground state; applying â† builds |n⟩ with Eₙ = (n + ½)ħω.',
+      'Ground state: E₀ = ħω/2 > 0 — the zero-point energy, forced by the algebra.',
+      'Physical origin: the uncertainty principle. Localising the particle in the well (Δx finite) costs kinetic energy (Δp ≥ ħ/2Δx); minimising ⟨p²⟩/2m + ½mω²⟨x²⟩ over Δx gives exactly ħω/2.',
+      'Check: ψ₀ is a Gaussian with ΔxΔp = ħ/2 — a minimum-uncertainty state.',
+    ],
+  },
+  {
+    id: 'dsc15-kmap',
+    paperCode: 'DSC-15',
+    question: 'State the rules of Karnaugh-map minimisation and minimise F(A,B,C,D) = Σm(0,2,5,7,8,10,13,15).',
+    answer: [
+      'Rules: order rows/columns in Gray code (one variable changes between neighbours); group 1s in rectangular blocks of 1, 2, 4, 8…; blocks may wrap around edges; each block of 2ᵏ drops k variables; use the fewest, largest blocks; may include don’t-cares when helpful.',
+      'Plot the 1s: a checkerboard pattern — no adjacent 1s except diagonally.',
+      'Grouping the four corner cells (0, 2, 8, 10 — wrap-around): B′D′.',
+      'Grouping the other four (5, 7, 13, 15): BD.',
+      'Result: F = B′D′ + BD — two 2-literal terms where SOP would need eight 4-literal minterms. Check: covers all minterms, no overlaps wasted.',
+    ],
+  },
+  {
+    id: 'dsc15-jk-race',
+    paperCode: 'DSC-15',
+    question: 'What is the race-around condition of the JK flip-flop and how is it eliminated?',
+    answer: [
+      'With level-triggered clocking and J = K = 1, the flip-flop toggles: Q⁺ = Q′.',
+      'If the clock pulse stays high longer than the propagation delay t_pd, the new output feeds back and toggles again — and again, unpredictably, for the remainder of the pulse. This is the race-around condition.',
+      'Cure 1: keep the clock pulse width < t_pd — impractical and fragile.',
+      'Cure 2 (proper): master-slave construction — two cascaded flip-flops, the slave clocked by the inverted clock; the master samples while CLK is high, the slave transfers when CLK goes low. One toggle per clock cycle, guaranteed.',
+      'Modern equivalent: edge-triggered design — output changes only at the clock edge, eliminating the race by construction.',
     ],
   },
   {

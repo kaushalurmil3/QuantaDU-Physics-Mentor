@@ -1,0 +1,158 @@
+import type { DetailedPaper } from './types';
+
+export const DSC13: DetailedPaper = {
+  kind: 'detailed',
+  id: 'dsc13',
+  code: 'DSC-13',
+  name: 'Electromagnetic Theory',
+  playlist: {
+    label: 'NPTEL Electromagnetic Theory (IIT)',
+    url: 'https://www.youtube.com/results?search_query=NPTEL+Electromagnetic+Theory+IIT',
+  },
+  chapters: [
+    {
+      title: 'Chapter 1: Maxwell Equations & Electromagnetic Waves',
+      topics: [
+        'Maxwell equations in vacuum and matter',
+        'The electromagnetic wave equation',
+        'Poynting vector and energy flow',
+        'Momentum and radiation pressure of EM waves',
+        'Transverse nature of plane waves',
+      ],
+      notes: [
+        'Maxwell equations in vacuum: ∇·E = ρ/ε₀, ∇·B = 0, ∇×E = −∂B/∂t, ∇×B = μ₀J + μ₀ε₀∂E/∂t. In linear homogeneous matter replace ε₀ → ε and μ₀ → μ. The set is complete: specifying charge and current density determines the fields — write the four with one-line physical meanings as the standard opening of any long answer.',
+        'Plane waves in free space: take ρ = 0, J = 0, assume E, B ∝ e^{i(k·r − ωt)}; the wave equations ∇²E = ε₀μ₀∂²E/∂t² follow, with speed c = 1/√(ε₀μ₀) = 3×10⁸ m/s — light is an electromagnetic wave. Gauss\u2019s laws force k·E = k·B = 0 (transversality) and Faraday gives B = k̂×E/c: the triad (E, B, k) is right-handed with |E| = c|B|.',
+        'Poynting vector S = (1/μ₀)E×B gives the energy flux (watts per square metre) of the field; the Poynting theorem ∂u/∂t + ∇·S = −J·E with energy density u = (ε₀E² + B²/μ₀)/2 is the work-energy theorem for fields. For a plane wave E and B share the energy equally: u_E = u_B, average S = u·c in the propagation direction.',
+        'Momentum: the field carries momentum density g = S/c² = u k̂/c; momentum flux equals pressure. For total absorption the radiation pressure is P = I/c, for total reflection P = 2I/c, with I the intensity (average of S). Deriving the pressure from the momentum transferred per photon (p = U/c) or per unit area per second is the standard numerical — sunlight at 1.4 kW/m² gives about 4.7 μPa absorbed.',
+        'Wave-length bookkeeping for numericals: intensity relates to field amplitude by I = (1/2)cε₀E₀² = cB₀²/2μ₀; the rms fields are E₀/√2, B₀/√2. Exam questions typically give intensity and ask for E₀, B₀, pressure, or the force on a reflecting sail — all one-line links from these definitions.',
+      ],
+      derivations: [
+        'Wave equation from Maxwell: take the curl of ∇×E = −∂B/∂t, use ∇×(∇×E) = ∇(∇·E) − ∇²E with ∇·E = 0, and substitute Ampère-Maxwell for ∇×B to get ∇²E = ε₀μ₀ ∂²E/∂t²; repeat for B. Identify c = 1/√(ε₀μ₀) and note the measured speed of light matches — Maxwell\u2019s synthesis.',
+        'Transversality and the E-B-k triad: insert the plane-wave ansatz into ∇·E = 0 and ∇·B = 0 to get k·E = k·B = 0; then Faraday\u2019s law gives B = (1/ω)k×E = k̂×E/c — derive both, then state the right-handed triad and |E| = c|B|.',
+        'Poynting theorem: compute ∂u/∂t from u = (ε₀E² + B²/μ₀)/2 using Maxwell equations, write the result as −∇·(E×B/μ₀) − J·E, and identify the flux term as the Poynting vector — the derivation is a direct vector identity exercise and is fully examinable.',
+        'Radiation pressure from momentum: momentum density g = S/c²; the momentum reaching unit area in time dt is g·c·dt, so absorbed pressure = ⟨S⟩/c = I/c; reflection doubles the momentum change ⇒ P = 2I/c. Also verify from photon language: N photons per m²·s each carrying p = hν/c.',
+      ],
+      formulas: [
+        { name: 'Maxwell equations (vacuum)', expr: '∇·E = ρ/ε₀ ;  ∇·B = 0 ;  ∇×E = −∂B/∂t ;  ∇×B = μ₀J + μ₀ε₀∂E/∂t' },
+        { name: 'Wave speed', expr: 'c = 1/√(ε₀μ₀) = 3×10⁸ m/s' },
+        { name: 'Poynting vector & theorem', expr: 'S = (1/μ₀)E×B ;  ∂u/∂t + ∇·S = −J·E' },
+        { name: 'Energy density (plane wave)', expr: 'u = ε₀E² = B²/μ₀ (electric = magnetic share)' },
+        { name: 'Intensity–amplitude relation', expr: 'I = ½cε₀E₀² = cB₀²/2μ₀' },
+        { name: 'Radiation pressure', expr: 'P = I/c (absorbing) ;  P = 2I/c (reflecting)' },
+      ],
+      tips: [
+        'Open every Maxwell-equation answer by writing all four with their physical meanings — the grader checks the set before the derivation.',
+        'Keep the plane-wave bookkeeping sharp: transverse, E⊥B, |E| = c|B|, energy split equally. Sketching the triad earns the diagram mark.',
+        'Radiation-pressure numericals: decide absorbing vs reflecting first — that factor of 2 is where most marks are lost.',
+      ],
+    },
+    {
+      title: 'Chapter 2: EM Wave Propagation in Bounded Media',
+      topics: [
+        'Reflection and refraction at dielectric interfaces',
+        'Fresnel equations for amplitude coefficients',
+        'Total internal reflection and evanescent waves',
+        'Brewster angle',
+        'Intensity reflectance and transmittance',
+      ],
+      notes: [
+        'Boundary conditions at an interface between media: the tangential components of E and B are continuous (no surface currents), the normal components of D and B are continuous (no free surface charge). Applying these to incident, reflected and refracted plane waves gives the laws of optics: angle of incidence = angle of reflection and Snell\u2019s law n₁sinθᵢ = n₂sinθₜ — the entire geometric optics of refraction drops out of Maxwell.',
+        'Fresnel equations give the amplitude reflection and transmission coefficients for the two polarisations, defined with respect to the plane of incidence. For light incident from medium 1 to 2: r_s = (n₁cosθᵢ − n₂cosθₜ)/(n₁cosθᵢ + n₂cosθₜ) and r_p = (n₂cosθᵢ − n₁cosθₜ)/(n₂cosθᵢ + n₁cosθₜ); the transmitted amplitudes follow from energy bookkeeping. The sign of r tells you the phase flip on reflection — π for low-to-high incidence at normal incidence, none for high-to-low.',
+        'Special angles: at Brewster\u2019s angle tanθ_B = n₂/n₁ the reflected and refracted rays are perpendicular and r_p = 0 — reflected light is completely s-polarised (this is how polaroid sunglasses and laser window cuts work). At the critical angle sinθ_c = n₂/n₁ (n₁ > n₂) the refraction angle hits 90°; beyond it, total internal reflection with an evanescent wave of decay length δ ≈ λ/2π in the second medium — the physics of fibre optics and frustrated total internal reflection.',
+        'Energy bookkeeping: reflectance R = |r|² and transmittance T = (n₂cosθₜ/n₁cosθᵢ)|t|²; conservation requires R + T = 1 at every angle (no absorption). At normal incidence R = ((n₁ − n₂)/(n₁ + n₂))² — about 4% per surface for air-glass, the number behind every lens coating discussion.',
+        'Phase changes: r_s and r_p acquire phase shifts that differ away from normal incidence; combined with TIR the reflected wave gains an extra phase (Goos-Hänchen shift is beyond syllabus but the phase-on-TIR remark earns conceptual credit). Understanding why Fresnel equations explain polarisation-by-reflection is the conceptual payoff of this chapter.',
+      ],
+      derivations: [
+        'Snell and reflection laws: match the tangential phase factors e^{i(kx)} of incident, reflected and refracted waves along the interface — phase matching at the boundary forces k_{i,x} = k_{r,x} = k_{t,x}; translating gives the two laws. This phase-matching derivation is the modern favourite.',
+        'Fresnel coefficients (s-polarisation): write E_i, E_r, E_t with correct directions; apply continuity of tangential E and H at the interface; solve the two linear equations for r_s and t_s. Repeat for p with the field directions adjusted — the algebra is long, so practice one polarisation fully and quote the other.',
+        'Brewster angle: set r_p = 0; the numerator n₂cosθᵢ − n₁cosθₜ = 0 combined with Snell\u2019s law gives tanθ_B = n₂/n₁. Show equivalently that θ_B + θₜ = 90°, i.e. the reflected ray ⟂ refracted ray.',
+        'Critical angle and evanescent wave: from Snell with n₁ > n₂, θₜ = 90° at sinθ_c = n₂/n₁; for θ > θ_c, cosθₜ becomes imaginary — the transmitted wave e^{i(k·r − ωt)} picks up a real exponential decay e^{−z/δ} with δ = λ/(2π√(n₁²sin²θ − n₂²)); sketch the decay and note no net power crosses the boundary.',
+      ],
+      formulas: [
+        { name: 'Boundary conditions', expr: 'E₁ₜ = E₂ₜ ;  B₁ₜ = B₂ₜ ;  D₁ₙ = D₂ₙ ;  B₁ₙ = B₂ₙ' },
+        { name: 'Snell\u2019s law', expr: 'n₁ sinθᵢ = n₂ sinθₜ' },
+        { name: 'Fresnel (s)', expr: 'r_s = (n₁cosθᵢ − n₂cosθₜ)/(n₁cosθᵢ + n₂cosθₜ)' },
+        { name: 'Fresnel (p)', expr: 'r_p = (n₂cosθᵢ − n₁cosθₜ)/(n₂cosθᵢ + n₁cosθₜ)' },
+        { name: 'Brewster & critical angles', expr: 'tanθ_B = n₂/n₁ ;  sinθ_c = n₂/n₁ (n₁ > n₂)' },
+        { name: 'Normal-incidence reflectance', expr: 'R = ((n₁ − n₂)/(n₁ + n₂))²' },
+      ],
+      tips: [
+        'Define the s and p polarisations with respect to the plane of incidence before writing any Fresnel formula — undefined symbols lose method marks.',
+        'Brewster numericals need only tanθ_B = n₂/n₁; quote θ_B + θₜ = 90° as the physical check.',
+        'For TIR answers, always add the evanescent-wave sentence with decay length λ/2π — it distinguishes a complete answer from a school-level one.',
+      ],
+    },
+    {
+      title: 'Chapter 3: EM Waves in Conductors & Plasma',
+      topics: [
+        'Wave equation in a conductor; complex wave vector',
+        'Skin depth',
+        'Reflection from a good conductor',
+        'Plasma frequency',
+        'EM propagation in the ionosphere',
+      ],
+      notes: [
+        'In a conductor Ohm\u2019s law J = σE adds a diffusion-like term to the wave equation; for a good conductor (σ ≫ ωε) the wave vector becomes complex, k = (1 + i)/δ with the skin depth δ = √(2/μ₀σω). The wave decays as e^{−z/δ}: fields and currents are confined to a surface layer. For copper at 1 MHz, δ ≈ 66 μm; at microwave frequencies it shrinks to microns — quote one number to anchor the scale.',
+        'Consequences of finite δ: the wave in the conductor is strongly attenuated and dispersive (phase velocity depends on frequency); the magnetic field lags/leads the electric field by 45° and |B| ≫ |E| in terms of energy per unit volume; the impedance of the conductor Z_c = (1 + i)√(ωμ₀/2σ) is tiny — hence almost total reflection at normal incidence with R ≈ 1 − 2√(2ε₀ω/σ). Mirrors are conductors for this reason.',
+        'Plasma: the free-electron gas responds with permittivity ε(ω) = ε₀(1 − ω_p²/ω²), where the plasma frequency ω_p = √(n_e e²/m_e ε₀). For ω < ω_p the dielectric function is negative, k becomes imaginary and the wave is reflected (evanescent inside); for ω > ω_p it propagates with n = √(1 − ω_p²/ω²) < 1. Deriving ε(ω) from the equation of motion of a driven free electron (no damping) is the chapter\u2019s central derivation.',
+        'Ionosphere: a weakly ionised plasma with n_e ~ 10¹⁰–10¹² m⁻³ gives f_p ~ 1–10 MHz. AM short-wave signals (f < f_p) reflect off the ionosphere and skip around the globe; FM and TV (f ≫ f_p) pass through into space — the reason those bands need line-of-sight towers. The critical frequency f_c = f_p√(max density ratio) and its day-night variation from solar ionisation is the standard discussion.',
+        'Connection threads: the skin effect is the conductor limit of the same mathematics as plasma reflection (imaginary k), and both illustrate that Maxwell equations plus a medium model (Ohm or plasma response) predict propagation, reflection or attenuation — state the parallel explicitly; it is the conceptual spine examiners reward.',
+      ],
+      derivations: [
+        'Wave equation in a conductor: start from ∇×H = σE + ε∂E/∂t, take the curl of the curl-E equation to get ∇²E = μσε∂E/∂t + με∂²E/∂t²; insert the plane wave e^{i(kz − ωt)} and solve the resulting quadratic k² = μεω² + iμσω; for good conductors k ≈ (1 + i)/δ — extract δ = √(2/μ₀σω).',
+        'Field decay and surface current: with k complex, E ∝ e^{−z/δ}e^{i(z/δ − ωt)}; the current density J = σE flows within δ of the surface — the physical origin of the skin effect and of the effective resistance rising with frequency.',
+        'Plasma dielectric function: equation of motion m dv/dt = −eE for a free electron (ignore B of the wave and collisions); with v = −ieE/mω displacement current, D = ε₀E − n_e e x gives ε(ω) = ε₀(1 − ω_p²/ω²) — then read off propagation vs reflection from the sign of ε.',
+        'Ionosphere reflection condition: wave in plasma has k = (ω/c)√(1 − ω_p²/ω²); k real only for ω > ω_p; a signal of frequency f sent upward reflects at the altitude where local f_p equals f — derive the skip condition and the critical frequency f_c = 9√(n_e max) Hz with n_e in m⁻³.',
+      ],
+      formulas: [
+        { name: 'Skin depth', expr: 'δ = √(2/μ₀σω) ;  k = (1 + i)/δ' },
+        { name: 'Decay of fields in conductor', expr: 'E, B ∝ e^{−z/δ} (surface layer)' },
+        { name: 'Reflection from good conductor', expr: 'R ≈ 1 − 2√(2ε₀ω/σ) (normal incidence)' },
+        { name: 'Plasma frequency', expr: 'ω_p = √(n_e e²/m_e ε₀) ;  ε(ω) = ε₀(1 − ω_p²/ω²)' },
+        { name: 'Propagation condition', expr: 'ω > ω_p propagates (n < 1) ;  ω < ω_p reflected' },
+        { name: 'Critical frequency (ionosphere)', expr: 'f_c ≈ 9√(n_e) Hz (n_e in m⁻³)' },
+      ],
+      tips: [
+        'State the good-conductor condition σ ≫ ωε before using δ = √(2/μ₀σω) — the formula is invalid otherwise, and the grader checks the caveat.',
+        'Plasma numericals pivot on n_e: compute f_p first, then compare with the signal frequency — reflection below, transmission above.',
+        'End ionosphere answers with the AM-vs-FM contrast: it shows you can connect ε(ω) to a real technology, which is exactly what the question rewards.',
+      ],
+    },
+    {
+      title: 'Chapter 4: Waveguides & Polarisation',
+      topics: [
+        'Rectangular waveguide geometry and mode structure',
+        'TE and TM modes',
+        'Cutoff frequency and dispersion',
+        'Optical fibres and total internal reflection',
+        'Polarisation states of EM waves',
+      ],
+      notes: [
+        'A rectangular waveguide (width a, height b, conducting walls) cannot support a TEM wave — the fields must have structure along the cross-section. Solving the 2D Helmholtz equation with conducting boundary conditions (E_tangential = 0 at walls) gives discrete modes: TE_mn (E_z = 0) and TM_mn (B_z = 0), with m half-waves across a and n across b. TM_mn requires both m, n ≥ 1; TE_10 is the dominant mode of the standard guide.',
+        'Cutoff: each mode propagates only above its cutoff frequency f_c(mn) = (c/2)√((m/a)² + (n/b)²); below f_c the guide is reactive — the wave decays evanescently and carries no power. Waveguide behaves as a high-pass filter, unlike a two-wire line. Phase velocity c/√(1 − (f_c/f)²) exceeds c while the group velocity stays below c — a beautiful, examinable relativity-consistent dispersion relation.',
+        'The TE_10 mode: f_c = c/2a; field components E_y ∝ sin(πx/a), with B having both z and x components. Choosing a so that only TE_10 propagates over the operating band gives single-mode operation — the design rule for all microwave plumbing. Sketching E_y across the width and the wall-current pattern is the standard diagram.',
+        'Optical fibres: a doped core (n₁) inside cladding (n₂ < n₁) traps light by total internal reflection at the core-cladding wall; the acceptance half-angle obeys the numerical aperture sinθ_A = √(n₁² − n₂²). Step-index multimode, graded-index and single-mode fibres differ in how many modes they carry; pulse spreading (modal dispersion) limits bandwidth, which is why long-haul links are single-mode.',
+        'Polarisation: a plane wave with E fixed in one transverse direction is linearly polarised; two equal-amplitude quadrature components give circular polarisation (left/right by the phase sign); unequal amplitudes give elliptical. Maxwell\u2019s equations constrain only transversality — polarisation is the remaining degree of freedom, and devices (polarisers, wave plates at λ/4 and λ/2) manipulate it. Describing a wave fully therefore means frequency, direction and polarisation state.',
+      ],
+      derivations: [
+        'Waveguide mode structure: solve (∂²/∂x² + ∂²/∂y² + k_c²)ψ = 0 for the longitudinal field ψ = E_z or B_z with conducting boundary conditions; separation of variables gives ψ ∝ sin(mπx/a)sin(nπy/b) and k_c² = (mπ/a)² + (nπ/b)²; identify ω² = c²(k_z² + k_c²) — the dispersion relation with cutoff k_c.',
+        'Cutoff and evanescence: from ω² = c²(k_z² + k_c²), for ω < ck_c the axial wavenumber k_z = iκ is imaginary: fields decay as e^{−κz} and no power flows — derive the cutoff frequency f_c = ck_c/2π and the high-pass behaviour.',
+        'TE_10 fields: set m = 1, n = 0 in the TE solution; write all field components from the potentials, showing E_y = E₀sin(πx/a)e^{i(k_z z − ωt)} and the paired B_x, B_z; verify tangential E vanishes on the walls — a guided worked example worth reproducing.',
+        'Numerical aperture: ray picture — the entering ray refracts, then must meet the core-cladding interface beyond the critical angle sinθ_c = n₂/n₁; chaining Snell at entry with TIR at the wall gives sinθ_A = √(n₁² − n₂²); the wave-optics picture agrees via guided modes below cutoff in the cladding.',
+      ],
+      formulas: [
+        { name: 'Cutoff frequency (rectangular)', expr: 'f_c(mn) = (c/2)√((m/a)² + (n/b)²)' },
+        { name: 'Guide dispersion', expr: 'ω² = c²(k_z² + k_c²) ;  v_p > c > v_g' },
+        { name: 'TE_10 cutoff', expr: 'f_c(10) = c/2a' },
+        { name: 'Numerical aperture', expr: 'sinθ_A = √(n₁² − n₂²)' },
+        { name: 'TIR condition (fibre)', expr: 'θ > θ_c = sin⁻¹(n₂/n₁) at core-cladding wall' },
+        { name: 'Polarisation states', expr: 'E = x̂E₁cos(ωt) + ŷE₂cos(ωt + φ) — linear (φ = 0), circular (E₁ = E₂, φ = ±π/2), elliptical otherwise' },
+      ],
+      tips: [
+        'State why TEM cannot exist in a hollow guide (no axial conductor to close the field lines) — it is the conceptual opener graders expect.',
+        'Cutoff numericals are one-line: compute f_c(mn), compare with the operating frequency, decide propagate or evanesce.',
+        'For fibre questions, draw the ray diagram with the entry refraction and the TIR bounce, then quote the NA formula — the pair earns full structure marks.',
+      ],
+    },
+  ],
+};

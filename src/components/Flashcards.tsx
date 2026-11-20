@@ -19,6 +19,9 @@ const PAPER_STYLES: Record<Flashcard['paperCode'], string> = {
   'DSC-10': 'bg-lime-100 text-lime-700',
   'DSC-11': 'bg-indigo-100 text-indigo-700',
   'DSC-12': 'bg-fuchsia-100 text-fuchsia-700',
+  'DSC-13': 'bg-emerald-100 text-emerald-700',
+  'DSC-14': 'bg-blue-100 text-blue-700',
+  'DSC-15': 'bg-red-100 text-red-700',
 };
 
 function Card({
@@ -150,7 +153,7 @@ export default function Flashcards() {
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <h2 className="text-2xl font-semibold tracking-tight text-navy-900">Interactive Flashcards</h2>
       <p className="mt-1 text-sm text-navy-500">
-        28 cards across Semester 1–4 papers. Click a card to flip between the question and the step-by-step answer.
+        34 cards across Semester 1–5 papers. Click a card to flip between the question and the step-by-step answer.
       </p>
 
       <div className="mt-6 rounded-xl border border-navy-100 bg-white p-5 shadow-card">

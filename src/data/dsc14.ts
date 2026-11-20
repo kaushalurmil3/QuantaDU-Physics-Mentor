@@ -1,0 +1,156 @@
+import type { DetailedPaper } from './types';
+
+export const DSC14: DetailedPaper = {
+  kind: 'detailed',
+  id: 'dsc14',
+  code: 'DSC-14',
+  name: 'Quantum Mechanics I',
+  playlist: {
+    label: 'NPTEL Quantum Mechanics — V. Balakrishnan (IIT Madras)',
+    url: 'https://www.youtube.com/results?search_query=NPTEL+Quantum+Mechanics+V+Balakrishnan',
+  },
+  chapters: [
+    {
+      title: 'Chapter 1: Formalism of Quantum Mechanics',
+      topics: [
+        'Hilbert space and states as vectors',
+        'Dirac bra-ket notation',
+        'Hermitian operators and observables',
+        'Commutators and simultaneous measurement',
+        'Generalised uncertainty relation',
+      ],
+      notes: [
+        'States live in a complex Hilbert space: kets |ψ⟩ with inner product ⟨φ|ψ⟩, linear superposition a|α⟩ + b|β⟩ allowed, normalisation ⟨ψ|ψ⟩ = 1. The Born rule gives probabilities as mod-squared amplitudes. The move from wave functions to vectors is the formalism upgrade of this semester: ψ(x) is simply the component ⟨x|ψ⟩ of the state in the position basis.',
+        'Observables are Hermitian (self-adjoint) operators: Â = Â† guarantees real eigenvalues and a complete orthogonal eigenbasis, which is why only Hermitian operators qualify as observables. Measurement postulate: a measurement of A yields one eigenvalue aₙ and collapses the state onto the eigenket |aₙ⟩; repeating immediately gives the same value — state the collapse, it is graded.',
+        'Expansion postulate: any |ψ⟩ = Σₙ cₙ|aₙ⟩ with cₙ = ⟨aₙ|ψ⟩ and |cₙ|² the probability of outcome aₙ; the expectation value ⟨A⟩ = ⟨ψ|Â|ψ⟩ = Σ|cₙ|²aₙ. Compatible observables commute: [Â, B̂] = 0 allows a common eigenbasis and simultaneous definite values; incompatible ones do not.',
+        'Commutator algebra: [Â, B̂] ≡ ÂB̂ − B̂Â is anti-Hermitian for two Hermitian operators times i; canonical example [x̂, p̂] = iħ. The Robertson relation ΔA·ΔB ≥ ½|⟨[Â, B̂]⟩| generalises the uncertainty principle — for x, p it reproduces ΔxΔp ≥ ħ/2, and for any pair it quantifies incompatibility. Deriving Robertson from the Schwarz inequality is the flagship derivation of the chapter.',
+        'Unitary evolution and change of basis: states evolve by |ψ(t)⟩ = Û(t)|ψ(0)⟩ with Û†Û = 1 (probability conservation); changing basis is a unitary transformation — the same vector described in the position or momentum or energy basis. Matrix mechanics and wave mechanics are the same theory in two bases; a sentence to that effect shows command of the formalism.',
+      ],
+      derivations: [
+        'Reality of eigenvalues and orthogonality: for Â = Â† with Â|a⟩ = a|a⟩ and Â|b⟩ = b|b⟩, write a⟨a|b⟩ = ⟨a|Â|b⟩ = ⟨Âa|b⟩ = b⟨a|b⟩; hence (a − b)⟨a|b⟩ = 0 — eigenvalues real (a = b case) and distinct eigenvectors orthogonal. Short, complete, always asked.',
+        'Robertson uncertainty relation: apply the Schwarz inequality to the vectors (Â − ⟨A⟩)|ψ⟩ and (B̂ − ⟨B⟩)|ψ⟩, use the Cauchy-Schwarz form with Im of the inner product: ΔA²ΔB² ≥ |⟨ΔÂ ΔB̂⟩|²/4 ≥ (⟨[Â, B̂]⟩/2i)²/4; conclude ΔAΔB ≥ ½|⟨[Â,B̂]⟩| — set out the steps cleanly.',
+        'Momentum operator in the position basis: translation invariance demands p̂ generate spatial translations; expanding the translated wave function to first order gives ⟨x|p̂|ψ⟩ = −iħ∂ψ/∂x; verify [x̂, p̂] = iħ on test functions. This grounds the canonical commutator rather than postulating it.',
+        'Expectation values and Ehrenfest: from ⟨A⟩ = ⟨ψ|Â|ψ⟩ and the Schrodinger equation, d⟨A⟩/dt = ⟨∂Â/∂t⟩ + (i/ħ)⟨[Ĥ, Â]⟩; for A = x and A = p recover the Ehrenfest relations d⟨x⟩/dt = ⟨p⟩/m, d⟨p⟩/dt = −⟨∇V⟩ — Newton\u2019s laws for averages.',
+      ],
+      formulas: [
+        { name: 'Born rule', expr: 'P(aₙ) = |⟨aₙ|ψ⟩|² ,  Σₙ|⟨aₙ|ψ⟩|² = 1' },
+        { name: 'Expectation value', expr: '⟨A⟩ = ⟨ψ|Â|ψ⟩ = Σ|cₙ|² aₙ' },
+        { name: 'Canonical commutator', expr: '[x̂, p̂] = iħ' },
+        { name: 'Robertson relation', expr: 'ΔA ΔB ≥ ½ |⟨[Â, B̂]⟩|' },
+        { name: 'Heisenberg equation', expr: 'd⟨A⟩/dt = ⟨∂Â/∂t⟩ + (i/ħ)⟨[Ĥ, Â]⟩' },
+      ],
+      tips: [
+        'Every formalism answer should name its postulates explicitly (states, observables, measurement, expansion) — the skeleton carries the marks.',
+        'Prove Hermiticity claims by integration by parts in the position representation; boundary terms vanish for normalisable states — say so.',
+        'For commutator questions, compute in the eigenbasis or use the Leibniz rule rather than brute force; quote the Robertson relation as the physical payoff.',
+      ],
+    },
+    {
+      title: 'Chapter 2: Quantum Harmonic Oscillator',
+      topics: [
+        'Ladder operators and algebraic solution',
+        'Number operator and energy spectrum',
+        'Analytical solution with Hermite polynomials',
+        'Zero-point energy and its physical meaning',
+        'Classical limit and correspondence',
+      ],
+      notes: [
+        'Hamiltonian H = p²/2m + ½mω²x². Define the ladder operators â = √(mω/2ħ)x̂ + i p̂/√(2mħ) and â† its adjoint; they satisfy [â, â†] = 1 and H = ħω(â†â + ½). The number operator N̂ = â†â has eigenvalues n = 0, 1, 2, … — the algebra alone quantises the oscillator, no differential equation needed.',
+        'Energy spectrum: Eₙ = (n + ½)ħω, equally spaced by ħω. Ladder action: â|n⟩ = √n|n−1⟩, â†|n⟩ = √(n+1)|n+1⟩ — raising and lowering excitation number. The ground state is fixed by â|0⟩ = 0 plus positivity of N̂: E₀ = ħω/2 > 0 is forced, the zero-point energy. Its origin is the uncertainty principle: localising the particle in the well costs kinetic energy even at T = 0.',
+        'Analytical route: the Schrodinger equation −(ħ²/2m)ψ″ + ½mω²x²ψ = Eψ, scaled with ξ = √(mω/ħ)x, has normalisable solutions only for E = (n + ½)ħω with ψₙ ∝ Hₙ(ξ)e^{−ξ²/2} — Hermite polynomials H₀ = 1, H₁ = 2ξ, H₂ = 4ξ² − 2, …, parity (−1)ⁿ. Both routes must agree; stating that agreement is the completeness remark examiners want.',
+        'Physics of the ground state: Gaussian ψ₀ ∝ e^{−ξ²/2} with Δx = √(ħ/2mω), Δp = √(mħω/2), product ħ/2 — a minimum-uncertainty state. Compare with the classical oscillator averaged over a period: for large n, ⟨x²⟩ and the probability distribution approach the classical arcsine law (correspondence principle); sketching ψₙ envelopes against the classical density for n = 0, 1, 10 is the standard figure.',
+        'Applications to mention: blackbody modes, lattice phonons (DSC-11 revisited) and molecular vibration spectra are all harmonic oscillators — ħω vibrational quanta explain low-temperature specific heats and IR spectroscopy line spacings. The QHO is the prototype of every small-oscillation problem because any smooth minimum of V is quadratic to leading order (Taylor).',
+      ],
+      derivations: [
+        'Algebraic spectrum: construct â, â† from x̂, p̂; verify [â, â†] = 1 and H = ħω(â†â + ½); show N̂ = â†â is positive with integer-spaced eigenvalues (â lowers n by exactly 1, and â|0⟩ = 0 terminates the ladder); conclude Eₙ = (n + ½)ħω. Present as a clean sequence — it is the highest-value derivation of the paper.',
+        'Ground state wave function: solve âψ₀ = 0, i.e. (ξ + d/dξ)ψ₀ = 0 ⇒ ψ₀ = (mω/πħ)^{1/4} e^{−ξ²/2}; normalise and compute Δx, Δp to show the minimum-uncertainty product ħ/2.',
+        'Hermite solution: separate the asymptotic behaviour (ψ ~ e^{−ξ²/2} at large ξ), substitute ψ = H(ξ)e^{−ξ²/2} to get the Hermite equation H″ − 2ξH′ + 2nH = 0; normalisability forces the series to terminate at n — the quantisation reappears analytically; write H₀…H₂ and the parity.',
+        'Classical limit: compute ⟨x²⟩ for state n and show the probability |ψₙ(x)|² averaged over fast oscillations tends to ρ(x) = 1/(π√(a² − x²)) as n → ∞ (the classical distribution for amplitude a); state the correspondence principle explicitly.',
+      ],
+      formulas: [
+        { name: 'Ladder operators', expr: 'â = √(mω/2ħ)(x̂ + ip̂/mω) ;  [â, â†] = 1' },
+        { name: 'Hamiltonian', expr: 'H = ħω(â†â + ½) = ħω(N̂ + ½)' },
+        { name: 'Energy spectrum', expr: 'Eₙ = (n + ½)ħω ,  n = 0, 1, 2, …' },
+        { name: 'Ladder action', expr: 'â|n⟩ = √n|n−1⟩ ;  â†|n⟩ = √(n+1)|n+1⟩' },
+        { name: 'Eigenfunctions', expr: 'ψₙ(x) ∝ Hₙ(ξ) e^{−ξ²/2} ,  ξ = √(mω/ħ)x' },
+        { name: 'Zero-point scales', expr: 'Δx = √(ħ/2mω) ;  Δp = √(mħω/2) ;  ΔxΔp = ħ/2' },
+      ],
+      tips: [
+        'Know both solutions (algebraic and Hermite) — papers typically set one and expect the other as a cross-check remark.',
+        'Always terminate the zero-point discussion with the uncertainty-principle sentence: E₀ > 0 because confinement costs energy.',
+        'Check parity in every oscillator integral: ψₙ has parity (−1)ⁿ, so odd integrands vanish — free marks on expectation-value questions.',
+      ],
+    },
+    {
+      title: 'Chapter 3: Angular Momentum & Hydrogen Atom',
+      topics: [
+        'Orbital angular momentum operators and algebra',
+        'Spherical harmonics',
+        'Radial Schrodinger equation for hydrogen',
+        'Energy levels and degeneracy',
+        'Probability densities and quantum numbers',
+      ],
+      notes: [
+        'Orbital angular momentum L̂ = r̂×p̂ with components obeying [L̂ₓ, L̂ᵧ] = iħL̂_z (cyclic). Only one component (conventionally L_z) and L̂² can be simultaneously sharp. Their common eigenstates are the spherical harmonics Yₗₘ(θ, φ) with L̂²Y = ħ²l(l+1)Y (l = 0, 1, 2, …) and L̂_zY = mħY (m = −l…l) — 2l+1 sublevels per l, the vector-model picture.',
+        'Ladder treatment: L̂± = L̂ₓ ± iL̂ḧ step m up and down; the requirement m = −l…l follows from positivity of L̂². Spherical harmonics are complete orthonormal on the sphere; |Yₗₘ|² gives the angular probability density of the hydrogen states — s, p, d shapes with nodal surfaces at l and m zeros.',
+        'Hydrogen: with V(r) = −e²/4πε₀r, separate ψ = R(r)Yₗₘ(θ, φ); the radial equation −(ħ²/2m_r)(1/r²)(r²R′)′ + [ħ²l(l+1)/2m_r r² − e²/4πε₀r]R = ER (m_r the reduced mass). Normalisable solutions require E = −13.6 eV/n² with the principal quantum number n = 1, 2, …, n ≥ l + 1 — the Bohr energies recovered with full wave mechanics.',
+        'Degeneracy: for each n the states run over l = 0…n−1 and m = −l…l, giving degeneracy n² (spin doubling makes it 2n²) — the largest degeneracy of any 1/r potential, traceable to hidden symmetry. Radial functions are Laguerre polynomials in ρ = 2r/n a₀ with n−l−1 radial nodes; the most probable radius of the 1s state is a₀ (Bohr radius), while ⟨r⟩ = (3/2)a₀ for 1s — quote both correctly.',
+        'Structure of a full hydrogen answer: quantum numbers (n, l, m) with their operators and allowed values, the energy formula, degeneracy count, and a sketch of ψ or |ψ|² for the requested state. The 2p_z and 3d orbitals with their nodal planes are the standard sketches; mark angular and radial nodes distinctly.',
+      ],
+      derivations: [
+        'Angular momentum algebra: compute [L̂ₓ, L̂ᵧ] = iħL̂_z directly from L̂ = r̂×p̂ using the canonical commutators; introduce L̂±, show they step m by ±1, and use positivity ⟨L̂²⟩ ≥ ⟨L̂_z²⟩ to bound m — the algebra reproduces the quantisation without solving any PDE.',
+        'Spherical harmonics as eigenstates: write L̂_z = −iħ∂/∂φ and L̂² in spherical coordinates; verify Yₗₘ ∝ Pₗ^m(cosθ)e^{imφ} satisfies both eigenvalue equations — quote the first few (Y₀₀, Y₁₀, Y₁±1) with normalisation.',
+        'Hydrogen radial solution: substitute u = rR into the radial equation, factor the asymptotics u ~ ρ^{l+1}e^{−ρ/2} (ρ = 2r/na₀), and obtain the associated Laguerre equation; normalisability forces the series to terminate, fixing E_n = −m_r e⁴/(2(4πε₀)²ħ²n²) — derive at least the quantisation step in full.',
+        'Degeneracy count: for given n, allowed l = 0…n−1 with 2l+1 m-values each: Σ_{l=0}^{n−1}(2l+1) = n²; note the accidental degeneracy beyond axial symmetry is the signature of the Coulomb potential — contrast with the oscillator\u2019s different degeneracy structure.',
+      ],
+      formulas: [
+        { name: 'Angular momentum algebra', expr: '[L̂ₓ, L̂ᵧ] = iħL̂_z (cyclic) ;  L̂²Yₗₘ = ħ²l(l+1)Yₗₘ' },
+        { name: 'Eigenvalues', expr: 'L² = ħ²l(l+1) ;  L_z = mħ ,  m = −l … +l' },
+        { name: 'Hydrogen energies', expr: 'E_n = −13.6 eV/n² (reduced-mass corrected)' },
+        { name: 'Wave functions', expr: 'ψₙₗₘ = Rₙₗ(r) Yₗₘ(θ, φ) ;  n ≥ l + 1' },
+        { name: 'Degeneracy', expr: 'g(n) = n² (orbital) ;  2n² with spin' },
+        { name: 'Bohr radius & scales', expr: 'a₀ = 4πε₀ħ²/m_e e² = 0.529 Å' },
+      ],
+      tips: [
+        'Separate angular from radial content: Yₗₘ carries l, m; the radial equation carries the energy. Mixing them up is the classic error.',
+        'State the degeneracy count explicitly in every hydrogen answer — it is cheap and examiners allocate it a mark.',
+        'For angular-momentum numericals, remember L² = ħ²l(l+1), not (lħ)²; sketching the vector model with L precessing about z makes the distinction visible.',
+      ],
+    },
+    {
+      title: 'Chapter 4: Spin & Identical Particles',
+      topics: [
+        'Stern-Gerlach experiment',
+        'Spin as internal angular momentum',
+        'Pauli spin matrices',
+        'Spinors and precession',
+        'Pauli exclusion principle and symmetric/antisymmetric states',
+      ],
+      notes: [
+        'Stern-Gerlach: silver atoms through an inhomogeneous field B_z(z) = B₀ + Gz feel F_z = μ_z G; classically a continuous fan of deflections, but the beam splits into exactly two — evidence of a two-valued quantised angular momentum with l = 0 atoms. The experiment discovered spin: s = 1/2 with S_z = ±ħ/2 only. It is also the prototype of state preparation and measurement (sequential SG apparatus questions are fair game).',
+        'Spin is intrinsic — no classical analogue, not literal rotation (a point rotating to give ħ/2 would need superluminal surface speed; the electron is pointlike to experimental limits). Spin states live in a two-dimensional space: |↑⟩, |↓⟩ eigenstates of Ŝ_z; a general spinor a|↑⟩ + b|↓⟩ with |a|² + |b|² = 1. Spin inherits the angular momentum algebra: [Ŝₓ, Ŝᵧ] = iħŜ_z with s = 1/2 giving exactly two states.',
+        'Pauli matrices: Ŝᵢ = (ħ/2)σᵢ with σₓ = [[0,1],[1,0]], σᵧ = [[0,−i],[i,0]], σ_z = [[1,0],[0,−1]]; algebra σᵢσⱼ = δᵢⱼ + iεᵢⱼₖσₖ. Eigenvalues ±1 (spin ±ħ/2); expectation ⟨σ⟩ for a spinor gives the Bloch-sphere direction. Precession: a spin in a static field B₀ẑ evolves with phases e^{∓iωt/2} — the spin vector precesses at the Larmor frequency ω = gμ_BB/ħ; deriving and sketching the precession is standard.',
+        'Identical particles: quantum amplitudes for exchanging two identical particles must give physical indistinguishability — measurement probabilities invariant under P₁₂. The total wave function must be symmetric (bosons, integer spin) or antisymmetric (fermions, half-integer spin) under exchange. Antisymmetrising the product ψₐ(1)ψ_b(2) − ψ_b(1)ψₐ(2) makes it vanish at a = b: two identical fermions cannot occupy the same single-particle state — the Pauli exclusion principle, derived not postulated.',
+        'Consequences: the exclusion principle underwrites the periodic table (electron shell filling), degeneracy pressure in white dwarfs, and Fermi statistics of electrons; symmetric states give Bose-Einstein statistics and condensation. Exchange is not a force — it is a symmetry requirement of the state; saying exactly that distinguishes a complete answer.',
+      ],
+      derivations: [
+        'Stern-Gerlach force: energy of moment in field U = −μ·B; with B_z varying, F_z = ∂(μ·B)/∂z = μ_z G; classical magnetic moments (orbital, ℓ ≥ 1) would give an odd number 2ℓ+1 of beams; the observed two imply a two-valued moment — the spin-½ hypothesis; quantify the beam separation for given G and length.',
+        'Pauli algebra: demand three 2×2 traceless Hermitian matrices with Ŝᵢ = (ħ/2)σᵢ obeying [σₓ, σᵧ] = 2iσ_z (cyclic); verify σᵢσⱼ = δᵢⱼ + iεᵢⱼₖσₖ and hence σ² = 3, σ·n̂ has eigenvalues ±1 — construct one matrix (σₓ) by diagonalising Sₓ in the S_z basis and generalise.',
+        'Larmor precession: Hamiltonian H = −γB₀Ŝ_z; time evolution of the spinor |↑ₓ⟩ = (|↑⟩ + |↓⟩)/√2 multiplies components by e^{∓iωt/2}; the expectation ⟨Sₓ⟩ = (ħ/2)cos ωt with ω = gμ_BB₀/ħ — the spin precesses about the field; connect to NMR timing.',
+        'Pauli exclusion from antisymmetry: for two fermions in states a, b the state must change sign under exchange: Ψ(1,2) = [ψₐ(1)ψ_b(2) − ψ_b(1)ψₐ(2)]/√2; set particle labels equal (same position, same spin) to get Ψ = 0 — zero probability density; generalise to the occupation-number statement nᵢ ≤ 1.',
+      ],
+      formulas: [
+        { name: 'Spin eigenvalues', expr: 'S² = ħ²s(s+1) = 3ħ²/4 ;  S_z = ±ħ/2' },
+        { name: 'Pauli matrices', expr: 'σᵢσⱼ = δᵢⱼI + iεᵢⱼₖσₖ ;  σ_xσ_y = iσ_z (cyclic)' },
+        { name: 'Larmor frequency', expr: 'ω = g μ_B B/ħ (precession about B)' },
+        { name: 'Fermion two-particle state', expr: 'Ψ_A = [ψₐ(1)ψ_b(2) − ψ_b(1)ψₐ(2)]/√2' },
+        { name: 'Pauli exclusion', expr: '⟨same position & spin⟩ = 0 for antisymmetric Ψ' },
+      ],
+      tips: [
+        'Quote the SG result as: two beams, not a continuum — then state what it implies (s = 1/2). The inference chain is the graded content.',
+        'Matrix numericals: use σᵢσⱼ = δᵢⱼ + iεᵢⱼₖ instead of multiplying 2×2 matrices by hand — faster and error-free.',
+        'For identical-particle answers, state the symmetry rule for bosons AND fermions, then give one consequence each (BEC vs periodic table).',
+      ],
+    },
+  ],
+};
