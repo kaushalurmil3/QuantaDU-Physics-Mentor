@@ -1,0 +1,155 @@
+import type { DetailedPaper } from './types';
+
+export const DSC4: DetailedPaper = {
+  kind: 'detailed',
+  id: 'dsc4',
+  code: 'DSC-4',
+  name: 'Mathematical Physics II',
+  playlist: {
+    label: 'NPTEL Selected Topics in Mathematical Physics',
+    url: 'https://www.youtube.com/playlist?list=PLbMVogVj5nJRhl_6TUGChpnt2Lg0AZvZu',
+  },
+  chapters: [
+    {
+      title: 'Chapter 1: Fourier Series',
+      topics: [
+        'Periodic functions and their properties',
+        'Dirichlet conditions for a Fourier expansion',
+        "Euler's formulas for the Fourier coefficients",
+        'Half-range sine and cosine expansions',
+        "Parseval's identity",
+      ],
+      notes: [
+        'A function f(x) is periodic with period T if f(x + T) = f(x) for all x. The Fourier series idea: any reasonably well-behaved periodic function can be built as a sum of sines and cosines whose frequencies are integer multiples of the fundamental 2π/T. State this definition in your own words in every "define periodicity" opener — it carries easy marks.',
+        'Dirichlet conditions are the exam\'s favourite "state the conditions" question: f(x) must be single-valued and periodic, piecewise continuous with only finitely many discontinuities in one period, and have only finitely many maxima and minima in one period. When all hold, the series converges to f(x) at points of continuity and to the average [f(x⁺) + f(x⁻)]/2 at jumps — quoting the averaging rule at discontinuities is what earns the last mark.',
+        "Euler's formulas give the coefficients: aₙ = (1/T)∫f(x)cos(nkx)dx and bₙ = (1/T)∫f(x)sin(nkx)dx over one period, with k = 2π/T. The orthogonality relations of sines and cosines over a full period are the engine behind these formulas — be ready to prove one orthogonality relation and then derive the coefficients, which is a standard 14-mark structure.",
+        'Half-range expansions: on [0, L] you may extend the function evenly to get a pure cosine series (aₙ only) or oddly to get a pure sine series (bₙ only). Both represent the same function on [0, L] but differ outside it. Choosing the right half-range for a boundary-value problem (cosine for insulated ends, sine for fixed ends) is a repeatedly examined skill.',
+        "Parseval's identity, (1/T)∫f²(x)dx = a₀²/4 + ½Σ(aₙ² + bₙ²), connects the time-domain energy to the spectral coefficients. It converts hard integrals of squared functions into quickly summable series — several numericals are literally 'evaluate ∫f² using Parseval', so practise one or two end to end.",
+      ],
+      derivations: [
+        "Orthogonality: show ∫₀^T sin(nkx)sin(mkx)dx = 0 for n ≠ m using the product-to-sum identity sinA sinB = ½[cos(A−B) − cos(A+B)]; the integral of cos((n∓m)kx) over a full period vanishes unless n = m, where it gives T/2.",
+        "Euler's formula for aₙ: multiply the series f = a₀/2 + Σ(aₙ cos nkx + bₙ sin nkx) by cos(mkx), integrate over one period, and watch every term die by orthogonality except the aₘ term, leaving aₘ = (2/T)∫f cos(mkx)dx.",
+        "Half-range cosine expansion of f(x) = x on [0, L]: extend evenly, aₙ = (2/L)∫₀^L x cos(nπx/L)dx; integrate by parts to get aₙ = 0 for even n and −4L/(n²π²) for odd n — a worked example examiners reuse constantly.",
+        "Parseval's identity: write out f² as the double sum of the series times itself; every cross term integrates to zero by orthogonality, and the surviving diagonal terms reproduce a₀²/4 + ½Σ(aₙ² + bₙ²).",
+      ],
+      formulas: [
+        { name: 'Fourier series (period 2L)', expr: 'f(x) = a₀/2 + Σ [aₙ cos(nπx/L) + bₙ sin(nπx/L)]' },
+        { name: "Euler's formulas", expr: 'aₙ = (1/L)∫f cos(nπx/L)dx,  bₙ = (1/L)∫f sin(nπx/L)dx' },
+        { name: 'Half-range sine (odd extension)', expr: 'bₙ = (2/L)∫₀^L f(x) sin(nπx/L)dx' },
+        { name: 'Half-range cosine (even extension)', expr: 'aₙ = (2/L)∫₀^L f(x) cos(nπx/L)dx' },
+        { name: "Parseval's identity", expr: '(1/L)∫₀^{2L} f²dx = a₀²/4 + ½ Σ (aₙ² + bₙ²)' },
+      ],
+      tips: [
+        'Check even/odd symmetry before computing: an even function kills all bₙ, an odd function kills all aₙ — half the work for free.',
+        'At a discontinuity, always quote the mean-value convergence rule; examiners specifically look for it.',
+        'Sketch the periodic extension (including the half-range one) before expanding — the sketch itself often carries a mark.',
+      ],
+    },
+    {
+      title: 'Chapter 2: Frobenius Method & Special Functions',
+      topics: [
+        'Singular points of second-order ODEs',
+        'Power series solution about a regular singular point',
+        'Legendre polynomials Pₙ(x)',
+        "Rodrigue's formula",
+        'Orthogonality of Legendre polynomials',
+      ],
+      notes: [
+        'Classify points of the standard form y″ + P(x)y′ + Q(x)y = 0: a point x₀ is ordinary if P, Q are analytic there; a regular singular point if (x−x₀)P and (x−x₀)²Q are analytic; otherwise irregular. Legendre\'s equation (1−x²)y″ − 2xy′ + n(n+1)y = 0 has regular singular points at x = ±1 — stating this classification is step one of almost every series-solution answer.',
+        'The Frobenius method seeks y = Σ aₖ x^{k+s} about a regular singular point. Substitute into the ODE, collect powers, and the lowest power yields the indicial equation for s. The recurrence relation then generates all coefficients. Always display the indicial equation and recurrence explicitly — they are the structural marks of the answer.',
+        'Legendre polynomials are the polynomial solutions of Legendre\'s equation for integer n, normalised so Pₙ(1) = 1. The first few — P₀ = 1, P₁ = x, P₂ = (3x²−1)/2, P₃ = (5x³−3x)/2 — should be memorised; numericals and "verify by substitution" questions lean on them.',
+        "Rodrigue's formula, Pₙ(x) = (1/(2ⁿ n!)) dⁿ/dxⁿ (x²−1)ⁿ, generates every Legendre polynomial in one stroke. It is also the standard tool for proving properties: parity Pₙ(−x) = (−1)ⁿPₙ(x) and Pₙ(1) = 1 both follow in two lines from the formula.",
+        'Orthogonality: ∫₋₁¹ Pₘ(x)Pₙ(x)dx = 0 for m ≠ n, and = 2/(2n+1) for m = n. This is what lets any reasonable function on [−1, 1] be expanded as a Legendre series with coefficients cₙ = (2n+1)/2 ∫f Pₙ dx — the same logic as Fourier series, which examiners like you to point out.',
+      ],
+      derivations: [
+        'Frobenius on Legendre\'s equation about x = 0 (ordinary point): insert y = Σaₖxᵏ to get the recurrence aₖ₊₂ = [(k(k+1) − n(n+1))/((k+2)(k+1))] aₖ; for integer n the series truncates at k = n, giving the polynomial solution Pₙ(x).',
+        "Rodrigue's formula: expand (x²−1)ⁿ by the binomial theorem, differentiate n times, and normalise using Pₙ(1) = 1 to fix the constant 1/(2ⁿn!); show the result reproduces P₂ = (3x²−1)/2 as a check.",
+        'Orthogonality proof: write Legendre\'s equation in Sturm–Liouville form d/dx[(1−x²)y′] + n(n+1)y = 0; multiply Pₘ\'s equation by Pₙ and Pₙ\'s by Pₘ, subtract, and integrate by parts over [−1, 1] — the boundary term vanishes at ±1 and the symmetry of the operator gives orthogonality.',
+        'Norm integral: from the recurrence (2n+1)xPₙ = (n+1)Pₙ₊₁ + nPₙ₋₁ and orthogonality, derive ∫₋₁¹ Pₙ²dx = 2/(2n+1).',
+      ],
+      formulas: [
+        { name: "Legendre's equation", expr: "(1−x²)y″ − 2xy′ + n(n+1)y = 0" },
+        { name: "Rodrigue's formula", expr: 'Pₙ(x) = (1/(2ⁿ n!)) dⁿ/dxⁿ (x² − 1)ⁿ' },
+        { name: 'Orthogonality', expr: '∫₋₁¹ Pₘ Pₙ dx = 0 (m≠n);  = 2/(2n+1) (m=n)' },
+        { name: 'Recurrence', expr: '(n+1)Pₙ₊₁ = (2n+1)xPₙ − nPₙ₋₁' },
+        { name: 'Expansion coefficient', expr: 'cₙ = (2n+1)/2 ∫₋₁¹ f(x) Pₙ(x) dx' },
+      ],
+      tips: [
+        'State the indicial equation and recurrence before crunching coefficients — structure earns method marks even if arithmetic slips.',
+        'Verify any Pₙ you derive against Rodrigue\'s formula for small n (n = 2 or 3); it catches sign errors instantly.',
+        'In orthogonality proofs, name the Sturm–Liouville form explicitly — it signals understanding, not memorisation.',
+      ],
+    },
+    {
+      title: 'Chapter 3: Bessel Functions & Beta/Gamma Functions',
+      topics: [
+        'Bessel functions of the first kind Jₙ(x)',
+        'Recurrence relations for Jₙ(x)',
+        'Gamma function and its properties',
+        'Beta function',
+        'Relation B(m,n) = Γ(m)Γ(n)/Γ(m+n)',
+      ],
+      notes: [
+        "Bessel's equation x²y″ + xy′ + (x² − n²)y = 0 arises whenever a problem has cylindrical symmetry — vibrating drumheads, heat flow in a cylinder, current density in a wire. Its regular solutions are the Bessel functions of the first kind Jₙ(x), obtained by Frobenius in exactly the way Chapter 2 taught.",
+        'The series Jₙ(x) = Σ (−1)ᵏ (x/2)^{2k+n} / (k! Γ(k+n+1)) oscillates with decaying amplitude, like a damped sine wave. J₀(0) = 1 while all other Jₙ(0) = 0 — quoting these initial values is often the fastest way to fix constants in boundary problems.',
+        'Recurrence relations connect neighbouring orders: Jₙ₊₁ = (2n/x)Jₙ − Jₙ₋₁, and the derivative relations d/dx[xⁿJₙ] = xⁿJₙ₋₁, d/dx[x^{−n}Jₙ] = −x^{−n}Jₙ₋₁. These are workhorses of integrals and numericals — the question "derive the recurrence from the series" is a classic.',
+        'The Gamma function Γ(p) = ∫₀^∞ e^{−t}t^{p−1}dt generalises the factorial: Γ(n+1) = n! for integer n, and Γ(½) = √π shows up everywhere in physics. Key properties: Γ(p+1) = pΓ(p) and Γ(p)Γ(1−p) = π/sin(πp).',
+        'The Beta function B(m,n) = ∫₀¹ x^{m−1}(1−x)^{n−1}dx satisfies the central relation B(m,n) = Γ(m)Γ(n)/Γ(m+n). Also know the symmetric forms B(m,n) = 2∫₀^{π/2} sin^{2m−1}θcos^{2n−1}θdθ — this trigonometric form is the one used to evaluate physics integrals like ∫sinⁿθdθ.',
+      ],
+      derivations: [
+        'Frobenius on Bessel\'s equation: substitute y = Σaₖx^{k+s}; the indicial equation s² − n² = 0 gives s = ±n, and the recurrence aₖ = −aₖ₋₂/[(k+s)² − n²] produces the Jₙ series with the Gamma function absorbing the non-integer steps.',
+        'Recurrence from the series: start from d/dx[xⁿJₙ] = xⁿJₙ₋₁, differentiate the series term by term, and rearrange to obtain Jₙ₊₁ = (2n/x)Jₙ − Jₙ₋₁; show the n = 0 case reproduces J₁ = −J₀′.',
+        'Gamma function: integrate Γ(p+1) = ∫e^{−t}tᵖdt by parts to get Γ(p+1) = pΓ(p); iterate for integer p to get Γ(n+1) = n!; evaluate Γ(½) via the Gaussian integral trick (square it, polar coordinates) to get √π.',
+        'Beta–Gamma relation: in B(m,n) = ∫₀¹ x^{m−1}(1−x)^{n−1}dx substitute t = x/(1−x) to convert the interval to (0, ∞), split into two exponentials, and evaluate each as a Gamma integral — the product factors and the result is Γ(m)Γ(n)/Γ(m+n).',
+      ],
+      formulas: [
+        { name: "Bessel's equation", expr: 'x²y″ + xy′ + (x² − n²)y = 0' },
+        { name: 'Jₙ series', expr: 'Jₙ(x) = Σ (−1)ᵏ (x/2)^{2k+n} / (k! Γ(k+n+1))' },
+        { name: 'Recurrence', expr: 'Jₙ₊₁(x) = (2n/x) Jₙ(x) − Jₙ₋₁(x)' },
+        { name: 'Gamma function', expr: 'Γ(p) = ∫₀^∞ e^{−t} t^{p−1} dt;  Γ(n+1) = n!;  Γ(½) = √π' },
+        { name: 'Beta function', expr: 'B(m,n) = ∫₀¹ x^{m−1}(1−x)^{n−1}dx = Γ(m)Γ(n)/Γ(m+n)' },
+        { name: 'Trigonometric Beta form', expr: 'B(m,n) = 2∫₀^{π/2} sin^{2m−1}θ cos^{2n−1}θ dθ' },
+      ],
+      tips: [
+        'Recognise the Beta form inside physics integrals: ∫₀^{π/2} sinᵐθcosⁿθdθ converts directly to Beta/Gamma — that conversion is the whole numerical.',
+        'Quote J₀(0) = 1, Jₙ(0) = 0 and the small-x limit Jₙ(x) ≈ (x/2)ⁿ/n! when fixing boundary conditions.',
+        'In Gamma problems, reduce everything with Γ(p+1) = pΓ(p) before reaching for the integral definition.',
+      ],
+    },
+    {
+      title: 'Chapter 4: Partial Differential Equations',
+      topics: [
+        'Method of separation of variables',
+        '1D heat (diffusion) equation',
+        '1D wave equation',
+        '2D Laplace equation in Cartesian coordinates',
+        '2D Laplace equation in polar coordinates',
+      ],
+      notes: [
+        'Separation of variables: assume the solution is a product u(x, t) = X(x)T(t), substitute into the PDE, and divide through so that one side depends only on x and the other only on t. Both must equal a constant — the separation constant. Choosing it correctly (negative for oscillations, positive for decay) is the make-or-break step, so always justify its sign from the physics.',
+        'The 1D heat equation ∂u/∂t = h ∂²u/∂x² describes diffusion of temperature. Separating with X and e^{−hλt} gives damped exponentials in time times sines/cosines in space. With fixed-end (Dirichlet) conditions the steady approach is exponential; identifying which boundary conditions kill which terms is how DU frames its numericals.',
+        'The 1D wave equation ∂²u/∂t² = v² ∂²u/∂x² governs a stretched string. Separation gives X = sin(nπx/L) and T = cos(nπvt/L), sin(nπvt/L); the general solution is a sum over modes with frequencies νₙ = nv/2L. The "pluck a string, express the initial shape as a Fourier series" problem is the single most repeated long question of this unit — it fuses this chapter with Chapter 1.',
+        "Laplace's equation ∇²u = 0 describes equilibrium: steady-state temperature, electrostatic potential in charge-free regions. In Cartesian coordinates with u prescribed on rectangle edges, separate u = X(x)Y(y) and satisfy each edge one at a time, superposing the pieces — the standard four-edge rectangle problem.",
+        'In polar coordinates ∇²u = (1/r)∂/∂r(r ∂u/∂r) + (1/r²)∂²u/∂θ². Separating u = R(r)Θ(θ) gives Θ = cos(nθ), sin(nθ) (periodic, so n integer — the single-valuedness argument earns marks) and powers of r for R. The classic application: steady temperature inside a disc with one half at temperature u₀ — the solution is the Fourier–Bessel-style series built from rⁿcos(nθ).',
+      ],
+      derivations: [
+        'Heat equation with fixed ends: separate u = X(x)e^{−hλt}, get X″ + λX = 0 with X(0) = X(L) = 0; eigenvalues λₙ = (nπ/L)² and the full solution u = Σ bₙ sin(nπx/L)e^{−h(nπ/L)²t}, with bₙ the half-range sine coefficients of the initial temperature profile.',
+        'Wave equation for a plucked string: separate to get modes sin(nπx/L)[Aₙcos(nπvt/L) + Bₙsin(nπvt/L)]; match the initial displacement f(x) and velocity g(x) using Fourier orthogonality to fix Aₙ and Bₙ = gₙL/(nπv).',
+        "Laplace in a rectangle: with u(x, 0) = f(x) and the other three edges held at zero, separation gives u = Σ cₙ sin(nπx/L) sinh(nπy/L), where cₙ = fₙ/sinh(nπb/L) matches the top edge — walk through one coefficient carefully and state the pattern.",
+        "Laplace in polar coordinates inside r < R with u(R, θ) = f(θ): the regularity condition at r = 0 kills the log and r^{−n} terms, leaving u = Σ rⁿ(aₙcos nθ + bₙsin nθ)/Rⁿ with Fourier coefficients of f(θ) — quote the interior Dirichlet problem solution.",
+      ],
+      formulas: [
+        { name: '1D heat equation', expr: '∂u/∂t = h ∂²u/∂x²' },
+        { name: 'Heat equation solution (fixed ends)', expr: 'u = Σ bₙ sin(nπx/L) e^{−h(nπ/L)²t}' },
+        { name: '1D wave equation', expr: '∂²u/∂t² = v² ∂²u/∂x²' },
+        { name: 'Normal modes', expr: 'νₙ = nv/2L' },
+        { name: "Laplace's equation (polar)", expr: '(1/r)∂/∂r(r ∂u/∂r) + (1/r²)∂²u/∂θ² = 0' },
+      ],
+      tips: [
+        'Justify the sign of the separation constant from the physics (boundedness in time, or periodicity) — it is a standing mark in every separation problem.',
+        'Match boundary conditions one edge at a time and superpose; never try to satisfy all four edges with a single term.',
+        'State the general solution as a series with coefficients left as integrals first, then evaluate — it protects partial marks.',
+      ],
+    },
+  ],
+};

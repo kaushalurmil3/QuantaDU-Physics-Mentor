@@ -34,7 +34,8 @@ function SchemeToggle({ q }: { q: Question }) {
 }
 
 export default function SamplePapers() {
-  const paper = SAMPLE_PAPERS[0];
+  const [paperId, setPaperId] = useState(SAMPLE_PAPERS[0].id);
+  const paper = SAMPLE_PAPERS.find((p) => p.id === paperId) ?? SAMPLE_PAPERS[0];
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
@@ -43,7 +44,23 @@ export default function SamplePapers() {
         Realistic UGCF end-semester theory papers with a marking scheme hidden under every question.
       </p>
 
-      <div className="mt-6 overflow-hidden rounded-xl border border-navy-200 bg-white shadow-card">
+      <div className="mt-6 flex flex-wrap gap-2">
+        {SAMPLE_PAPERS.map((p) => (
+          <button
+            key={p.id}
+            onClick={() => setPaperId(p.id)}
+            className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+              p.id === paper.id
+                ? 'bg-navy-800 text-white shadow-card'
+                : 'border border-navy-200 bg-white text-navy-600 hover:border-amber-400 hover:text-amber-700'
+            }`}
+          >
+            {p.paperCode.split(' ')[0]}
+          </button>
+        ))}
+      </div>
+
+      <div key={paper.id} className="mt-6 overflow-hidden rounded-xl border border-navy-200 bg-white shadow-card">
         {/* Question-paper header */}
         <header className="border-b-2 border-navy-900 bg-navy-50/60 px-6 py-6 text-center">
           <div className="flex items-center justify-between text-xs font-medium text-navy-500">

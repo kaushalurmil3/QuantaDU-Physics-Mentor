@@ -1,6 +1,6 @@
 export type Flashcard = {
   id: string;
-  paperCode: 'DSC-1' | 'DSC-2' | 'DSC-3';
+  paperCode: 'DSC-1' | 'DSC-2' | 'DSC-3' | 'DSC-4' | 'DSC-5' | 'DSC-6';
   question: string;
   answer: string[];
 };
@@ -185,6 +185,73 @@ export const FLASHCARDS: Flashcard[] = [
       'μ ∂²y/∂t² = T ∂²y/∂x²  ⇒  ∂²y/∂t² = (T/μ) ∂²y/∂x².',
       'Compare with the wave equation ∂²y/∂t² = v² ∂²y/∂x² ⇒ v = √(T/μ).',
       'Heavier strings (larger μ) carry slower waves; tighter strings carry faster ones.',
+    ],
+  },
+  {
+    id: 'dsc4-dirichlet',
+    paperCode: 'DSC-4',
+    question: 'State the Dirichlet conditions for a function f(x) to be expanded as a Fourier series.',
+    answer: [
+      'f(x) must be single-valued and periodic.',
+      '• f(x) is piecewise continuous with only a finite number of finite discontinuities in one period.',
+      '• f(x) has a finite number of maxima and minima in one period.',
+      'When these hold, the Fourier series converges to f(x) at points of continuity and to the average [f(x⁺) + f(x⁻)]/2 at a discontinuity.',
+    ],
+  },
+  {
+    id: 'dsc4-rodrigues',
+    paperCode: 'DSC-4',
+    question: "Write Rodrigue's formula for Legendre polynomials Pₙ(x).",
+    answer: [
+      "Pₙ(x) = (1 / (2ⁿ n!)) · dⁿ/dxⁿ (x² − 1)ⁿ.",
+      'Checks: n = 0 ⇒ P₀ = 1; n = 1 ⇒ P₁ = x; n = 2 ⇒ P₂ = (3x² − 1)/2.',
+      "Immediate consequences: Pₙ(1) = 1, Pₙ(−x) = (−1)ⁿPₙ(x) (parity), and Pₙ(−1) = (−1)ⁿ.",
+      "It is the standard tool for proving orthogonality and recurrence relations of Legendre polynomials.",
+    ],
+  },
+  {
+    id: 'dsc5-conservative-e',
+    paperCode: 'DSC-5',
+    question: 'Why is the electrostatic field conservative while the induced electric field is non-conservative?',
+    answer: [
+      'For static charges, the field is produced by charge density alone: ∇×E = 0, so E = −∇V — the line integral around any closed loop is zero (conservative).',
+      'For a time-varying magnetic field, Faraday\u2019s law gives ∮E·dl = −dΦ_B/dt, i.e. ∇×E = −∂B/∂t ≠ 0.',
+      'The induced field has closed field lines and does net work around a loop — it cannot be written as the gradient of a scalar potential.',
+      'Hence a changing magnetic field creates a non-conservative electric field; a steady magnetic field does not.',
+    ],
+  },
+  {
+    id: 'dsc5-displacement-current',
+    paperCode: 'DSC-5',
+    question: "What physical problem did Maxwell's displacement current solve?",
+    answer: [
+      "Ampere's law ∇×B = μ₀J was inconsistent for time-varying fields: taking its divergence forces ∇·J = 0, contradicting charge conservation for a charging capacitor (current flows in, but no conduction current crosses the gap).",
+      'Maxwell added the displacement current density ε₀ ∂E/∂t: between capacitor plates the changing E-field plays the role of current.',
+      "∇×B = μ₀J + μ₀ε₀ ∂E/∂t restores consistency with the continuity equation ∇·J = −∂ρ/∂t.",
+      'It also predicted that changing E and B sustain each other — electromagnetic waves travelling at c = 1/√(μ₀ε₀).',
+    ],
+  },
+  {
+    id: 'dsc6-max-power-ac',
+    paperCode: 'DSC-6',
+    question: 'State the Maximum Power Transfer Theorem for an AC circuit.',
+    answer: [
+      'Maximum average power is delivered to the load when the load impedance Z_L equals the complex conjugate of the Thevenin source impedance: Z_L = Z_Th*.',
+      '• Reactances cancel: X_L = −X_Th.',
+      '• Resistances match: R_L = R_Th.',
+      'P_max = |V_Th|² / (4R_Th); efficiency at the match is only 50%.',
+      'For a purely resistive network this reduces to R_L = R_Th.',
+    ],
+  },
+  {
+    id: 'dsc6-lcr-resonance',
+    paperCode: 'DSC-6',
+    question: 'What is the condition for resonance in a series LCR circuit?',
+    answer: [
+      'Inductive reactance equals capacitive reactance: X_L = X_C, i.e. ωL = 1/ωC.',
+      'Resonant frequency: f₀ = 1 / (2π√(LC)).',
+      'At resonance the impedance is minimum and purely resistive: Z = R, so the current is maximum V/R.',
+      'Power factor is unity, and the voltage across L or C is Q times the supply voltage (Q = ω₀L/R).',
     ],
   },
   {
