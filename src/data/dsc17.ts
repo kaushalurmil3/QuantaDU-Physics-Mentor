@@ -1,0 +1,155 @@
+import type { DetailedPaper } from './types';
+
+export const DSC17: DetailedPaper = {
+  kind: 'detailed',
+  id: 'dsc17',
+  code: 'DSC-17',
+  name: 'Atomic and Molecular Physics',
+  playlist: {
+    label: 'NPTEL Atomic and Molecular Physics (IIT)',
+    url: 'https://www.youtube.com/results?search_query=NPTEL+Atomic+and+Molecular+Physics+IIT',
+  },
+  chapters: [
+    {
+      title: 'Chapter 1: Fine Structure of Hydrogen & Alkali Spectra',
+      topics: [
+        'Spin-orbit coupling',
+        'Relativistic kinetic-energy correction',
+        'Lamb shift',
+        'Fine structure of spectral lines',
+        'Alkali atom quantum defects and selection rules',
+      ],
+      notes: [
+        'The Bohr energies of hydrogen (−13.6/n² eV) are the gross structure; the fine structure splits them by ~10⁻⁴ of that scale (α² corrections, α ≈ 1/137) through two effects of the same order: spin-orbit coupling and the relativistic correction to the kinetic energy. Both are handled as perturbations on the hydrogen eigenstates.',
+        'Spin-orbit coupling: in the electron\u2019s rest frame the orbiting proton creates a magnetic field that interacts with the electron spin moment: H_so = ξ(r) L·S, with ξ(r) = Ze²/(2m²c²r³) including the Thomas factor of 1/2 (a relativistic kinematic correction without which the theory overestimates by 2). Since L·S = [J² − L² − S²]/2, the coupling is diagonal in the coupled basis |n l j m_j⟩ — states of different j split; the 2p level splits into j = 1/2 and j = 3/2.',
+        'Relativistic correction: the kinetic energy E = p²/2m is only the first term of E² = p²c² + m²c⁴; the next term −p⁴/8m³c² is a perturbation of the same order (α²) as spin-orbit. The full fine structure for hydrogen depends on n and j only: ΔE = (E_n α²/n²)[n/(j + 1/2) − 3/4] — the Dirac result to order α⁴; levels with the same n, j remain degenerate (the "accidental" Dirac degeneracy).',
+        'Lamb shift: the Dirac degeneracy between 2s₁/₂ and 2p₁/₂ is lifted by ~1058 MHz (the Lamb-Retherford experiment) — a QED effect from vacuum fluctuations of the electromagnetic field (the electron "jitters", sampling the potential differently for s and p states). The Lamb shift is larger than the fine-structure splitting\u2019s detail and must be quoted: it is the experimental gateway to quantum electrodynamics in this course.',
+        'Alkali atoms: one valence electron outside a closed shell; the core screens the nuclear charge so states of the same n but different l have different energies (penetration: s-states dive into the core). Energies follow E = −Ry/(n − δ_l)² with the quantum defect δ_l (large for s, small for d); the sodium D-line doublet (3p → 3s, split by spin-orbit in the 3p state) is the flagship observable — a yellow doublet at 589.0 and 589.6 nm. Electric-dipole selection rules Δl = ±1, Δj = 0, ±1 (not 0→0) govern every line; state them in every spectrum answer.',
+      ],
+      derivations: [
+        'Spin-orbit Hamiltonian: in the electron rest frame the nuclear current creates B′ = (1/c²)(v×E) (from transforming the field); the electron moment μ_s interacts: H_so = −μ_s·B′; include the Thomas precession factor ½ and express E as −∇V for the Coulomb field to get H_so = Ze²/(2m²c²r³) L·S — a full, step-by-step classical-relativistic setup worth reproducing.',
+        'First-order perturbation with L·S: since H_so is diagonal in |n l s j m_j⟩, use L·S = [J(J+1) − L(L+1) − S(S+1)]ħ²/2 with s = 1/2 to get the splitting ΔE_so = ⟨ξ(r)⟩ħ²/2 [j(j+1) − l(l+1) − 3/4]; evaluate ⟨r⁻³⟩ for hydrogen states and compute the 2p splitting as the worked example.',
+        'Relativistic correction: expand E = √(p²c² + m²c⁴) ≈ mc² + p²/2m − p⁴/8m³c²; treat −p⁴/8m³c² as a perturbation: ⟨p⁴⟩ from the Schrodinger equation (apply H twice on ψ); combine with the spin-orbit term to display the n, j-dependent fine-structure formula.',
+        'Alkali quantum defect: explain penetration classically (elliptic orbits of high-l vs core-plunging s orbits) and quantum-mechanically (wave function amplitude inside the core); fit observed sodium levels to the Rydberg formula with δ_l to extract the defects — the data-analysis pattern of alkali spectra questions.',
+      ],
+      formulas: [
+        { name: 'Spin-orbit Hamiltonian', expr: 'H_so = Ze²/(2m²c²r³) L·S (Thomas factor included)' },
+        { name: 'L·S in the coupled basis', expr: 'L·S = ½[J(J+1) − L(L+1) − S(S+1)]ħ²' },
+        { name: 'Hydrogen fine structure', expr: 'ΔE_fs ∝ (α²/n³)[n/(j+½) − ¾] Ry — depends on n, j only' },
+        { name: 'Lamb shift', expr: 'E(2s₁/₂) − E(2p₁/₂) ≈ 1058 MHz' },
+        { name: 'Alkali Rydberg formula', expr: 'E = −Ry/(n − δ_l)² ;  δ_s > δ_p > δ_d' },
+        { name: 'E1 selection rules', expr: 'Δl = ±1 ;  Δj = 0, ±1 (no 0→0) ;  Δm_j = 0, ±1' },
+      ],
+      tips: [
+        'Order the effects by size in every answer: gross structure → fine (α²) → Lamb shift — the hierarchy itself is graded.',
+        'Always work in the coupled |j, m_j⟩ basis for spin-orbit; L·S is not diagonal in the uncoupled basis — a common wasteful detour.',
+        'For alkali spectra, name penetration and the quantum defect; the sodium D-line doublet with its wavelengths is the expected example.',
+      ],
+    },
+    {
+      title: 'Chapter 2: Many-Electron Atoms & Coupling Schemes',
+      topics: [
+        'Central-field approximation and electron configurations',
+        'LS (Russell-Saunders) coupling',
+        'JJ coupling',
+        'Hund\u2019s rules and term symbols',
+        'Zeeman effect (normal and anomalous), Paschen-Back effect',
+      ],
+      notes: [
+        'Many-electron atoms: the exact Hamiltonian is intractable; the central-field approximation replaces the electron-electron repulsion by a spherically averaged potential, giving one-electron orbitals and configurations (1s², 2s², 2p⁶, …). Residual interactions split each configuration into terms — the levels labelled by term symbols ^{2S+1}L_J (L, S, J the total orbital, spin and angular momenta).',
+        'LS (Russell-Saunders) coupling: for light atoms, electrostatic residual interactions dominate; individual orbital momenta lᵢ couple to a total L and spins sᵢ to a total S, then L + S → J. Equivalent electrons are constrained by Pauli exclusion; the resulting terms for a configuration like p² are ³P, ¹D, ¹S — deriving the allowed terms for a two-electron configuration is the classic exercise.',
+        'Hund\u2019s rules order the terms by energy: (1) maximum spin multiplicity (2S+1) — exchange lowers parallel-spin states; (2) maximum L for that S; (3) for less/more than half-filled shells, J minimum/maximum. They predict ground terms (e.g. carbon ³P₀, nitrogen ⁴S₃/₂) and are the working tool of atomic spectroscopy; know the exchange-integral argument behind rule 1.',
+        'JJ coupling: for heavy atoms, each electron\u2019s spin-orbit (which scales as Z⁴) exceeds the residual electrostatic coupling; individual electrons first form j = l ± ½, then jᵢ couple to total J. The level count is identical to LS (same J values, different energy ordering) — intermediate coupling lies between; being able to say when each regime applies is the conceptual content.',
+        'Zeeman effects: in a weak field B, levels split by ΔE = μ_B g_J m_J B with the Landé g-factor (L, S coupled — anomalous Zeeman: lines split into many components per the g values); for strong B, L and S decouple (Paschen-Back): ΔE = μ_B B(m_L + 2m_S) — the normal triplet reappears. The normal Zeeman effect (simple triplet) occurs for singlet states (S = 0, g = 1); the anomalous pattern reduces to normal in the Paschen-Back limit — deriving the Landé g-factor and sketching splittings with polarisations (π, σ±) is the standard full question.',
+      ],
+      derivations: [
+        'Term symbols for equivalent electrons: for p², list the 15 allowed microstates (C(6,2)) respecting Pauli; tabulate M_L, M_S; read off L = 2 (¹D), L = 1 (³P), L = 0 (¹S); apply Hund to order them — the complete bookkeeping exercise.',
+        'Landé g-factor: compute g_J = 1 + [J(J+1) + S(S+1) − L(L+1)]/2J(J+1) from the vector model (project S and L contributions onto J); verify g = 2 for ²S₁/₂ and g = 1 for ¹P₁; then ΔE = μ_B g_J m_J B — derive one case fully.',
+        'Anomalous to normal (Paschen-Back): in strong field H_B ≫ H_so, the good quantum numbers become m_L, m_S: ΔE = μ_B B(m_L + 2m_S); show that summing over the spin components collapses the anomalous multiplet into the normal triplet — the crossover argument.',
+        'Exchange and Hund\u2019s first rule: the antisymmetry of the two-electron wave function forces a symmetric spin state (triplet) to pair with an antisymmetric spatial state, which has less Coulomb repulsion (electrons further apart) — hence higher multiplicity lies lower; a two-electron integral calculation makes it quantitative.',
+      ],
+      formulas: [
+        { name: 'Term symbol', expr: '^{2S+1}L_J (L = S, P, D, F… for 0, 1, 2, 3…)' },
+        { name: 'Hund\u2019s rules', expr: 'max S → max L → min J (less than half-filled) / max J (more than half)' },
+        { name: 'Landé g-factor', expr: 'g_J = 1 + [J(J+1) + S(S+1) − L(L+1)] / 2J(J+1)' },
+        { name: 'Anomalous Zeeman', expr: 'ΔE = μ_B g_J m_J B (weak field, LS coupled)' },
+        { name: 'Paschen-Back', expr: 'ΔE = μ_B B(m_L + 2m_S) (strong field, LS decoupled)' },
+      ],
+      tips: [
+        'Determine the ground term of any requested configuration using Hund\u2019s rules — the three-rule chain is a guaranteed marks-earner.',
+        'Say explicitly which coupling regime applies (light atoms LS, heavy atoms JJ) and why (relative strength of electrostatic vs spin-orbit terms, scaling as Z⁴).',
+        'Zeeman answers need the level diagram with m_J sublevels and the π/σ polarisation labels — the diagram carries the diagram marks.',
+      ],
+    },
+    {
+      title: 'Chapter 3: Molecular Spectra',
+      topics: [
+        'Born-Oppenheimer approximation',
+        'Rotational spectra of diatomic molecules',
+        'Vibrational spectra and anharmonicity',
+        'Rotational-vibrational and electronic bands; Franck-Condon principle',
+        'Raman effect',
+      ],
+      notes: [
+        'Born-Oppenheimer: nuclei are ~1836× heavier than electrons, so the electronic and nuclear motions separate — solve electrons in fixed nuclei positions to get the potential energy curve V(R) for the bond, then nuclear motion (vibration/rotation) in that curve. The approximation underlies all molecular spectroscopy; state it before any molecular calculation.',
+        'Rotation: a rigid rotor has E_J = ħ²J(J+1)/2I with moment of inertia I = μR₀² (reduced mass); transitions ΔJ = ±1 give lines at E = 2B(J+1) with B = ħ²/2I — equally spaced microwave lines, the standard method for bond lengths (CO at 1.13 Å from its 1.9 cm⁻¹ spacing). Intensities follow the (2J+1) degeneracy and the Boltzmann population — the characteristic intensity envelope peaks near the thermal J.',
+        'Vibration: the harmonic approximation gives E_v = ħω(v + ½) with selection rule Δv = ±1 and a single IR band at ħω; real bonds are anharmonic (Morse potential): levels crowd at higher v, overtone transitions (Δv = 2, 3) appear weakly, and dissociation energy D_e follows from the anharmonicity constant. The vibrating-rotating molecule combines both: each vibrational band carries a rotational branch structure (P and R branches, ΔJ = −1 and +1; Q branch only when the electronic angular momentum allows ΔJ = 0).',
+        'Electronic spectra: transitions between electronic states carry vibrational and rotational fine structure — band systems. The Franck-Condon principle: electronic transitions are vertical on the molecular potential diagram (nuclei do not move during the fast electronic jump), so intensity goes to the vibrational level whose turning point matches the starting geometry — the Franck-Condon factor |∫χ_v′χ_v dx|². It explains vibronic intensity patterns and the difference between absorption and fluorescence spectra.',
+        'Raman effect: inelastic scattering of light by molecular polarisability oscillations gives Stokes (molecule gains energy) and anti-Stokes (loses) lines displaced by the rotational/vibrational quanta. Selection rules differ from IR: Raman needs a change in polarisability (homonuclear diatomics like N₂, O₂ are Raman-active but IR-inactive — the complementarity of the two methods); rotational Raman has ΔJ = 0, ±2 — quote the mutual-exclusion rule for centrosymmetric molecules.',
+      ],
+      derivations: [
+        'Rigid rotor: solve the 2-body problem via reduced mass; E_J = ħ²J(J+1)/2I with transition frequencies ν = 2Bc(J+1) — constant spacing 2Bc; show the line spacing gives I and hence the bond length; include the intensity envelope from (2J+1)e^{−E_J/kT}.',
+        'Morse oscillator: E_v = ħω_e(v + ½) − ħω_e x_e(v + ½)²; show level crowding, extract D_e = ħω_e/4x_e from the parameters, and derive the anharmonic overtones — the standard anharmonicity treatment.',
+        'Franck-Condon factors: within the Born-Oppenheimer and Condon approximations the transition moment factors into electronic × nuclear overlap: I ∝ |∫χ_v′(R)χ_v(R)dR|²; compute for a displaced harmonic oscillator to show the v′-progression peaks at the vertically-connected level — the quantitative core of the principle.',
+        'Raman rotational selection rules: the induced dipole p = αE has α(θ) = α_⊥ + (α_∥ − α_⊥)cos²θ; the ΔJ = ±2 rule follows from the rank-2 tensor nature of the polarisability; derive the Stokes/anti-Stokes line positions and the intensity ratio from Boltzmann populations.',
+      ],
+      formulas: [
+        { name: 'Rigid rotor', expr: 'E_J = ħ²J(J+1)/2I ;  I = μR₀² ;  lines spaced 2Bc' },
+        { name: 'Harmonic vibration', expr: 'E_v = ħω(v + ½) ;  Δv = ±1 (IR active if dipole changes)' },
+        { name: 'Morse anharmonic', expr: 'E_v = ħω_e(v+½) − ħω_e x_e(v+½)² ;  D_e ≈ ħω_e/4x_e' },
+        { name: 'Franck-Condon factor', expr: 'I ∝ |⟨χ_v′|χ_v⟩|² (vertical transitions)' },
+        { name: 'Raman', expr: 'Δν = vibrational/rotational quanta ;  rotational ΔJ = 0, ±2' },
+      ],
+      tips: [
+        'State the Born-Oppenheimer separation before any molecular derivation — it licenses every subsequent step.',
+        'Connect spectra to structure: line spacings give bond lengths and force constants — always end numericals with the physical parameter extracted.',
+        'IR vs Raman complementarity (dipole vs polarisability changes; mutual exclusion for centrosymmetric molecules) is the standard conceptual question — have the N₂ example ready.',
+      ],
+    },
+    {
+      title: 'Chapter 4: Lasers',
+      topics: [
+        'Spontaneous and stimulated emission',
+        'Einstein A and B coefficients',
+        'Population inversion and pumping',
+        'Optical cavities and threshold condition',
+        'He-Ne and Ruby lasers',
+      ],
+      notes: [
+        'Three processes at frequency ν = ΔE/h: absorption (B₁₂ ρ(ν) rate), spontaneous emission (A₂₁ — random direction/phase, lifetime τ = 1/A₂₁), and stimulated emission (B₂₁ ρ(ν) — the emitted photon is an exact clone of the stimulating one: same direction, phase, polarisation). Stimulated emission is the physical heart of the laser; a single photon can trigger a coherent avalanche.',
+        'Einstein coefficients: in equilibrium with blackbody radiation, detailed balance N₁B₁₂ρ = N₂(A₂₁ + B₂₁ρ) reproduces Planck\u2019s law only if B₁₂ = B₂₁ and A₂₁/B₂₁ = 8πhν³/c³. Two consequences: absorption and stimulated emission are intrinsically equally likely (per particle), and the A/B ratio grows as ν³ — at optical frequencies spontaneous emission dominates unless inversion is arranged; at microwave frequencies it does not (hence masers came first).',
+        'Population inversion and pumping: with N₂ > N₁ the stimulated emission exceeds absorption — net amplification (negative temperature in Boltzmann terms). Since two-level pumping saturates at N₁ = N₂ (the B coefficients are equal), practical lasers use three-level (ruby: pump to a broad band, fast non-radiative decay to a metastable upper level, lase to ground) or four-level schemes (He-Ne: lower laser level kept empty by a fast decay, so inversion is easier) — explaining why four-level lasers run continuously at far lower pump power is the standard conceptual question.',
+        'Cavity and threshold: an optical cavity (two mirrors, length L) provides feedback and selects modes; gain per pass gL must exceed losses (mirror transmission + scattering): the threshold condition. Above threshold, the output becomes a coherent, highly monochromatic beam (temporal coherence from the narrow linewidth, spatial coherence from the mode structure); the resonator modes and the Gaussian beam profile connect to the waveguide physics of Semester 5.',
+        'Canonical systems: He-Ne (632.8 nm; He atoms pumped by discharge transfer energy resonantly to Ne upper levels; four-level; continuous, mW) and Ruby (694.3 nm; Cr³⁺ ions in sapphire, three-level, flash-lamp pumped, pulsed). Semiconductor laser diodes, Nd:YAG and the role of metastable states complete the survey; be able to sketch each level diagram and label pump, laser and decay transitions.',
+      ],
+      derivations: [
+        'Einstein relations: assume equilibrium between N₁, N₂ and radiation density ρ(ν); write the rate balance N₁B₁₂ρ = N₂(A₂₁ + B₂₁ρ); require the equilibrium ρ(ν) to be Planck\u2019s law and match: B₁₂ = B₂₁, A₂₁/B₂₁ = 8πhν³/c³ — the cleanest derivation in the subject, asked almost every year.',
+        'Gain and inversion: the net gain coefficient is γ(ν) = (N₂ − N₁)B₂₁ hν g(ν)/c… i.e. proportional to the inversion times the lineshape; amplification requires N₂ > N₁; combine with cavity losses for the threshold inversion — derive the threshold condition for a cavity of length L with mirror reflectivities R₁, R₂.',
+        'Two-level saturation: pumping a two-level system with rate W gives N₂/N₁ = W/(A + 2W) → 1 as W → ∞ — inversion impossible; hence three/four-level designs. Derive the steady-state populations and the saturation behaviour explicitly.',
+        'Level-scheme analysis: for ruby (three-level) compute the fraction of ions that must be excited for inversion (N₂ > N₁/2 — more than half: the historical drawback); for He-Ne show the lower level empties quickly, so tiny pump rates suffice — the quantitative comparison that answers "why four-level?".',
+      ],
+      formulas: [
+        { name: 'Einstein relations', expr: 'B₁₂ = B₂₁ ;  A₂₁/B₂₁ = 8πhν³/c³' },
+        { name: 'Spontaneous lifetime', expr: 'τ = 1/A₂₁ ;  natural linewidth Δν = A/2π' },
+        { name: 'Laser condition', expr: 'N₂ > N₁ (inversion) ;  gain gL ≥ losses (threshold)' },
+        { name: 'Two-level saturation', expr: 'N₂/N₁ = W/(A + 2W) → 1 — no inversion possible' },
+        { name: 'Canonical wavelengths', expr: 'He-Ne 632.8 nm ;  Ruby 694.3 nm' },
+      ],
+      tips: [
+        'The Einstein derivation with Planck matching is the most requested item of this chapter — have it word-perfect, including the ν³ factor.',
+        'Explain the ν³ dependence physically (density of optical modes grows as ν³), and connect it to why masers preceded lasers.',
+        'For laser-system questions, sketch the level diagram with pump, laser and decay arrows labelled, and classify the scheme (3 vs 4 level) — the labelled sketch is the expected format.',
+      ],
+    },
+  ],
+};

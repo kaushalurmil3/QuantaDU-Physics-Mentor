@@ -1,6 +1,6 @@
 export type Flashcard = {
   id: string;
-  paperCode: 'DSC-1' | 'DSC-2' | 'DSC-3' | 'DSC-4' | 'DSC-5' | 'DSC-6' | 'DSC-7' | 'DSC-8' | 'DSC-9' | 'DSC-10' | 'DSC-11' | 'DSC-12' | 'DSC-13' | 'DSC-14' | 'DSC-15';
+  paperCode: 'DSC-1' | 'DSC-2' | 'DSC-3' | 'DSC-4' | 'DSC-5' | 'DSC-6' | 'DSC-7' | 'DSC-8' | 'DSC-9' | 'DSC-10' | 'DSC-11' | 'DSC-12' | 'DSC-13' | 'DSC-14' | 'DSC-15' | 'DSC-16' | 'DSC-17' | 'DSC-18';
   question: string;
   answer: string[];
 };
@@ -484,6 +484,79 @@ export const FLASHCARDS: Flashcard[] = [
       'Cure 1: keep the clock pulse width < t_pd — impractical and fragile.',
       'Cure 2 (proper): master-slave construction — two cascaded flip-flops, the slave clocked by the inverted clock; the master samples while CLK is high, the slave transfers when CLK goes low. One toggle per clock cycle, guaranteed.',
       'Modern equivalent: edge-triggered design — output changes only at the clock edge, eliminating the race by construction.',
+    ],
+  },
+  {
+    id: 'dsc16-gibbs-paradox',
+    paperCode: 'DSC-16',
+    question: 'What is the Gibbs paradox of mixing, and how does the N! factor resolve it? What is its deeper significance?',
+    answer: [
+      'Paradox: if two identical gases (same T, P, N) are treated as distinguishable, mixing gives mixing entropy ΔS = 2Nk ln 2 — but nothing observable happens when the partition is removed.',
+      'Resolution: identical particles are indistinguishable; the N-particle partition function must be divided by N! (permutations of identical particles do not create new microstates).',
+      'With 1/N!, the entropy S = Nk[ln(V/Nλ_T³) + 5/2] (Sackur-Tetrode) is extensive: doubling the system doubles S, and the spurious mixing entropy vanishes.',
+      'Significance: the fix is not classical bookkeeping but the acknowledgement of quantum indistinguishability — the seed of Bose-Einstein and Fermi-Dirac statistics.',
+    ],
+  },
+  {
+    id: 'dsc16-bec',
+    paperCode: 'DSC-16',
+    question: 'Explain Bose-Einstein condensation: state the condition and compute the critical temperature for an ideal gas.',
+    answer: [
+      'For massive bosons with conserved N, excited states can hold only N_ex = 2.612 V(mkT/h²)^{3/2} particles (the μ → 0 limit of the BE integral).',
+      'When the total N exceeds this capacity, the surplus collapses into the ground state — a macroscopic occupation N₀ of one quantum state: Bose-Einstein condensation.',
+      'Condition: n λ_T³ ≥ 2.612; the critical temperature T_c = (2πħ²/mk)(n/2.612)^{2/3}.',
+      'Below T_c: N₀/N = 1 − (T/T_c)^{3/2} — a clean power law.',
+      'Numerical: for ⁴He at liquid density, T_c ≈ 3.1 K (the lambda transition at 2.17 K — interactions modify the ideal value); dilute Rb gases: T_c ~ 100 nK — achieved in 1995.',
+    ],
+  },
+  {
+    id: 'dsc16-fermi-energy',
+    paperCode: 'DSC-16',
+    question: 'Derive the Fermi energy of the electron gas in a metal and compute it for copper (n = 8.5×10²⁸ m⁻³).',
+    answer: [
+      'At T = 0, fermions fill all states up to the Fermi wavevector k_F; count states in k-space:',
+      'N = 2 · V/(2π)³ · (4πk_F³/3) (factor 2 for spin) ⇒ k_F = (3π²n)^{1/3}.',
+      'Fermi energy: E_F = ħ²k_F²/2m = (ħ²/2m)(3π²n)^{2/3}.',
+      'Copper: k_F = (3π² × 8.5×10²⁸)^{1/3} ≈ 1.36×10¹⁰ m⁻¹ ⇒ E_F ≈ 7.0 eV.',
+      'Fermi temperature T_F = E_F/k ≈ 80,000 K ≫ 300 K — room temperature is “cold” on the Fermi scale; only electrons within ~kT of E_F are thermally active, giving the tiny linear electronic heat capacity C_v^el = (π²/2)Nk(T/T_F).',
+    ],
+  },
+  {
+    id: 'dsc17-einstein-ab',
+    paperCode: 'DSC-17',
+    question: 'Derive the relations between the Einstein A and B coefficients and state their two physical consequences.',
+    answer: [
+      'Equilibrium between N₁, N₂ atoms and radiation density ρ(ν): rate up = rate down:',
+      'N₁ B₁₂ ρ(ν) = N₂ [A₂₁ + B₂₁ ρ(ν)].',
+      'Require ρ(ν) to be Planck’s law: ρ = (8πhν³/c³)/(e^{hν/kT} − 1); matching the two forms term by term gives:',
+      'B₁₂ = B₂₁ and A₂₁/B₂₁ = 8πhν³/c³.',
+      'Consequence 1: absorption and stimulated emission are intrinsically equally likely per particle — light amplification needs N₂ > N₁ (population inversion).',
+      'Consequence 2: the A/B ratio grows as ν³ — at optical frequencies spontaneous emission dominates unless inversion is engineered; at microwave frequencies it does not (masers came first).',
+    ],
+  },
+  {
+    id: 'dsc18-magic-numbers',
+    paperCode: 'DSC-18',
+    question: 'What are nuclear magic numbers, what evidence supports them, and how does the shell model explain them?',
+    answer: [
+      'Magic numbers: N or Z = 2, 8, 20, 28, 50, 82, 126 (neutrons only for 126) — nuclei there are exceptionally stable.',
+      'Evidence: sharp peaks in neutron/proton separation energies; many stable isotopes for magic N/Z; spherical charge distributions; spin-0, even-even ground states; low abundance of alpha-capture products just past a magic number.',
+      'Shell model: nucleons move independently in a ~50 MeV potential well. A pure harmonic oscillator reproduces only 2, 8, 20.',
+      'Adding a strong spin-orbit term −C L·S (C > 0, opposite sense to atoms: j = l + ½ drops lower) regroups the shells and reproduces all magic numbers — sketch the level diagram.',
+      'Like noble gases in atomic physics, closed shells are spherical with spin 0; odd nucleons outside a closed shell determine the nucleus’s spin and magnetic moment (Schmidt lines).',
+    ],
+  },
+  {
+    id: 'dsc18-quark-content',
+    paperCode: 'DSC-18',
+    question: 'Give the quark compositions of the proton, neutron, π⁺ and K⁺, and verify charge, baryon number and strangeness for each.',
+    answer: [
+      'Quark data: u(+2/3, B = +1/3, S = 0), d(−1/3, B = +1/3, S = 0), s(−1/3, B = +1/3, S = −1); antiquarks flip all signs.',
+      'Proton = uud: Q = 2/3 + 2/3 − 1/3 = +1; B = 1; S = 0.',
+      'Neutron = udd: Q = 2/3 − 1/3 − 1/3 = 0; B = 1; S = 0.',
+      'π⁺ = ud̄: Q = 2/3 + 1/3 = +1; B = 0; S = 0 (quark-antiquark pair).',
+      'K⁺ = us̄: Q = 2/3 + 1/3 = +1; B = 0; S = +1 (the antiquark carries S = +1 — kaons are the lightest strange mesons).',
+      'Bonus: Ω⁻ = sss — Q = −1, B = 1, S = −3, the predicted corner of the spin-3/2 decuplet, found at 1672 MeV.',
     ],
   },
   {

@@ -1,0 +1,157 @@
+import type { DetailedPaper } from './types';
+
+export const DSC18: DetailedPaper = {
+  kind: 'detailed',
+  id: 'dsc18',
+  code: 'DSC-18',
+  name: 'Nuclear and Particle Physics',
+  playlist: {
+    label: 'NPTEL Nuclear and Particle Physics (IIT)',
+    url: 'https://www.youtube.com/results?search_query=NPTEL+Nuclear+and+Particle+Physics+IIT',
+  },
+  chapters: [
+    {
+      title: 'Chapter 1: General Properties of Nuclei & Nuclear Models',
+      topics: [
+        'Nuclear size, mass and binding energy',
+        'Liquid drop model and semi-empirical mass formula',
+        'Shell model and magic numbers',
+        'Nuclear spin and moments',
+        'Stability and decay modes',
+      ],
+      notes: [
+        'Nuclear properties: radius R = R₀A^{1/3} (R₀ ≈ 1.2 fm, from electron scattering), density ~2×10¹⁷ kg/m³ (nucleons essentially incompressible), charge Ze, spin I from nucleon angular momenta coupling, and magnetic moment μ = g(I/1)μ_N with the nuclear magneton μ_N = eħ/2m_p — 1836× smaller than μ_B. Measured via hyperfine structure and nuclear magnetic resonance; a one-line mention of μ_N\u2019s origin earns the definition mark.',
+        'Binding energy: B = [Zm_p + Nm_n − M(A,Z)]c²; the B/A curve (from DSC-10, now central) rises to ~8.8 MeV/nucleon near ⁵⁶Fe and declines slowly — the energy source map for fusion and fission. Any mass-formula numerical starts from the measured atomic masses and mass excess Δ = M − A (in u).',
+        'Liquid drop model and SEMF: B = a_vA − a_sA^{2/3} − a_cZ(Z−1)/A^{1/3} − a_a(A−2Z)²/A + δ — five terms with physical stories (saturation, surface tension, Coulomb repulsion, Pauli asymmetry, pairing). Constants a_v ≈ 15.5, a_s ≈ 17, a_c ≈ 0.7, a_a ≈ 23 MeV; δ = ±a_pA^{−1/2} for even-even/odd-odd, 0 for odd A. The formula predicts the beta-stability valley Z(A) and fission Q-values — deriving the stable Z at fixed A (∂B/∂Z = 0) is the repeated derivation of this paper.',
+        'Shell model: strong peaks in neutron/proton separation energies at N, Z = 2, 8, 20, 28, 50, 82, 126 (magic numbers) — nuclei there are extra bound, spherical, with spin-0 ground states (like noble gases in atomic physics). The model: nucleons in a deep (≈ 50 MeV) potential well plus strong spin-orbit (ℓ ± ½ splitting, unlike atoms where it is tiny) reproduces the magic sequence and predicts ground-state spins of odd-A nuclei (Schmidt lines).',
+        'Collective picture: even-even nuclei near closed shells are spherical vibrators; between shells they are permanently deformed rotors (E ∝ J(J+1) rotational bands) — the shell model describes single-particle physics while the collective model describes the same nuclei\u2019s excited spectra; stating the complementarity and sketching one rotational band is the standard extended answer. Decay modes (α, β, γ, fission) with their Q-value criteria close the chapter.',
+      ],
+      derivations: [
+        'Semi-empirical mass formula: write each term with its justification (volume saturation, surface loss, uniform-sphere Coulomb self-energy 3e²Z²/20πε₀R, asymmetry from the Fermi gas of two wells, pairing); fit constants to masses; verify the formula reproduces the B/A curve within ~1%.',
+        'Beta-stability line: minimise mass (maximise B) at fixed A: ∂B/∂Z = 0 with Z(Z−1) ≈ Z² gives Z = A/(2 + (a_c/2a_a)A^{2/3}); show N = Z for light nuclei and neutron excess for heavy; compare with the observed valley.',
+        'Shell model magic numbers: solve nucleons in a 3D harmonic oscillator well (shells at 2, 8, 20…), note where it fails (28, 50, 82, 126), then add the strong spin-orbit term −C L·S (C > 0, nuclear sense opposite to atoms) — the ℓ + ½ level drops, regrouping the shells to reproduce all magic numbers; sketch the level diagram.',
+        'Nuclear magnetic moment: μ = g_J(I)μ_N I with g from the spin/orbital contributions; derive the Schmidt lines (single odd nucleon coupled j = l ± ½) and compare with measured moments — the standard shell-model evidence question.',
+      ],
+      formulas: [
+        { name: 'Nuclear radius & density', expr: 'R = 1.2 A^{1/3} fm ;  ρ ≈ 2×10¹⁷ kg/m³' },
+        { name: 'Binding energy', expr: 'B = [Zm_p + Nm_n − M(A,Z)]c²' },
+        { name: 'Semi-empirical mass formula', expr: 'B = a_vA − a_sA^{2/3} − a_cZ(Z−1)/A^{1/3} − a_a(A−2Z)²/A + δ' },
+        { name: 'Stable Z', expr: 'Z = A/(2 + (a_c/2a_a)A^{2/3})' },
+        { name: 'Magic numbers', expr: '2, 8, 20, 28, 50, 82, 126 (protons: no 126)' },
+        { name: 'Nuclear magneton', expr: 'μ_N = eħ/2m_p = 5.05×10⁻²⁷ J/T' },
+      ],
+      tips: [
+        'Every SEMF answer should label the five terms with their physical pictures — the physical stories carry as many marks as the formula.',
+        'Magic-number questions expect the spin-orbit level-diagram sketch, not just the list of numbers.',
+        'Keep units of mass excess (u) and MeV straight: 1 u = 931.5 MeV/c² — conversion slips are the top numerical error.',
+      ],
+    },
+    {
+      title: 'Chapter 2: Nuclear Reactions & Accelerators',
+      topics: [
+        'Reaction Q-values and threshold energy',
+        'Compound nucleus and cross sections',
+        'Nuclear fission and its energy balance',
+        'Fusion and the Coulomb barrier',
+        'Cyclotron and synchrotron principles',
+      ],
+      notes: [
+        'Q-value: Q = (Σm_initial − Σm_final)c² — positive for exothermic, negative for endothermic reactions; kinematics of two-body reactions a + A → b + B conserve momentum, so an endothermic reaction needs the projectile energy above threshold E_th = −Q(1 + m_a/m_A) — deriving the threshold (projectile momentum cannot vanish in the centre-of-mass frame) is the flagship derivation; the ¹⁴N(α,p)¹⁷O and ⁷Li(p,n) reactions are the classic numericals.',
+        'Compound nucleus: the projectile is absorbed, forming an excited intermediate that forgets its formation history and decays statistically (Bohr\u2019s hypothesis — same compound, different entrance channels, same decay products ratios). The Breit-Wigner resonance formula σ ∝ Γ²/[(E − E_R)² + Γ²/4] describes the cross-section peaks; Γ is the level width, τ = ħ/Γ its lifetime — quote the resonance picture with a sketch.',
+        'Fission: ²³⁵U + n → two fragments + 2–3 neutrons + ~200 MeV, dominated by the Coulomb term dropping relative to surface (fragments higher on the B/A curve); barrier ≈ 6 MeV for U; ²³⁵U is fissile with thermal neutrons (odd-A, pairing gap) while ²³⁸U needs fast neutrons — the pairing-term story. Energy per fission, chain reaction criticality and moderator role (slow neutrons for ²³⁵U) complete the reactor question.',
+        'Fusion: light nuclei fuse; the Coulomb barrier e²/4πε₀R ≈ 0.5–1 MeV for p-p, yet stellar cores (10⁷ K ≈ 1 keV) fuse via tunnelling (Gamow factor — DSC-10 revisited) plus the slow pp-chain/triple-alpha; terrestrial magnetic and inertial confinement chase the same rates. The ⁴He binding (~28 MeV) versus the tunnelling barrier explains why stars burn slowly — the standard discussion question.',
+        'Accelerators: cyclotron — particles orbit in a fixed B with RF acceleration each half-turn; the cyclotron frequency f = qB/2πm is energy-independent non-relativistically, giving compact spiralling machines; relativity breaks it above ~MeV/nucleon (mass increase detunes the RF). Synchrotron: ramp B and RF together to hold a fixed orbit radius — the principle of all modern high-energy machines; state the phase stability principle (particles off-phase are corrected toward the stable phase) as the key idea.',
+      ],
+      derivations: [
+        'Threshold energy: write the two-body kinematics at threshold (products move together in the lab/CM frame); E_th = −Q(1 + m_a/m_A) — derive from energy-momentum conservation; verify with ⁷Li(p,n)⁷Be: Q = −1.64 MeV, E_th ≈ 1.88 MeV.',
+        'Breit-Wigner formula: from the resonance amplitude σ = (π/k²)(2J+1)/[(2J_a+1)(2J_A+1)] · Γ²/[(E−E_R)² + Γ²/4]; identify width, lifetime and the peak cross section; sketch σ(E) with Γ defined as the FWHM.',
+        'Fission energetics: compute Q ≈ 200 MeV from the SEMF: fragments gain Coulomb-term relief while surface cost is small; estimate the Coulomb barrier for fragment separation and the number of neutrons per fission — the chain-reaction multiplication factor k = 1 ± ε as the criticality condition.',
+        'Cyclotron frequency and its limit: equate qvB = mv²/r ⇒ ω = qB/m; derive the orbit period T = 2πm/qB and its non-relativistic constancy; show the relativistic mass increase m → γm detunes the RF and state the synchrocyclotron/synchrotron fixes (frequency modulation, constant-radius ramping) — a complete accelerator derivation.',
+      ],
+      formulas: [
+        { name: 'Q-value', expr: 'Q = (m_initial − m_final)c² ;  1 u = 931.5 MeV/c²' },
+        { name: 'Threshold energy', expr: 'E_th = −Q(1 + m_a/m_A) (endothermic, Q < 0)' },
+        { name: 'Breit-Wigner resonance', expr: 'σ(E) ∝ Γ²/[(E − E_R)² + Γ²/4] ;  τ = ħ/Γ' },
+        { name: 'Fission energy', expr: '²³⁵U + n → fragments + 2.5 n + ~200 MeV' },
+        { name: 'Cyclotron frequency', expr: 'f = qB/2πm (non-relativistic)' },
+        { name: 'Coulomb barrier', expr: 'V_C = Z₁Z₂e²/4πε₀R ≈ 1 MeV (light nuclei)' },
+      ],
+      tips: [
+        'Q-value numericals: use atomic masses consistently and state whether the reaction is exo/endothermic before computing the threshold.',
+        'Compound-nucleus answers should name the "loss of memory" hypothesis and the Breit-Wigner resonance as its experimental signature.',
+        'Accelerator questions: end with the relativistic limitation and the synchrotron fix — the physics narrative is what earns the marks, not the machine names.',
+      ],
+    },
+    {
+      title: 'Chapter 3: Particle Detectors',
+      topics: [
+        'Interaction of radiation with matter',
+        'Gas detectors: ionisation chamber, proportional counter, GM counter',
+        'Scintillation detectors and photomultipliers',
+        'Semiconductor detectors',
+        'Energy resolution and dead time',
+      ],
+      notes: [
+        'Radiation interaction basics: charged particles lose energy by ionisation and excitation (dE/dx, the Bethe-Bloch dependence ~z²/v²); gammas by photoelectric effect (low E), Compton scattering (mid E) and pair production (> 1.022 MeV); neutrons by recoil and capture — the detector choice follows the interaction mechanism. Sketching the three gamma regimes is the standard figure.',
+        'Gas detectors: ionisation chamber (no gas gain: every ion pair collected, current proportional to energy deposition — dosimetry); proportional counter (moderate field: gas multiplication A ~ 10⁴, signal ∝ deposited energy); Geiger-Müller counter (high field: full avalanche along the anode, signal independent of energy, dead time ~100 μs). The plateau and threshold curves and the quenching gas role (self-extinguishing discharge) are the operational details examined.',
+        'Scintillators: radiation excites a fluorescent medium (NaI(Tl), plastic, liquid scintillator); photons are collected by a photomultiplier tube (photo cathode + dynode chain, gain ~10⁶–10⁸). Fast (ns-scale) timing, high efficiency, but modest energy resolution (~6–7% at 662 keV for NaI); the PMT gain-voltage dependence and the pulse-height spectrum (photopeak, Compton edge and continuum, backscatter peak) are the standard analysis exercise.',
+        'Semiconductor detectors: ionisation in a reverse-biased p-n junction (Si for charged particles, HPGe for gammas); ~3 eV per electron-hole pair vs ~30 eV per ion pair in gas — ten times more charge carriers, hence far better energy resolution (HPGe: ~0.2% at 1332 keV vs NaI\u2019s ~6%); requires cooling (HPGe, liquid nitrogen) to suppress leakage current. The junction depletion region and capacitance vs bias voltage are the device-physics details examiners check.',
+        'Comparison table to carry into every detector question: mechanism, signal size vs energy (proportional or not), timing, energy resolution, typical use — ionisation chambers for dosimetry, GM for counting, scintillators for timing and high efficiency, semiconductors for precision spectroscopy. Efficiency, dead time corrections (non-paralysable model n = m/(1 − mτ)) and background subtraction complete the working toolkit.',
+      ],
+      derivations: [
+        'GM counter operation: derive the avalanche multiplication near the thin anode wire (field ∝ 1/r); explain why the discharge is self-sustaining without quench gas and how the quenching gas (halogen) restores the counter — the device-physics narrative with the plateau curve.',
+        'PMT gain: N stages each multiplying secondary emission by δ: gain G = δ^N; differentiate ln G vs voltage to show the extreme high-voltage sensitivity (gain varies ~10× per 100 V) — why PMT supplies must be ultra-stable.',
+        'Semiconductor statistics: Fano factor interpretation of resolution: σ_E = F·w·√(N) type scaling with w = 3 eV (Si) / 2.96 eV (Ge); compare with gas (w ≈ 30 eV) to derive the 10× resolution advantage — quantify with the 662 keV line.',
+        'Dead-time corrections: for a non-paralysable counter with dead time τ, measured rate m relates to true n by m = n/(1 + nτ); invert to correct; compute the correction at mτ ≈ 0.1 as the worked example — the operational statistics every counting experiment needs.',
+      ],
+      formulas: [
+        { name: 'Pair production threshold', expr: 'E_γ > 2m_e c² = 1.022 MeV' },
+        { name: 'Gas vs semiconductor ionisation', expr: 'w_gas ≈ 30 eV/pair ;  w_Si ≈ 3.6 eV ;  w_Ge ≈ 2.96 eV' },
+        { name: 'PMT gain', expr: 'G = δ^N (δ secondary emission per dynode, N stages)' },
+        { name: 'Dead time (non-paralysable)', expr: 'm = n/(1 + nτ) ⇒ n = m/(1 − mτ)' },
+        { name: 'Resolution figures', expr: 'NaI(Tl): ~6% @ 662 keV ;  HPGe: ~0.2% @ 1332 keV' },
+      ],
+      tips: [
+        'Structure detector answers by mechanism first (what interacts, what signal), then by performance (resolution, timing, dead time) — the two-axis structure is graded.',
+        'Know one numerical anchor per detector (GM plateau length, NaI resolution, HPGe resolution) — concrete numbers lift an answer above description.',
+        'For gamma spectra, identify the photopeak, Compton edge and backscatter peak in the pulse-height diagram — the standard interpretation question.',
+      ],
+    },
+    {
+      title: 'Chapter 4: Elementary Particles & Conservation Laws',
+      topics: [
+        'Particle classification: leptons, mesons, baryons',
+        'Quarks and their quantum numbers',
+        'Eightfold way and the quark model',
+        'Conservation laws: baryon number, lepton number, strangeness',
+        'Fundamental interactions and their mediators',
+      ],
+      notes: [
+        'Classification: leptons (electron, muon, tau + three neutrinos — pointlike, no strong interaction) vs hadrons (strong interaction): baryons (fermions, qq q, p, n, Λ, Σ, Ξ, Ω) and mesons (bosons, qq̄, π, K, ρ…). Spin-statistics separates the families; the zoo\u2019s periodicity in charge and strangeness demanded an internal structure — the historical road to quarks.',
+        'Quarks: three (then six) flavours with fractional charges and baryon numbers: u(2/3, +1/3), d(−1/3, +1/3), s(−1/3, +1/3, strangeness −1), plus c, b, t (charges +2/3, −1/3, −1/3). Proton = uud (charge 2/3+2/3−1/3 = 1, B = 1), neutron = udd (charge 0), pions π⁺ = ud̄, kaon K⁺ = us̄ — the quark-content bookkeeping of any requested hadron is the bread-and-butter exercise of this chapter.',
+        'Eightfold way: Gell-Mann and Ne\u2019man organised baryons and mesons into SU(3) multiplets plotted in (S, I₃) planes — the spin-½ baryon octet (p, n, Λ, Σ, Ξ), the spin-3/2 baryon decuplet ending in Ω⁻ (sss, strangeness −3) predicted before discovery, and the pseudoscalar meson nonet. The pattern is the periodic table of hadrons; the Ω⁻ prediction is the standard evidence question, and colour (the SU(3) of QCD) explains why no free quarks are observed (confinement).',
+        'Conservation laws: always conserved — energy, momentum, angular momentum, charge, baryon number B (each quark +1/3), the three lepton numbers L_e, L_μ, L_τ; conserved by strong and electromagnetic but not weak — strangeness S, isospin I, parity and CP: the weak interaction violates strangeness (ΔS = ±1 semileptonically) and parity maximally. Reaction analysis = check every conservation law; a forbidden decay (e.g. n → pe⁻γ vs the allowed p → ne⁺ν... β-decay n → p + e⁻ + ν̄) is decided by the law tables.',
+        'Interactions and mediators: strong (gluons, colour, range ~1 fm, coupling ~1), electromagnetic (photon, massless, infinite range, α = 1/137), weak (W±, Z⁰ — massive, range ~10⁻¹⁸ m, violates P and CP, β-decay), gravitational (negligible here). The mediators\u2019 masses explain the ranges (range ~ ħ/mc — derive the W-range as the one-line argument); the Standard Model organises it all, with the Higgs providing masses — one closing paragraph on the SM is expected in long answers.',
+      ],
+      derivations: [
+        'Quark-content bookkeeping: given a hadron, determine its quark composition from charge, baryon number and strangeness — e.g. Ξ⁰ (Q = 0, B = 1, S = −2): uss; K⁰ (Q = 0, B = 0, S = +1): ds̄ — practice until mechanical.',
+        'Eightfold-way decuplet: plot the spin-3/2 baryons in the (S, I₃) plane; the triangular pattern with 10 states predicts Ω⁻ (sss, S = −3, Q = −1) at the vacant corner; compute its predicted mass by the Gell-Mann-Okubo mass formula and compare with the measured 1672 MeV — the classic prediction success story.',
+        'Range from mediator mass: range R ~ ħ/mc; for the W (80 GeV) R ~ 2×10⁻¹⁸ m; for the pion (140 MeV) R ~ 1.4 fm — deriving both and connecting the pion range to the nuclear force range (Yukawa) is the standard calculation.',
+        'Conservation-law analysis of a decay: take n → p + e⁻ + ν̄ (allowed: B, L_e, charge, energy all fine) versus p → n + e⁺ + ν (forbidden in free space by energy — p lighter than n); decide for Λ → p + π⁻ (allowed, weak: ΔS = +1) — work two examples with a full law checklist.',
+      ],
+      formulas: [
+        { name: 'Quark charges & baryon number', expr: 'u(+2/3), d(−1/3), s(−1/3) ;  B(quark) = +1/3 ;  S(s) = −1' },
+        { name: 'Nucleon content', expr: 'p = uud ;  n = udd ;  π⁺ = ud̄ ;  K⁺ = us̄' },
+        { name: 'Conserved (always)', expr: 'charge, B, L_e, L_μ, L_τ, energy, momentum' },
+        { name: 'Weak-only violation', expr: 'S, I, P, CP — ΔS = ±1 in weak decays' },
+        { name: 'Range from mediator mass', expr: 'R ≈ ħ/mc ;  W: 2×10⁻¹⁸ m ;  π: 1.4 fm' },
+        { name: 'Ω⁻ prediction', expr: 'Ω⁻ = sss, S = −3, Q = −1, m ≈ 1672 MeV/c²' },
+      ],
+      tips: [
+        'Memorise the quark table (charges, baryon number, strangeness) — every classification and reaction question flows from it.',
+        'Reaction analysis: run the full conservation checklist in a fixed order (charge → B → L → S → energy); state which law permits or forbids.',
+        'For Eightfold-way questions, sketch the multiplet diagram — the geometric pattern and the Ω⁻ corner are the expected evidence.',
+      ],
+    },
+  ],
+};

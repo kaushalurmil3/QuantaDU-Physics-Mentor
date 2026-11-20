@@ -1,0 +1,155 @@
+import type { DetailedPaper } from './types';
+
+export const DSC16: DetailedPaper = {
+  kind: 'detailed',
+  id: 'dsc16',
+  code: 'DSC-16',
+  name: 'Statistical Mechanics',
+  playlist: {
+    label: 'NPTEL Statistical Mechanics (IIT)',
+    url: 'https://www.youtube.com/results?search_query=NPTEL+Statistical+Mechanics+IIT',
+  },
+  chapters: [
+    {
+      title: 'Chapter 1: Classical Statistical Mechanics',
+      topics: [
+        'Phase space and density of states',
+        'Microstates and macrostates',
+        'Boltzmann entropy S = k ln W',
+        'Microcanonical ensemble',
+        'Canonical and grand canonical ensembles',
+      ],
+      notes: [
+        'Phase space: the 6N-dimensional space of coordinates and momenta (qᵢ, pᵢ) of an N-particle system; each point is a complete microscopic specification. A microstate is one phase-space point (or one quantum state); a macrostate is specified by a few bulk variables (E, V, N) and contains an enormous number W of microstates — the fundamental counting problem of statistical mechanics.',
+        'Boltzmann entropy: S = k ln W (k the Boltzmann constant) — the logarithm makes entropy additive when systems combine, and the second law becomes probabilistic: an isolated system evolves toward the macrostate with the overwhelmingly largest W. Deriving the thermodynamic arrows (dS ≥ 0, S → 0 as T → 0 needs the quantum version) from counting is the chapter\u2019s conceptual spine.',
+        'Microcanonical ensemble: an isolated system with fixed E, V, N; all accessible microstates are equally probable (the postulate of equal a priori probabilities). The entropy is S = k ln Ω(E) with Ω the number of states in the energy shell; temperature is defined by 1/T = (∂S/∂E)_{V,N} — deriving T, p and μ as partial derivatives of S is the standard exercise.',
+        'Canonical ensemble: system in contact with a heat bath at temperature T (fixed T, V, N); the probability of a state of energy Eᵣ is the Boltzmann weight pᵣ = e^{−Eᵣ/kT}/Z with the partition function Z = Σᵣ e^{−Eᵣ/kT}. All thermodynamics flows from Z: F = −kT ln Z, S = −(∂F/∂T)_V, U = −∂ ln Z/∂β (β = 1/kT). The canonical is the workhorse ensemble — nearly every exam problem lives here.',
+        'Grand canonical ensemble: system exchanges energy AND particles with a reservoir (fixed T, V, μ); states are weighted by e^{−(Eᵣ − μNᵣ)/𝒵}; the grand partition function 𝒵 = Σ e^{−β(E − μN)} generates the equation of state PV = kT ln 𝒵 and fluctuations ⟨ΔN²⟩ = kT(∂N/∂μ)_T — used whenever particle number varies (quantum gases, adsorption). State clearly which ensemble applies before solving any problem; mixing them is the classic error.',
+      ],
+      derivations: [
+        'Boltzmann distribution from counting: divide N particles among energy levels with Nᵢ occupants; maximise the number of arrangements W = N!/∏Nᵢ! subject to ΣNᵢ = N and ΣNᵢεᵢ = E using Lagrange multipliers and Stirling\u2019s approximation ln N! ≈ N ln N − N; the result is the Boltzmann distribution Nᵢ ∝ e^{−βεᵢ} — derive it once in full.',
+        'Entropy and probability: show S = k ln W is additive for composite systems (ln(W₁W₂) = ln W₁ + ln W₂) and maximised at equilibrium; identify 1/T = ∂S/∂E by considering two systems in thermal contact and demanding entropy increase — equilibrium when ∂S₁/∂E₁ = ∂S₂/∂E₂.',
+        'Canonical partition function from the microcanonical one: treat system + reservoir as microcanonical; expand ln Ω_R(E − Eᵣ) to first order in Eᵣ (reservoir large), identify β, and sum the resulting Boltzmann weights: pᵣ ∝ e^{−βEᵣ} with Z normalising — the bridge between the ensembles.',
+        'Thermodynamic quantities from Z: U = −∂ ln Z/∂β; F = −kT ln Z; S = k(ln Z + βU); derive one completely (say U for the two-level system) and quote the rest — the operator-skill the paper examines.',
+      ],
+      formulas: [
+        { name: 'Boltzmann entropy', expr: 'S = k ln W' },
+        { name: 'Microcanonical temperature', expr: '1/T = (∂S/∂E)_{V,N} ;  p = T(∂S/∂V)_E' },
+        { name: 'Boltzmann weight', expr: 'pᵣ = e^{−Eᵣ/kT}/Z ;  Z = Σᵣ e^{−βEᵣ}' },
+        { name: 'Thermodynamics from Z', expr: 'F = −kT ln Z ;  U = −∂ ln Z/∂β ;  S = −(∂F/∂T)_V' },
+        { name: 'Grand canonical', expr: '𝒵 = Σ e^{−β(E−μN)} ;  PV = kT ln 𝒵 ;  ⟨N⟩ = kT(∂ ln 𝒵/∂μ)_T' },
+      ],
+      tips: [
+        'Open ensemble problems by naming the fixed variables (E,V,N vs T,V,N vs T,V,μ) — the choice of ensemble is itself graded.',
+        'Keep Stirling\u2019s approximation and the Lagrange-multiplier derivation of the Boltzmann distribution exam-ready; it is asked almost every year.',
+        'Verify units and limits: every derived S should scale like k and every Z should reduce to 1 for a single state.',
+      ],
+    },
+    {
+      title: 'Chapter 2: Classical Ideal Gas & Equipartition',
+      topics: [
+        'Maxwell-Boltzmann velocity distribution',
+        'Classical partition function of an ideal gas',
+        'Gibbs paradox and indistinguishability',
+        'Sackur-Tetrode equation',
+        'Equipartition theorem and its failures',
+      ],
+      notes: [
+        'Maxwell-Boltzmann distribution: for an ideal gas in equilibrium, the probability density for speeds is f(v) = 4πn(m/2πkT)^{3/2} v² e^{−mv²/2kT}; the most probable speed is √(2kT/m), the mean 1.6√(kT/m), the rms √(3kT/m). Deriving f(v) from the Boltzmann weight applied to phase-space volume is the standard opening derivation; the three characteristic speeds and their ordering are favourite short questions.',
+        'Classical partition function: for a monatomic ideal gas Z = V/λ_T³ with the thermal de Broglie wavelength λ_T = h/√(2πmkT) (per particle, N copies give Z^N/N!); from ln Z follow U = 3NkT/2, PV = NkT and the Sackur-Tetrode entropy — the classical ideal gas solved completely from statistical mechanics.',
+        'Gibbs paradox: if the N identical gas molecules are treated as distinguishable, the entropy of mixing two identical gases at the same density is non-zero — an absurdity, since nothing observable happens. Dividing by N! (the indistinguishability of identical particles) removes the extra entropy and makes S extensive. The paradox is the historical seed of quantum statistics: the resolution is not a classical fix but the acknowledgement that identical particles are fundamentally indistinguishable.',
+        'Sackur-Tetrode equation: S = Nk[ln(V/Nλ_T³) + 5/2] — the entropy of a monatomic ideal gas including the quantum scale λ_T. It is extensive (the N! correction built in), it vanishes properly as T → 0 limits are approached (signalling the third law and the need for quantum mechanics at low T), and it contains h — a classical formula carrying Planck\u2019s constant, evidence that classical statistics is only an approximation.',
+        'Equipartition theorem: each quadratic degree of freedom in the Hamiltonian contributes kT/2 to the mean energy (classically). Monatomic gas: 3 translational → 3kT/2; diatomic with vibration un-frozen: +2 rotational → 5kT/2; with vibration active: +2 vibrational → 7kT/2. The observed temperature-dependence of diatomic heat capacities (H₂\u2019s rotational degrees freezing below ~85 K) shows the theorem\u2019s classical failure and anticipates the quantum statistics of Chapters 3 and 4 — the historical motivation for the whole quantum theory.',
+      ],
+      derivations: [
+        'Maxwell velocity distribution: the single-particle partition function factors; the probability density over momenta is Gaussian in each component: f(p) ∝ e^{−p²/2mkT}; converting to speeds with the shell volume 4πv²dv gives the standard f(v) — compute the most probable, mean and rms speeds explicitly.',
+        'Ideal gas partition function and equation of state: Z₁ = (1/h³)∫e^{−βp²/2m} d³q d³p = V/λ_T³; for N indistinguishable particles Z_N = Z₁^N/N!; PV = kT ∂ ln Z/∂V = NkT — derive the ideal gas law and U = 3NkT/2 from ln Z.',
+        'Gibbs paradox resolution: compute the mixing entropy of two distinguishable gases (ΔS = 2Nk ln 2 for identical gases — the paradox), then show that dividing by N! in the N-particle partition function removes it; discuss extensivity of S as the physical requirement.',
+        'Sackur-Tetrode: combine S = k(ln Z + βU) for the ideal gas with Z_N = Z₁^N/N! and Stirling; obtain S = Nk[ln(V/Nλ_T³) + 5/2]; verify extensivity and note the role of h/λ_T — a derivation examiners set in full.',
+        'Equipartition: for a Hamiltonian term ap², the Gaussian integral ⟨ap²⟩ = −∂ ln(∫e^{−βap²}dp)/∂β = kT/2 — generalise to all quadratic terms; then explain the freezing of degrees of freedom quantum-mechanically (level spacing ħω ≫ kT means the mode cannot be excited).',
+      ],
+      formulas: [
+        { name: 'Maxwell-Boltzmann speed distribution', expr: 'f(v) = 4πn (m/2πkT)^{3/2} v² e^{−mv²/2kT}' },
+        { name: 'Characteristic speeds', expr: 'v_p = √(2kT/m) ;  v̄ = √(8kT/πm) ;  v_rms = √(3kT/m)' },
+        { name: 'Single-particle partition function', expr: 'Z₁ = V/λ_T³ ;  λ_T = h/√(2πmkT)' },
+        { name: 'Sackur-Tetrode', expr: 'S = Nk [ln(V/Nλ_T³) + 5/2]' },
+        { name: 'Equipartition', expr: '⟨energy per quadratic DOF⟩ = kT/2' },
+      ],
+      tips: [
+        'Gibbs paradox answers must contain three parts: the paradoxical result, the N! resolution, and the quantum-mechanical meaning — all three for full marks.',
+        'Equipartition numericals: count degrees of freedom per molecule carefully and remember vibrational modes contribute twice (KE + PE).',
+        'λ_T compared to interparticle spacing (V/N)^{1/3} decides when classical statistics is valid — quote this criterion, it bridges to Chapters 3 and 4.',
+      ],
+    },
+    {
+      title: 'Chapter 3: Bose-Einstein Statistics',
+      topics: [
+        'Bosons and symmetric states',
+        'Bose-Einstein distribution',
+        'Planck\u2019s blackbody radiation law',
+        'Photon gas and Stefan-Boltzmann law',
+        'Bose-Einstein condensation',
+      ],
+      notes: [
+        'Bosons: particles with integer spin whose many-particle wave function is symmetric under exchange; any number of bosons may occupy the same quantum state. Photons (spin 1), ⁴He atoms, and Cooper pairs are the standard examples. Counting microstates with unlimited occupation gives the Bose-Einstein distribution n̄(ε) = 1/(e^{β(ε−μ)} − 1) — the −1 and the unlimited occupation are the two structural differences from Fermi counting.',
+        'Blackbody radiation: photons have μ = 0 (number not conserved — they are emitted and absorbed until thermal equilibrium), two polarisations, and density of states g(ω) = Vω²/π²c³; the BE distribution then gives the spectral energy density u(ω) = (ħω³/π²c³)/(e^{ħω/kT} − 1) — Planck\u2019s law. Deriving it from the photon gas (rather than postulating it) is the chapter\u2019s flagship derivation and resolves the ultraviolet catastrophe that motivated quantum theory.',
+        'Photon gas thermodynamics: integrating u(ω) gives u = aT⁴ with a = 4σ/c (Stefan-Boltzmann); the radiation pressure is P = u/3 (photons are massless — a third of the energy density, not two-thirds); the Wien displacement law λ_max T = constant follows from maximising u(λ, T). Quote the numerical anchors: a T = 5800 K solar surface peaks at ~500 nm; the cosmic microwave background at 2.7 K peaks at ~1 mm.',
+        'Bose-Einstein condensation: for massive bosons with conserved N, the excited states can hold only a limited number of particles below a critical temperature; the excess collapses into the ground state. The condition n λ_T³ ≥ 2.612 (from the μ → 0 limit of the BE integral) defines the condensation temperature T_c = (2πħ²/ mk)(n/2.612)^{2/3} for an ideal gas — below T_c a macroscopic fraction of particles occupies the single ground state: a new phase of matter with no classical analogue.',
+        'Consequences and evidence: the condensate shows a macroscopic wave function, superfluid-like behaviour (the ideal-gas calculation is the prototype; liquid ⁴He\u2019s lambda transition and ultracold atomic gases in traps are the real systems). BEC questions typically ask for T_c of a given density ⁴He or Rb gas and the fraction in the ground state, N₀/N = 1 − (T/T_c)^{3/2} — a clean power law worth memorising.',
+      ],
+      derivations: [
+        'BE distribution: count the ways of distributing Nᵢ identical bosons among gᵢ states at energy εᵢ (stars and bars): W = ∏(Nᵢ+gᵢ−1)!/Nᵢ!(gᵢ−1)!; maximise with Lagrange multipliers (constraints ΣNᵢ = N, ΣNᵢεᵢ = E) to get n̄ = 1/(e^{β(ε−μ)} − 1) — the bosonic analogue of the Boltzmann derivation.',
+        'Planck\u2019s law from the photon gas: density of states g(ω)dω = Vω²dω/π²c³ (two polarisations), multiply by n̄(ω) with μ = 0 and by ħω: u(ω) = (ħω³/π²c³)/(e^{ħω/kT} − 1); verify the limits — Rayleigh-Jeans (low ω: classical, ultraviolet catastrophe) and Wien (high ω).',
+        'Stefan-Boltzmann: u = ∫u(ω)dω = (π²k⁴/15ħ³c³)T⁴ using ∫x³dx/(eˣ−1) = π⁴/15; identify the constant with 4σ/c and the radiation pressure P = u/3 — a complete thermodynamic profile of the photon gas.',
+        'Condensation temperature: for massive bosons with μ → 0 at T_c, the excited-state capacity is N_ex = V(2πmkT/h²)^{3/2}·2.612; setting N_ex = N gives T_c = (2πħ²/mk)(n/2.612)^{2/3}; below T_c, N₀/N = 1 − (T/T_c)^{3/2} — derive the 2.612 (a ζ-function value) and the power law.',
+      ],
+      formulas: [
+        { name: 'Bose-Einstein distribution', expr: 'n̄(ε) = 1/(e^{β(ε−μ)} − 1)' },
+        { name: 'Photon gas (μ = 0)', expr: 'u(ω) = (ħω³/π²c³)/(e^{ħω/kT} − 1) — Planck\u2019s law' },
+        { name: 'Stefan-Boltzmann', expr: 'u = aT⁴ ;  P = u/3 ;  j = σT⁴' },
+        { name: 'Wien displacement', expr: 'λ_max T = 2.9×10⁻³ m·K' },
+        { name: 'Condensation', expr: 'nλ_T³ = 2.612 at T_c ;  N₀/N = 1 − (T/T_c)^{3/2}' },
+      ],
+      tips: [
+        'State the two bosonic signatures in every answer: symmetric wave function and unlimited occupation — the definition carries marks.',
+        'For photons, always set μ = 0 and explain why (photon number is not conserved); forgetting μ = 0 wrecks the derivation.',
+        'BEC numericals: work with number density n and λ_T; check nλ_T³ ≥ 2.612 before quoting a condensate — the inequality is the physical criterion.',
+      ],
+    },
+    {
+      title: 'Chapter 4: Fermi-Dirac Statistics',
+      topics: [
+        'Fermions and antisymmetric states',
+        'Fermi-Dirac distribution and chemical potential',
+        'Fermi energy of the electron gas in metals',
+        'Electronic heat capacity',
+        'White dwarf stars and the Chandrasekhar limit',
+      ],
+      notes: [
+        'Fermions: half-integer spin particles with antisymmetric wave functions — at most one particle per quantum state (Pauli exclusion, derived in DSC-14). Counting microstates with 0/1 occupation gives the Fermi-Dirac distribution n̄(ε) = 1/(e^{β(ε−μ)} + 1); at T = 0 it becomes a step function: all states below the Fermi energy E_F filled, all above empty — the origin of the Fermi surface in metals.',
+        'Electron gas in metals: conduction electrons form a degenerate Fermi gas; E_F = (ħ²/2m)(3π²n)^{2/3} with n the electron density. For copper (n ≈ 8.5×10²⁸ m⁻³), E_F ≈ 7 eV and the Fermi temperature T_F = E_F/k ≈ 80,000 K — room temperature is "cold" compared to the Fermi scale, which is why the classical ideal-gas treatment of electrons fails so badly and why metals need the FD statistics.',
+        'Thermodynamics of the degenerate gas: only electrons within ~kT of E_F are thermally active; the electronic heat capacity is C_v^el = (π²/2)Nk(T/T_F) — linear in T and tiny compared to the lattice Debye term at room temperature, dominating only below a few kelvin (the γT + βT³ law from DSC-11 reappears). The Pauli paramagnetism of the same gas and the pressure of the degenerate gas P = (2/5)nE_F complete the standard treatment.',
+        'White dwarf stars: exhausted stellar cores supported against gravity by electron degeneracy pressure (P ∝ n^{5/3} for the relativistic gas); more massive dwarfs compress further until the electrons become relativistic, at which point the support weakens — leading to the Chandrasekhar limit M ≈ 1.4 M_☉ above which no white dwarf is stable (collapse to neutron star or black hole). Deriving P ∝ n^{5/3} from the FD gas at T = 0 and stating the physical argument for the mass limit is the astrophysical application examiners love.',
+        'Contrast table for the exam: Boltzmann (distinguishable, nλ_T³ ≪ 1) vs BE (symmetric, unlimited occupation) vs FD (antisymmetric, single occupation) — with the classical limit nλ_T³ ≪ 1 recovering Boltzmann from both quantum distributions. Sketching n̄(ε) at T = 0 and T > 0 (the smooth step with kT-wide rounding at μ) is the required figure.',
+      ],
+      derivations: [
+        'FD distribution: count microstates with 0/1 occupation per state, W = ∏ gᵢ!/(Nᵢ!(gᵢ−Nᵢ)!), maximise with Lagrange multipliers; the result n̄ = 1/(e^{β(ε−μ)} + 1) — present in parallel with the BE derivation to show the counting difference.',
+        'Fermi energy: at T = 0 fill states in k-space up to k_F; N = 2·V/(2π)³·(4πk_F³/3) (factor 2 for spin) ⇒ k_F = (3π²n)^{1/3} and E_F = ħ²k_F²/2m; compute E_F for copper as the worked numerical.',
+        'Electronic heat capacity: integrate (ε − μ)(−∂n̄/∂ε) over the density of states near E_F; the narrowing derivative factor ∂n̄/∂ε ∝ 1/kT selects a fraction T/T_F of electrons: C_v^el = (π²/2)Nk(T/T_F) — derive the scaling, quote the coefficient.',
+        'Degeneracy pressure: P = (2/5)nE_F at T = 0 for the non-relativistic gas (derive from P = −∂E/∂V with E ∝ N^{5/3}V^{−2/3}); for the relativistic limit P ∝ n^{4/3}; chain to the hydrostatic balance of a white dwarf and the Chandrasekhar mass M_Ch ≈ 1.4M_☉ — the complete astrophysical argument.',
+      ],
+      formulas: [
+        { name: 'Fermi-Dirac distribution', expr: 'n̄(ε) = 1/(e^{β(ε−μ)} + 1) ;  T = 0: step at E_F' },
+        { name: 'Fermi energy', expr: 'E_F = (ħ²/2m)(3π²n)^{2/3} ;  T_F = E_F/k' },
+        { name: 'Electronic heat capacity', expr: 'C_v^el = (π²/2)Nk(T/T_F)' },
+        { name: 'Degeneracy pressure', expr: 'P = (2/5)nE_F (non-relativistic, T = 0)' },
+        { name: 'Chandrasekhar limit', expr: 'M_Ch ≈ 1.4 M_☉ (relativistic electron degeneracy)' },
+      ],
+      tips: [
+        'Quantify degeneracy first: E_F ~ eV vs kT ~ 1/40 eV at room temperature — the ratio justifies using FD statistics and anchors every numerical.',
+        'Sketch n̄(ε) at T = 0 and finite T in every distribution question; the kT-wide rounding at μ is the picture examiners look for.',
+        'White-dwarf answers need the chain: FD gas → degeneracy pressure → relativistic correction → mass limit; the physics argument, not the number, earns the marks.',
+      ],
+    },
+  ],
+};

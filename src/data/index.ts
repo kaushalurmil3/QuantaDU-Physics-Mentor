@@ -13,7 +13,10 @@ import { DSC12 } from './dsc12';
 import { DSC13 } from './dsc13';
 import { DSC14 } from './dsc14';
 import { DSC15 } from './dsc15';
+import { DSC16 } from './dsc16';
+import { DSC17 } from './dsc17';
+import { DSC18 } from './dsc18';
 
 export * from './types';
 export * from './semesterData';
-export { DSC1, DSC2, DSC3, DSC4, DSC5, DSC6, DSC7, DSC8, DSC9, DSC10, DSC11, DSC12, DSC13, DSC14, DSC15 };
+export { DSC1, DSC2, DSC3, DSC4, DSC5, DSC6, DSC7, DSC8, DSC9, DSC10, DSC11, DSC12, DSC13, DSC14, DSC15, DSC16, DSC17, DSC18 };
