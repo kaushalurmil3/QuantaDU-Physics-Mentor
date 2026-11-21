@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   BookOpen,
   ChevronDown,
@@ -13,9 +13,9 @@ import {
   Video,
 } from 'lucide-react';
 import { SEMESTERS } from '@/data';
+import { COURSE_CATEGORIES, type CourseCategory } from '@/data/courseStructure';
 import type {
   DetailedChapter,
-  DetailedPaper,
   Formula,
   Paper,
   SyllabusPaper,
@@ -333,13 +333,77 @@ function PaperView({ paper, semesterId }: { paper: Paper; semesterId: number }) 
   );
 }
 
-export default function SemesterHub() {
-  const [semesterId, setSemesterId] = useState(1);
+function CourseCategoryView({ cat, semesterId }: { cat: CourseCategory; semesterId: number }) {
+  return (
+    <div key={cat.id} className="animate-rise space-y-4">
+      <div className="flex flex-col gap-3 rounded-xl bg-navy-900 px-5 py-4 text-white shadow-card sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-3">
+          <GraduationCap className="h-6 w-6 shrink-0 text-amber-400" />
+          <div>
+            <p className="text-sm font-semibold">{cat.code} — {cat.name}</p>
+            <p className="text-xs text-navy-200">Semester {semesterId} · DU NEP UGCF-2022 degree structure</p>
+          </div>
+        </div>
+        <span className="inline-flex shrink-0 items-center rounded-full bg-amber-500 px-3 py-1 text-xs font-semibold text-navy-950">
+          {cat.credits}
+        </span>
+      </div>
+
+      <div className="rounded-xl border border-navy-100 bg-white p-5 shadow-card">
+        <p className="text-sm leading-relaxed text-navy-800">{cat.description}</p>
+        <p className="mt-4 text-[11px] font-semibold uppercase tracking-wider text-navy-400">Typical courses under this category</p>
+        <p className="mt-1.5 text-sm leading-relaxed text-navy-900">{cat.examples}</p>
+      </div>
+
+      <div className="rounded-xl border border-emerald-200 bg-emerald-50/70 p-5">
+        <p className="flex items-center gap-2 text-sm font-semibold text-emerald-800">
+          <Lightbulb className="h-4 w-4" /> Credit weightage &amp; study tips (DU NEP rules)
+        </p>
+        <ul className="mt-2 space-y-1.5">
+          {cat.tips.map((t, i) => (
+            <li key={i} className="flex gap-2 text-sm leading-relaxed text-navy-900">
+              <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
+              {t}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+export default function SemesterHub({
+  initialSemesterId,
+  initialPaperId,
+}: {
+  initialSemesterId?: number;
+  initialPaperId?: string;
+} = {}) {
+  const [semesterId, setSemesterId] = useState(initialSemesterId ?? 1);
+  const [category, setCategory] = useState('dsc');
+  const [paperId, setPaperId] = useState(
+    initialPaperId ??
+      SEMESTERS.find((s) => s.id === (initialSemesterId ?? 1))?.papers[0]?.id ??
+      ''
+  );
+
+  // Deep links from search / site map
+  useEffect(() => {
+    if (initialSemesterId !== undefined) {
+      setSemesterId(initialSemesterId);
+      setCategory('dsc');
+      const sem = SEMESTERS.find((s) => s.id === initialSemesterId);
+      if (initialPaperId && sem?.papers.some((p) => p.id === initialPaperId)) {
+        setPaperId(initialPaperId);
+      } else {
+        setPaperId(sem?.papers[0]?.id ?? '');
+      }
+    }
+  }, [initialSemesterId, initialPaperId]);
   const semester = useMemo(
     () => SEMESTERS.find((s) => s.id === semesterId) ?? SEMESTERS[0],
     [semesterId]
   );
-  const [paperId, setPaperId] = useState(semester.papers[0]?.id ?? '');
   const paper = useMemo(
     () =>
       semester.papers.find((p) => p.id === paperId) ??
@@ -347,11 +411,13 @@ export default function SemesterHub() {
       null,
     [semester, paperId]
   );
+  const activeCategory = category === 'dsc' ? null : COURSE_CATEGORIES[semester.id]?.find((c) => c.id === category) ?? null;
 
   const handleSemesterChange = (id: number) => {
     const s = SEMESTERS.find((x) => x.id === id);
     if (!s) return;
     setSemesterId(id);
+    setCategory('dsc');
     setPaperId(s.papers[0]?.id ?? '');
   };
 
@@ -387,12 +453,31 @@ export default function SemesterHub() {
             <div className="relative">
               <select
                 value={paper?.id ?? ''}
+                disabled={category !== 'dsc'}
                 onChange={(e) => setPaperId(e.target.value)}
-                className="w-full appearance-none rounded-lg border border-navy-200 bg-white py-2.5 pl-4 pr-10 text-sm font-medium text-navy-800 shadow-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 sm:w-64"
+                className="w-full appearance-none rounded-lg border border-navy-200 bg-white py-2.5 pl-4 pr-10 text-sm font-medium text-navy-800 shadow-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 sm:w-64 disabled:opacity-40"
               >
                 {semester.papers.map((p) => (
                   <option key={p.id} value={p.id}>
                     {p.code}: {p.name}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-400" />
+            </div>
+          </label>
+          <label className="block">
+            <span className="mb-1 block text-xs font-medium text-navy-500">Course category</span>
+            <div className="relative">
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full appearance-none rounded-lg border border-navy-200 bg-white py-2.5 pl-4 pr-10 text-sm font-medium text-navy-800 shadow-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 sm:w-56"
+              >
+                <option value="dsc">DSC — Core Physics</option>
+                {(COURSE_CATEGORIES[semester.id] ?? []).map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.code} — {c.name}
                   </option>
                 ))}
               </select>
@@ -423,7 +508,11 @@ export default function SemesterHub() {
         )}
       </div>
 
-      {semester.active ? (
+      {category !== 'dsc' && activeCategory ? (
+        <div className="mt-6">
+          <CourseCategoryView cat={activeCategory} semesterId={semester.id} />
+        </div>
+      ) : semester.active ? (
         paper ? (
           <div key={`${semester.id}-${paper.id}`} className="mt-6">
             <PaperView paper={paper} semesterId={semester.id} />
