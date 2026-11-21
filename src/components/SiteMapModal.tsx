@@ -1,4 +1,4 @@
-import { BookOpen, ChevronRight, FileText, FlaskConical, GraduationCap, Layers, Map, Trophy, X } from 'lucide-react';
+import { BookOpen, ChevronRight, FileText, FlaskConical, GraduationCap, Layers, Map, MonitorPlay, Trophy, X } from 'lucide-react';
 import { SEMESTERS } from '@/data/semesterData';
 import type { SearchTab } from '@/data/searchIndex';
 
@@ -17,18 +17,24 @@ export default function SiteMapModal({ open, onClose, onNavigate }: Props) {
     { tab: 'pyq', label: 'PYQ Bank', icon: GraduationCap, desc: 'High-frequency DU previous year questions' },
     { tab: 'lab', label: 'Practicals & Lab Hub', icon: FlaskConical, desc: 'Marks breakdown, experiments, viva prep' },
     { tab: 'grader', label: 'AI Professor Grader', icon: Trophy, desc: 'Get your answers graded by AI' },
+    { tab: 'resources', label: 'Online Resources & Book Roadmap', icon: MonitorPlay, desc: 'NPTEL, MIT OCW, textbooks & buying guide' },
   ];
 
-  const extras: { label: string; desc: string; action: () => void }[] = [
+  const extras: { label: string; desc: string; tab: SearchTab }[] = [
     {
       label: 'Online Resources',
-      desc: 'Verified NPTEL video lectures for every DSC (linked inside each paper in the Semester Hub)',
-      action: () => onNavigate('hub'),
+      desc: 'NPTEL, MIT OCW (8.01/8.02/8.03), Feynman Lectures, OpenStax, Google Colab & SciPy tutorials',
+      tab: 'resources',
     },
     {
       label: 'Book Roadmap',
-      desc: 'Recommended textbooks per paper — listed in each semester\u2019s course category notes (DSE/Minor/SEC/VAC/AEC)',
-      action: () => onNavigate('hub'),
+      desc: 'Semester-wise textbook guide with BUY / BORROW / REFERENCE tags and AI Professor ratings',
+      tab: 'resources',
+    },
+    {
+      label: 'Official DU Syllabus PDFs',
+      desc: 'NEP UGCF-2022 syllabi on du.ac.in and the Physics Department revised syllabi',
+      tab: 'resources',
     },
   ];
 
@@ -123,10 +129,10 @@ export default function SiteMapModal({ open, onClose, onNavigate }: Props) {
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-wider text-navy-400">Resources</p>
             <div className="mt-2 space-y-2">
-              {extras.map(({ label, desc, action }) => (
+              {extras.map(({ label, desc, tab }) => (
                 <button
                   key={label}
-                  onClick={action}
+                  onClick={() => onNavigate(tab)}
                   className="group flex w-full items-start gap-3 rounded-lg border border-navy-100 p-3 text-left transition hover:border-amber-400 hover:bg-amber-50/50"
                 >
                   <BookOpen className="mt-0.5 h-4 w-4 shrink-0 text-sky-600" />

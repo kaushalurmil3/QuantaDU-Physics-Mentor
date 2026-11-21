@@ -2,8 +2,9 @@ import { SEMESTERS } from './semesterData';
 import { FLASHCARDS } from './flashcards';
 import { SAMPLE_PAPERS } from './samplePapers';
 import { PYQ_BANK } from './pyqBank';
+import { BOOKS } from './resources';
 
-export type SearchTab = 'hub' | 'flashcards' | 'papers' | 'pyq' | 'grader' | 'lab';
+export type SearchTab = 'hub' | 'flashcards' | 'papers' | 'pyq' | 'grader' | 'lab' | 'resources';
 
 export type SearchResult = {
   id: string;
@@ -119,7 +120,20 @@ function buildIndex(query: string): SearchResult[] {
     }
   }
 
-  // 5. Static sections (Lab Hub, Grader)
+  // 5. Book roadmap
+  for (const book of BOOKS) {
+    if ((`${book.title} ${book.author} ${book.reason}`).toLowerCase().includes(q)) {
+      push({
+        id: `book-${book.semester}-${book.title}`,
+        tab: 'resources',
+        location: `Sem ${book.semester} • Book Roadmap • ${book.tag}`,
+        snippet: `${book.title} — ${book.author}: ${book.reason} (AI Professor Rating ${book.rating.toFixed(1)}/5)`,
+        semester: book.semester,
+      });
+    }
+  }
+
+  // 6. Static sections (Lab Hub, Grader, Online Resources)
   const staticSections: { q: string[]; tab: SearchTab; location: string; snippet: string }[] = [
     {
       q: ['lab', 'practical', 'viva', 'experiment', 'error analysis', 'wheatstone', 'hall effect', 'gm counter', 'pendulum experiment', 'bridge'],
@@ -132,6 +146,12 @@ function buildIndex(query: string): SearchResult[] {
       tab: 'grader',
       location: 'AI Professor Grader',
       snippet: 'Write your derivation and get graded the way a DU professor would.',
+    },
+    {
+      q: ['nptel', 'mit', 'ocw', 'feynman', 'openstax', 'colab', 'python', 'numpy', 'scipy', 'online resources', 'book', 'textbook', 'syllabus'],
+      tab: 'resources',
+      location: 'Online Resources & Book Roadmap',
+      snippet: 'Free video lectures, problem sets, Python labs and the semester-wise textbook guide.',
     },
   ];
   for (const s of staticSections) {

@@ -8,6 +8,7 @@ import PYQBank from '@/components/PYQBank';
 import LabHub from '@/components/LabHub';
 import HeaderSearch from '@/components/HeaderSearch';
 import SiteMapModal from '@/components/SiteMapModal';
+import ResourceRoadmap from '@/components/ResourceRoadmap';
 import type { PYQ } from '@/data/pyqBank';
 import type { SearchTab } from '@/data/searchIndex';
 
@@ -136,8 +137,12 @@ export default function App() {
           {tab === 'pyq' && <PYQBank onPractice={handlePractice} />}
           {tab === 'lab' && <LabHub />}
           {tab === 'grader' && <ProfessorGrader practice={practiceForGrader} />}
+          {tab === 'resources' && <ResourceRoadmap />}
         </div>
       </main>
+
+      {/* Bottom resource & study roadmap — visible on every tab */}
+      {tab !== 'resources' && <ResourceRoadmap />}
 
       {/* Footer */}
       <footer className="border-t border-navy-100 bg-white">
