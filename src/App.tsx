@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Atom, BookOpen, FileText, Github, GraduationCap, Layers, Map, Sparkles, Trophy } from 'lucide-react';
+import { Atom, BookOpen, FileText, Github, GraduationCap, Layers, Map, MessageSquare, Sparkles, Trophy } from 'lucide-react';
 import SemesterHub from '@/components/SemesterHub';
 import Flashcards from '@/components/Flashcards';
 import SamplePapers from '@/components/SamplePapers';
@@ -9,6 +9,7 @@ import LabHub from '@/components/LabHub';
 import HeaderSearch from '@/components/HeaderSearch';
 import SiteMapModal from '@/components/SiteMapModal';
 import ResourceRoadmap from '@/components/ResourceRoadmap';
+import FeedbackModal from '@/components/FeedbackModal';
 import type { PYQ } from '@/data/pyqBank';
 import type { SearchTab } from '@/data/searchIndex';
 
@@ -28,6 +29,7 @@ export default function App() {
   const [practicePYQ, setPracticePYQ] = useState<PYQ | null>(null);
   const [hubTarget, setHubTarget] = useState<{ semester?: number; paperId?: string } | null>(null);
   const [siteMapOpen, setSiteMapOpen] = useState(false);
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   const handlePractice = (pyq: PYQ) => {
     setPracticePYQ(pyq);
@@ -161,6 +163,16 @@ export default function App() {
             <Map className="h-3.5 w-3.5" />
             Site Map — explore every section
           </button>
+          <button
+            onClick={() => {
+              setFeedbackOpen(true);
+              window.scrollTo({ top: 0 });
+            }}
+            className="inline-flex items-center gap-2 rounded-full border border-navy-200 px-4 py-1.5 text-xs font-medium text-navy-600 transition hover:border-amber-400 hover:text-amber-700"
+          >
+            <MessageSquare className="h-3.5 w-3.5" />
+            Give Feedback / Request PYQ
+          </button>
           <a
             href="https://github.com/your-username/du-physics-mentor"
             target="_blank"
@@ -181,6 +193,18 @@ export default function App() {
         onClose={() => setSiteMapOpen(false)}
         onNavigate={handleSearchNavigate}
       />
+
+      {/* Floating feedback button */}
+      <button
+        onClick={() => setFeedbackOpen(true)}
+        className="fixed bottom-5 right-5 z-30 flex items-center gap-2 rounded-full bg-navy-900 px-5 py-3 text-sm font-semibold text-white shadow-lg ring-1 ring-navy-800 transition hover:-translate-y-0.5 hover:bg-navy-700 hover:shadow-xl"
+        aria-label="Open student feedback form"
+      >
+        💬
+        Student Feedback
+      </button>
+
+      <FeedbackModal open={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
     </div>
   );
 }
